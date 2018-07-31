@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.dmtool.entities.User;
+import com.skilldistillery.dmtool.entities.Item;
 
-class UserTests {
+class ItemTests {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User u;
+	private Item i;
 	
 	
 	@BeforeAll
@@ -29,13 +29,13 @@ class UserTests {
 	@BeforeEach
 	public void setUp() throws Exception {
 		em = emf.createEntityManager();
-		u = em.find(User.class, 1);
+		i = em.find(Item.class, 1);
 	}
 
 	@AfterEach
 	public void tearDown() throws Exception {
 		em.close();
-		u = null;
+		i = null;
 	}
 
 	@AfterAll
@@ -45,15 +45,14 @@ class UserTests {
 	}
 	
 	@Test
-	void test_user_mapping() {
-		assertEquals("admin@admin.com", u.getEmail());
+	void test_spell_mapping() {
+		assertEquals("Testhammer", i.getName());
 	}
+	
 	@Test
-	void test_user_mapping_to_monster() {
-		assertEquals("Goblin", u.getMonsters().get(0).getName());
+	void test_spell_mapping_to_user() {
+		assertEquals("standard@standard.com", i.getUser().getEmail());
 	}
-
-
 	
 	
 

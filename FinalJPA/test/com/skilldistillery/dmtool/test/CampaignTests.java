@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.dmtool.entities.User;
+import com.skilldistillery.dmtool.entities.Campaign;
 
-class UserTests {
+class CampaignTests {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User u;
+	private Campaign c;
 	
 	
 	@BeforeAll
@@ -29,13 +29,13 @@ class UserTests {
 	@BeforeEach
 	public void setUp() throws Exception {
 		em = emf.createEntityManager();
-		u = em.find(User.class, 1);
+		c = em.find(Campaign.class, 1);
 	}
 
 	@AfterEach
 	public void tearDown() throws Exception {
 		em.close();
-		u = null;
+		c = null;
 	}
 
 	@AfterAll
@@ -45,15 +45,14 @@ class UserTests {
 	}
 	
 	@Test
-	void test_user_mapping() {
-		assertEquals("admin@admin.com", u.getEmail());
+	void test_campaign_mapping() {
+		assertEquals("test campaign", c.getName());
 	}
+	
 	@Test
-	void test_user_mapping_to_monster() {
-		assertEquals("Goblin", u.getMonsters().get(0).getName());
+	void test_camp_mapping_to_player() {
+		assertEquals("Legolas the Original", c.getPlayers().get(0).getName());
 	}
-
-
 	
 	
 

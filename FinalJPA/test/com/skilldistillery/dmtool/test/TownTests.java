@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.dmtool.entities.User;
+import com.skilldistillery.dmtool.entities.Town;
 
-class UserTests {
+class TownTests {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User u;
+	private Town t;
 	
 	
 	@BeforeAll
@@ -29,13 +29,13 @@ class UserTests {
 	@BeforeEach
 	public void setUp() throws Exception {
 		em = emf.createEntityManager();
-		u = em.find(User.class, 1);
+		t = em.find(Town.class, 1);
 	}
 
 	@AfterEach
 	public void tearDown() throws Exception {
 		em.close();
-		u = null;
+		t = null;
 	}
 
 	@AfterAll
@@ -45,14 +45,10 @@ class UserTests {
 	}
 	
 	@Test
-	void test_user_mapping() {
-		assertEquals("admin@admin.com", u.getEmail());
+	void test_npc_mapping() {
+		assertEquals("Towny McTownface", t.getName());
 	}
-	@Test
-	void test_user_mapping_to_monster() {
-		assertEquals("Goblin", u.getMonsters().get(0).getName());
-	}
-
+	
 
 	
 	
