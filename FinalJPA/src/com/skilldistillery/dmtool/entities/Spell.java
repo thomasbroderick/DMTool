@@ -10,7 +10,7 @@ public class Spell {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int id;
-	private String title;
+	private String name;
 	private String description;
 	@Column(name="higher_lvl")
 	private String higherLevel;
@@ -22,7 +22,7 @@ public class Spell {
 	private String concentration;
 	@Column(name="casting_time")
 	private String castingTime;
-	private String lvl;
+	private String level;
 	private String school;
 	private String classes;
 	@JsonIgnore
@@ -40,12 +40,12 @@ public class Spell {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -120,12 +120,12 @@ public class Spell {
 		this.castingTime = castingTime;
 	}
 
-	public String getLvl() {
-		return lvl;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setLvl(String lvl) {
-		this.lvl = lvl;
+	public void setLevel(String lvl) {
+		this.level = lvl;
 	}
 
 	public String getSchool() {
@@ -164,12 +164,12 @@ public class Spell {
 		result = prime * result + ((duration == null) ? 0 : duration.hashCode());
 		result = prime * result + ((higherLevel == null) ? 0 : higherLevel.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((lvl == null) ? 0 : lvl.hashCode());
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
 		result = prime * result + ((material == null) ? 0 : material.hashCode());
 		result = prime * result + ((range == null) ? 0 : range.hashCode());
 		result = prime * result + ((ritual == null) ? 0 : ritual.hashCode());
 		result = prime * result + ((school == null) ? 0 : school.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -220,10 +220,10 @@ public class Spell {
 			return false;
 		if (id != other.id)
 			return false;
-		if (lvl == null) {
-			if (other.lvl != null)
+		if (level == null) {
+			if (other.level != null)
 				return false;
-		} else if (!lvl.equals(other.lvl))
+		} else if (!level.equals(other.level))
 			return false;
 		if (material == null) {
 			if (other.material != null)
@@ -245,10 +245,10 @@ public class Spell {
 				return false;
 		} else if (!school.equals(other.school))
 			return false;
-		if (title == null) {
-			if (other.title != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!title.equals(other.title))
+		} else if (!name.equals(other.name))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -263,8 +263,8 @@ public class Spell {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Spell [id=");
 		builder.append(id);
-		builder.append(", title=");
-		builder.append(title);
+		builder.append(", name=");
+		builder.append(name);
 		builder.append(", description=");
 		builder.append(description);
 		builder.append(", higherLevel=");
@@ -284,7 +284,7 @@ public class Spell {
 		builder.append(", castingTime=");
 		builder.append(castingTime);
 		builder.append(", lvl=");
-		builder.append(lvl);
+		builder.append(level);
 		builder.append(", school=");
 		builder.append(school);
 		builder.append(", classes=");
