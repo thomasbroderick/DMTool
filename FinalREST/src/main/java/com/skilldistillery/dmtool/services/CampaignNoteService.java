@@ -6,14 +6,14 @@ import com.skilldistillery.dmtool.entities.CampaignNote;
 
 public interface CampaignNoteService {
 	
-	  public Set<CampaignNote> index(String username);
+	  public Set<CampaignNote> index(int id);
 
-	  public CampaignNote show(String username, int cid);
+	  public CampaignNote show(int nid);
 
-	  public CampaignNote create(String username, CampaignNote campaignNote);
+	  public CampaignNote create(int campId, CampaignNote campaignNote);
 
-	  public CampaignNote update(String username, int cid, CampaignNote campaignNote);
+	  public CampaignNote update(int noteId, CampaignNote campaignNote);
 
-	  public void destroy(String username, int cid);
+	  public void destroy(int cid);
 
 }
