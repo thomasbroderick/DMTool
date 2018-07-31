@@ -54,7 +54,8 @@ public class Monster {
 	private int constitutionSave;
 	@Column(name="wisdom_save")
 	private int wisdomSave;
-	
+	@Column(name="charisma_save")
+	private int charismaSave;	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -316,8 +317,13 @@ public class Monster {
 		this.user = user;
 	}
 
+	public int getCharismaSave() {
+		return charismaSave;
+	}
 
-	
+	public void setCharismaSave(int charismaSave) {
+		this.charismaSave = charismaSave;
+	}
 
 	@Override
 	public int hashCode() {
@@ -328,6 +334,7 @@ public class Monster {
 		result = prime * result + ((alignment == null) ? 0 : alignment.hashCode());
 		result = prime * result + challengeRating;
 		result = prime * result + charisma;
+		result = prime * result + charismaSave;
 		result = prime * result + ((conditionImmunities == null) ? 0 : conditionImmunities.hashCode());
 		result = prime * result + constitution;
 		result = prime * result + constitutionSave;
@@ -382,6 +389,8 @@ public class Monster {
 		if (challengeRating != other.challengeRating)
 			return false;
 		if (charisma != other.charisma)
+			return false;
+		if (charismaSave != other.charismaSave)
 			return false;
 		if (conditionImmunities == null) {
 			if (other.conditionImmunities != null)
@@ -553,9 +562,16 @@ public class Monster {
 		builder.append(constitutionSave);
 		builder.append(", wisdomSave=");
 		builder.append(wisdomSave);
+		builder.append(", charismaSave=");
+		builder.append(charismaSave);
 		builder.append("]");
 		return builder.toString();
 	}
+
+
+	
+
+	
 
 	
 }
