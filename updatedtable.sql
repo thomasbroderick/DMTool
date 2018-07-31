@@ -17,8 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `dm_tool_db` DEFAULT CHARACTER SET utf8 ;
 USE `dm_tool_db` ;
 
-GRANT SELECT, INSERT, UPDATE, DELETE on dm_tool_db.* to student;
-
+GRANT SELECT, INSERT, UPDATE, DELETE on dm_tool_db.* to student@localhost;
 -- -----------------------------------------------------
 -- Table `dm_tool_db`.`user`
 -- -----------------------------------------------------
@@ -32,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`user` (
   `enabled` TINYINT(1) NULL DEFAULT '1',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
 
 CREATE UNIQUE INDEX `email_UNIQUE` ON `dm_tool_db`.`user` (`email` ASC);
@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`campaign` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_campaign_user_idx` ON `dm_tool_db`.`campaign` (`user_id` ASC);
@@ -68,15 +69,16 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`campaign_note` (
   `campaign_id` INT(11) NOT NULL,
   `text` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_campaign_note`
+  CONSTRAINT `fk_campaign_notes`
     FOREIGN KEY (`campaign_id`)
     REFERENCES `dm_tool_db`.`campaign` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_campaign_note_idx` ON `dm_tool_db`.`campaign_note` (`campaign_id` ASC);
+CREATE INDEX `fk_campaign_notes_idx` ON `dm_tool_db`.`campaign_note` (`campaign_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -103,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`character` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_character_campaign_idx` ON `dm_tool_db`.`character` (`campaign_id` ASC);
@@ -118,15 +121,16 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`character_note` (
   `character_id` INT(11) NOT NULL,
   `text` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_character_note`
+  CONSTRAINT `fk_character_notes`
     FOREIGN KEY (`character_id`)
     REFERENCES `dm_tool_db`.`character` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_character_note_idx` ON `dm_tool_db`.`character_note` (`character_id` ASC);
+CREATE INDEX `fk_character_notes_idx` ON `dm_tool_db`.`character_note` (`character_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -154,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`item` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_item_user_idx` ON `dm_tool_db`.`item` (`user_id` ASC);
@@ -204,6 +209,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`monster` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_monster_user_idx` ON `dm_tool_db`.`monster` (`user_id` ASC);
@@ -233,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`npc` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_npc_campaign_idx` ON `dm_tool_db`.`npc` (`campaign_id` ASC);
@@ -268,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`spell` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_spell_user_idx` ON `dm_tool_db`.`spell` (`user_id` ASC);
@@ -290,6 +298,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`town` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `fk_town_campaign_idx` ON `dm_tool_db`.`town` (`campaign_id` ASC);
@@ -298,105 +307,3 @@ CREATE INDEX `fk_town_campaign_idx` ON `dm_tool_db`.`town` (`campaign_id` ASC);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`user`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (1, 'admin@admin.com', 'admin', 'admin', 1);
-INSERT INTO `dm_tool_db`.`user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (2, 'standard@standard.com', 'standard', 'standard', 1);
-INSERT INTO `dm_tool_db`.`user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (3, 'disabled@disabled.com', 'disabled', 'standard', 0);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`campaign`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`campaign` (`id`, `name`, `user_id`) VALUES (1, 'test campaign', 2);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`campaign_note`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`campaign_note` (`id`, `campaign_id`, `text`) VALUES (1, 1, 'Boss fight coming up!');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`character`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`character` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (1, 1, 'Legolas the Original', 30, 30, 1, 18, 6, 2, 0, NULL);
-INSERT INTO `dm_tool_db`.`character` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (2, 1, 'Gimli the Null', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`character_note`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`character_note` (`id`, `character_id`, `text`) VALUES (1, 1, 'Best character evar!');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`item`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`item` (`id`, `user_id`, `name`, `equipment_category`, `weapon_category`, `range`, `cost`, `damage`, `weight`, `properties`, `description`, `image_url`) VALUES (1, 2, 'Testhammer', 'Weapon', 'Hammer', 'Melee', '50 gold', '1d10', '50 kg', 'testy', 'Much hammer', NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`monster`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`monster` (`id`, `user_id`, `name`, `size`, `type`, `subtype`, `alignment`, `armor_class`, `hit_points`, `hit_dice`, `speed`, `strength`, `dexterity`, `intelligence`, `wisdom`, `charisma`, `constitution`, `dexterity_save`, `charisma_save`, `wisdom_save`, `stealth`, `damage_vulnerabilities`, `damage_resistances`, `damage_immunities`, `condition_immunities`, `senses`, `languages`, `challenge_rating`, `special_abilities`, `actions`, `legendary_actions`, `image_url`) VALUES (1, 1, 'Goblin', 'Medium', 'Goblinoid', NULL, NULL, 10, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`npc`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`npc` (`id`, `campaign_id`, `name`, `description`, `monster_id`, `image_url`) VALUES (1, 1, 'Lord Testerson', 'Testy', 1, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`spell`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`spell` (`id`, `user_id`, `name`, `description`, `range`, `components`, `material`, `ritual`, `duration`, `concentration`, `casting_time`, `level`, `school`, `classes`, `higher_lvl`) VALUES (1, 2, 'Test Spell', 'Tests the darkness', '10 feet', 'V', 'S', 'None', 'Years', 'No', 'Long', 1, NULL, NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dm_tool_db`.`town`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`town` (`id`, `campaign_id`, `name`, `description`) VALUES (1, 1, 'Towny McTownface', 'No place like home');
-
-COMMIT;
