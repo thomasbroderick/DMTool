@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`monster` (
   `constitution` INT(11) NULL DEFAULT NULL,
   `dexterity_save` INT(11) NULL DEFAULT NULL,
   `charisma_save` INT(11) NULL DEFAULT NULL,
+  `constitution_save` INT(11) NULL DEFAULT NULL,
   `wisdom_save` INT(11) NULL DEFAULT NULL,
   `stealth` INT(11) NULL DEFAULT NULL,
   `damage_vulnerabilities` MEDIUMTEXT NULL DEFAULT NULL,
@@ -367,7 +368,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`monster` (`id`, `user_id`, `name`, `size`, `type`, `subtype`, `alignment`, `armor_class`, `hit_points`, `hit_dice`, `speed`, `strength`, `dexterity`, `intelligence`, `wisdom`, `charisma`, `constitution`, `dexterity_save`, `charisma_save`, `wisdom_save`, `stealth`, `damage_vulnerabilities`, `damage_resistances`, `damage_immunities`, `condition_immunities`, `senses`, `languages`, `challenge_rating`, `special_abilities`, `actions`, `legendary_actions`, `image_url`) VALUES (1, 1, 'Goblin', 'Medium', 'Goblinoid', NULL, NULL, 10, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dm_tool_db`.`monster` (`id`, `user_id`, `name`, `size`, `type`, `subtype`, `alignment`, `armor_class`, `hit_points`, `hit_dice`, `speed`, `strength`, `dexterity`, `intelligence`, `wisdom`, `charisma`, `constitution`, `dexterity_save`, `charisma_save`, `constitution_save`, `wisdom_save`, `stealth`, `damage_vulnerabilities`, `damage_resistances`, `damage_immunities`, `condition_immunities`, `senses`, `languages`, `challenge_rating`, `special_abilities`, `actions`, `legendary_actions`, `image_url`) VALUES (1, 1, 'Goblin', 'Medium', 'Goblinoid', NULL, NULL, 10, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
