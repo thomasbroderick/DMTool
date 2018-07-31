@@ -31,17 +31,6 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 
-// explicitly configure the sourced files of the application for compilation
-sourceSets {
-  main {
-    java.srcDirs 'src'
-    resources.srcDirs 'src/resources'
-  }
-    test {
-    java.srcDirs 'test'
-    resources.srcDirs 'src'
-  }
- }
 repositories {
     mavenCentral()
 }
@@ -53,6 +42,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     runtime group: 'org.hidetake', name: 'groovy-ssh', version: '2.9.0'
     

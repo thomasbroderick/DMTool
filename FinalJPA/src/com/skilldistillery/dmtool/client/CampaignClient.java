@@ -10,7 +10,7 @@ public class CampaignClient {
 	
 	public static void main(String[] args) {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesolateMidterm");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DMTool");
 		EntityManager em = emf.createEntityManager();
 
 		Campaign campaign = em.find(Campaign.class, 1);
