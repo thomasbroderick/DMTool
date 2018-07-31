@@ -21,7 +21,7 @@ public class Town {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "campign_id")
+	@JoinColumn(name = "campaign_id")
 	private Campaign campaign;
 	
 	@OneToMany(mappedBy="town")

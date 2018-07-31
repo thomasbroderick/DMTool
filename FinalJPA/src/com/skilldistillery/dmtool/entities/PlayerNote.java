@@ -5,8 +5,8 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="character_note")
-public class CharacterNote {
+@Table(name="player_note")
+public class PlayerNote {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,8 @@ public class CharacterNote {
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "character_id")
-	private Character character;
+	@JoinColumn(name = "player_id")
+	private Player player;
 	
 	
 	public int getId() {
@@ -32,17 +32,17 @@ public class CharacterNote {
 	public void setContent(String content) {
 		this.text = content;
 	}
-	public Character getCharacter() {
-		return character;
+	public Player getPlayer() {
+		return player;
 	}
-	public void setCharacter(Character character) {
-		this.character = character;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((character == null) ? 0 : character.hashCode());
+		result = prime * result + ((player == null) ? 0 : player.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + id;
 		return result;
@@ -55,11 +55,11 @@ public class CharacterNote {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CharacterNote other = (CharacterNote) obj;
-		if (character == null) {
-			if (other.character != null)
+		PlayerNote other = (PlayerNote) obj;
+		if (player == null) {
+			if (other.player != null)
 				return false;
-		} else if (!character.equals(other.character))
+		} else if (!player.equals(other.player))
 			return false;
 		if (text == null) {
 			if (other.text != null)
@@ -73,9 +73,9 @@ public class CharacterNote {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CharacterNote [id=");
+		builder.append("PlayerNote [id=");
 		builder.append(id);
-		builder.append(", content=");
+		builder.append(", text=");
 		builder.append(text);
 		builder.append("]");
 		return builder.toString();

@@ -9,7 +9,7 @@ public class Monster {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private int id;
+	private Integer id;
 	private String name;
 	private String size;
 	private String type;
@@ -35,37 +35,37 @@ public class Monster {
 	@Column(name="hit_dice")
 	private String hitDice;
 	@Column(name="armor_class")
-	private int ac;
-	private int stealth;
+	private Integer ac;
+	private Integer stealth;
 	@Column(name="hit_points")
-	private int hitPoints;
+	private Integer hitPoints;
 	private String speed;
-	private int strength;
-	private int dexterity;
-	private int intelligence;
-	private int wisdom;
-	private int charisma;
-	private int constitution;
+	private Integer strength;
+	private Integer dexterity;
+	private Integer intelligence;
+	private Integer wisdom;
+	private Integer charisma;
+	private Integer constitution;
 	@Column(name="challenge_rating")
-	private int challengeRating;
+	private Integer challengeRating;
 	@Column(name="dexterity_save")
-	private int dexteritySave;
+	private Integer dexteritySave;
 	@Column(name="constitution_save")
-	private int constitutionSave;
+	private Integer constitutionSave;
 	@Column(name="wisdom_save")
-	private int wisdomSave;
+	private Integer wisdomSave;
 	@Column(name="charisma_save")
-	private int charismaSave;	
+	private Integer charismaSave;	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -197,27 +197,27 @@ public class Monster {
 		this.hitDice = hitDice;
 	}
 
-	public int getAc() {
+	public Integer getAc() {
 		return ac;
 	}
 
-	public void setAc(int ac) {
+	public void setAc(Integer ac) {
 		this.ac = ac;
 	}
 
-	public int getStealth() {
+	public Integer getStealth() {
 		return stealth;
 	}
 
-	public void setStealth(int stealth) {
+	public void setStealth(Integer stealth) {
 		this.stealth = stealth;
 	}
 
-	public int getHitPoints() {
+	public Integer getHitPoints() {
 		return hitPoints;
 	}
 
-	public void setHitPoints(int hitPoints) {
+	public void setHitPoints(Integer hitPoints) {
 		this.hitPoints = hitPoints;
 	}
 
@@ -229,83 +229,83 @@ public class Monster {
 		this.speed = speed;
 	}
 
-	public int getStrength() {
+	public Integer getStrength() {
 		return strength;
 	}
 
-	public void setStrength(int strength) {
+	public void setStrength(Integer strength) {
 		this.strength = strength;
 	}
 
-	public int getDexterity() {
+	public Integer getDexterity() {
 		return dexterity;
 	}
 
-	public void setDexterity(int dexterity) {
+	public void setDexterity(Integer dexterity) {
 		this.dexterity = dexterity;
 	}
 
-	public int getIntelligence() {
+	public Integer getIntelligence() {
 		return intelligence;
 	}
 
-	public void setIntelligence(int intelligence) {
+	public void setIntelligence(Integer intelligence) {
 		this.intelligence = intelligence;
 	}
 
-	public int getWisdom() {
+	public Integer getWisdom() {
 		return wisdom;
 	}
 
-	public void setWisdom(int wisdom) {
+	public void setWisdom(Integer wisdom) {
 		this.wisdom = wisdom;
 	}
 
-	public int getCharisma() {
+	public Integer getCharisma() {
 		return charisma;
 	}
 
-	public void setCharisma(int charisma) {
+	public void setCharisma(Integer charisma) {
 		this.charisma = charisma;
 	}
 
-	public int getConstitution() {
+	public Integer getConstitution() {
 		return constitution;
 	}
 
-	public void setConstitution(int constitution) {
+	public void setConstitution(Integer constitution) {
 		this.constitution = constitution;
 	}
 
-	public int getChallengeRating() {
+	public Integer getChallengeRating() {
 		return challengeRating;
 	}
 
-	public void setChallengeRating(int challengeRating) {
+	public void setChallengeRating(Integer challengeRating) {
 		this.challengeRating = challengeRating;
 	}
 
-	public int getDexteritySave() {
+	public Integer getDexteritySave() {
 		return dexteritySave;
 	}
 
-	public void setDexteritySave(int dexteritySave) {
+	public void setDexteritySave(Integer dexteritySave) {
 		this.dexteritySave = dexteritySave;
 	}
 
-	public int getConstitutionSave() {
+	public Integer getConstitutionSave() {
 		return constitutionSave;
 	}
 
-	public void setConstitutionSave(int constitutionSave) {
+	public void setConstitutionSave(Integer constitutionSave) {
 		this.constitutionSave = constitutionSave;
 	}
 
-	public int getWisdomSave() {
+	public Integer getWisdomSave() {
 		return wisdomSave;
 	}
 
-	public void setWisdomSave(int wisdomSave) {
+	public void setWisdomSave(Integer wisdomSave) {
 		this.wisdomSave = wisdomSave;
 	}
 
@@ -317,35 +317,37 @@ public class Monster {
 		this.user = user;
 	}
 
-	public int getCharismaSave() {
+	public Integer getCharismaSave() {
 		return charismaSave;
 	}
 
-	public void setCharismaSave(int charismaSave) {
+	public void setCharismaSave(Integer charismaSave) {
 		this.charismaSave = charismaSave;
 	}
+
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ac;
+		result = prime * result + ((ac == null) ? 0 : ac.hashCode());
 		result = prime * result + ((actions == null) ? 0 : actions.hashCode());
 		result = prime * result + ((alignment == null) ? 0 : alignment.hashCode());
-		result = prime * result + challengeRating;
-		result = prime * result + charisma;
-		result = prime * result + charismaSave;
+		result = prime * result + ((challengeRating == null) ? 0 : challengeRating.hashCode());
+		result = prime * result + ((charisma == null) ? 0 : charisma.hashCode());
+		result = prime * result + ((charismaSave == null) ? 0 : charismaSave.hashCode());
 		result = prime * result + ((conditionImmunities == null) ? 0 : conditionImmunities.hashCode());
-		result = prime * result + constitution;
-		result = prime * result + constitutionSave;
-		result = prime * result + dexterity;
-		result = prime * result + dexteritySave;
+		result = prime * result + ((constitution == null) ? 0 : constitution.hashCode());
+		result = prime * result + ((constitutionSave == null) ? 0 : constitutionSave.hashCode());
+		result = prime * result + ((dexterity == null) ? 0 : dexterity.hashCode());
+		result = prime * result + ((dexteritySave == null) ? 0 : dexteritySave.hashCode());
 		result = prime * result + ((hitDice == null) ? 0 : hitDice.hashCode());
-		result = prime * result + hitPoints;
-		result = prime * result + id;
+		result = prime * result + ((hitPoints == null) ? 0 : hitPoints.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + ((immunnities == null) ? 0 : immunnities.hashCode());
-		result = prime * result + intelligence;
+		result = prime * result + ((intelligence == null) ? 0 : intelligence.hashCode());
 		result = prime * result + ((languages == null) ? 0 : languages.hashCode());
 		result = prime * result + ((legendaryActions == null) ? 0 : legendaryActions.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -354,14 +356,14 @@ public class Monster {
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		result = prime * result + ((specialAbilities == null) ? 0 : specialAbilities.hashCode());
 		result = prime * result + ((speed == null) ? 0 : speed.hashCode());
-		result = prime * result + stealth;
-		result = prime * result + strength;
+		result = prime * result + ((stealth == null) ? 0 : stealth.hashCode());
+		result = prime * result + ((strength == null) ? 0 : strength.hashCode());
 		result = prime * result + ((subtype == null) ? 0 : subtype.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((vulnerabilities == null) ? 0 : vulnerabilities.hashCode());
-		result = prime * result + wisdom;
-		result = prime * result + wisdomSave;
+		result = prime * result + ((wisdom == null) ? 0 : wisdom.hashCode());
+		result = prime * result + ((wisdomSave == null) ? 0 : wisdomSave.hashCode());
 		return result;
 	}
 
@@ -374,7 +376,10 @@ public class Monster {
 		if (getClass() != obj.getClass())
 			return false;
 		Monster other = (Monster) obj;
-		if (ac != other.ac)
+		if (ac == null) {
+			if (other.ac != null)
+				return false;
+		} else if (!ac.equals(other.ac))
 			return false;
 		if (actions == null) {
 			if (other.actions != null)
@@ -386,33 +391,60 @@ public class Monster {
 				return false;
 		} else if (!alignment.equals(other.alignment))
 			return false;
-		if (challengeRating != other.challengeRating)
+		if (challengeRating == null) {
+			if (other.challengeRating != null)
+				return false;
+		} else if (!challengeRating.equals(other.challengeRating))
 			return false;
-		if (charisma != other.charisma)
+		if (charisma == null) {
+			if (other.charisma != null)
+				return false;
+		} else if (!charisma.equals(other.charisma))
 			return false;
-		if (charismaSave != other.charismaSave)
+		if (charismaSave == null) {
+			if (other.charismaSave != null)
+				return false;
+		} else if (!charismaSave.equals(other.charismaSave))
 			return false;
 		if (conditionImmunities == null) {
 			if (other.conditionImmunities != null)
 				return false;
 		} else if (!conditionImmunities.equals(other.conditionImmunities))
 			return false;
-		if (constitution != other.constitution)
+		if (constitution == null) {
+			if (other.constitution != null)
+				return false;
+		} else if (!constitution.equals(other.constitution))
 			return false;
-		if (constitutionSave != other.constitutionSave)
+		if (constitutionSave == null) {
+			if (other.constitutionSave != null)
+				return false;
+		} else if (!constitutionSave.equals(other.constitutionSave))
 			return false;
-		if (dexterity != other.dexterity)
+		if (dexterity == null) {
+			if (other.dexterity != null)
+				return false;
+		} else if (!dexterity.equals(other.dexterity))
 			return false;
-		if (dexteritySave != other.dexteritySave)
+		if (dexteritySave == null) {
+			if (other.dexteritySave != null)
+				return false;
+		} else if (!dexteritySave.equals(other.dexteritySave))
 			return false;
 		if (hitDice == null) {
 			if (other.hitDice != null)
 				return false;
 		} else if (!hitDice.equals(other.hitDice))
 			return false;
-		if (hitPoints != other.hitPoints)
+		if (hitPoints == null) {
+			if (other.hitPoints != null)
+				return false;
+		} else if (!hitPoints.equals(other.hitPoints))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (imageUrl == null) {
 			if (other.imageUrl != null)
@@ -424,7 +456,10 @@ public class Monster {
 				return false;
 		} else if (!immunnities.equals(other.immunnities))
 			return false;
-		if (intelligence != other.intelligence)
+		if (intelligence == null) {
+			if (other.intelligence != null)
+				return false;
+		} else if (!intelligence.equals(other.intelligence))
 			return false;
 		if (languages == null) {
 			if (other.languages != null)
@@ -466,9 +501,15 @@ public class Monster {
 				return false;
 		} else if (!speed.equals(other.speed))
 			return false;
-		if (stealth != other.stealth)
+		if (stealth == null) {
+			if (other.stealth != null)
+				return false;
+		} else if (!stealth.equals(other.stealth))
 			return false;
-		if (strength != other.strength)
+		if (strength == null) {
+			if (other.strength != null)
+				return false;
+		} else if (!strength.equals(other.strength))
 			return false;
 		if (subtype == null) {
 			if (other.subtype != null)
@@ -490,9 +531,15 @@ public class Monster {
 				return false;
 		} else if (!vulnerabilities.equals(other.vulnerabilities))
 			return false;
-		if (wisdom != other.wisdom)
+		if (wisdom == null) {
+			if (other.wisdom != null)
+				return false;
+		} else if (!wisdom.equals(other.wisdom))
 			return false;
-		if (wisdomSave != other.wisdomSave)
+		if (wisdomSave == null) {
+			if (other.wisdomSave != null)
+				return false;
+		} else if (!wisdomSave.equals(other.wisdomSave))
 			return false;
 		return true;
 	}

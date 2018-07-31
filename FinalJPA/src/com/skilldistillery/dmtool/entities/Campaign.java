@@ -30,7 +30,7 @@ public class Campaign {
 	@OneToMany(mappedBy="campaign")
 	private List<Town> towns;
 	@OneToMany(mappedBy="campaign")
-	private List<Character> characters;
+	private List<Player> players;
 
 	
 	
@@ -80,23 +80,23 @@ public class Campaign {
 	
 	//add and remove Charasters from campaign list
 	
-	public void addCharacter(Character character) {
-		if(characters == null) characters = new ArrayList<>();
+	public void addPlayer(Player player) {
+		if(players == null) players = new ArrayList<>();
 		
-		if(!characters.contains(character)) {
-			characters.add(character);
-			if(character.getCampaign() != null) {
-				character.getCampaign().getCharacters().remove(character);
+		if(!players.contains(player)) {
+			players.add(player);
+			if(player.getCampaign() != null) {
+				player.getCampaign().getPlayers().remove(player);
 				
 			}
-			character.setCampaign(this);
+			player.setCampaign(this);
 		}
 	}
 	
-	public void removeCharacter(Character character) {
-		character.setCampaign(null);
-		if(characters != null) {
-			characters.remove(character);
+	public void removePlayer(Player player) {
+		player.setCampaign(null);
+		if(players != null) {
+			players.remove(player);
 		}
 	}
 
@@ -140,22 +140,24 @@ public class Campaign {
 		this.towns = towns;
 	}
 
-	public List<Character> getCharacters() {
-		return characters;
+	public List<Player> getPlayers() {
+		return players;
 	}
 
-	public void setCharacters(List<Character> characters) {
-		this.characters = characters;
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((characters == null) ? 0 : characters.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((npcs == null) ? 0 : npcs.hashCode());
+		result = prime * result + ((players == null) ? 0 : players.hashCode());
 		result = prime * result + ((towns == null) ? 0 : towns.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
@@ -170,11 +172,6 @@ public class Campaign {
 		if (getClass() != obj.getClass())
 			return false;
 		Campaign other = (Campaign) obj;
-		if (characters == null) {
-			if (other.characters != null)
-				return false;
-		} else if (!characters.equals(other.characters))
-			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -186,6 +183,11 @@ public class Campaign {
 			if (other.npcs != null)
 				return false;
 		} else if (!npcs.equals(other.npcs))
+			return false;
+		if (players == null) {
+			if (other.players != null)
+				return false;
+		} else if (!players.equals(other.players))
 			return false;
 		if (towns == null) {
 			if (other.towns != null)
@@ -211,8 +213,8 @@ public class Campaign {
 		builder.append(npcs);
 		builder.append(", towns=");
 		builder.append(towns);
-		builder.append(", characters=");
-		builder.append(characters);
+		builder.append(", players=");
+		builder.append(players);
 		builder.append("]");
 		return builder.toString();
 	}

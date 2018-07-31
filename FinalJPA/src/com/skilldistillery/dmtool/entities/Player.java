@@ -15,59 +15,59 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Character {
+public class Player {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int id;
 	private String name;
 	@Column(name="max_hp")
-	private int maxHp;
+	private Integer maxHp;
 	@Column(name="current_hp")
-	private int currentHp;
-	private int intiative;
-	private int ac;
-	private int perception;
-	private int investigation;
-	private int insight;
+	private Integer currentHp;
+	private Integer initiative;
+	private Integer ac;
+	private Integer perception;
+	private Integer investigation;
+	private Integer insight;
 	@Column(name="image_url")
 	private String imageUrl;
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "campign_id")
+	@JoinColumn(name = "campaign_id")
 	private Campaign campaign;
 	
-	@OneToMany(mappedBy="character")
-	private List<CharacterNote> characterNotes;
+	@OneToMany(mappedBy="player")
+	private List<PlayerNote> playerNotes;
 	
-	//add and remove CharacterNotes from Character list
+	//add and remove playerNotes from player list
 	
-	public void addCharacterNote(CharacterNote characterNote) {
-		if(characterNotes == null) characterNotes = new ArrayList<>();
+	public void addPlayerNote(PlayerNote playerNote) {
+		if(playerNotes == null) playerNotes = new ArrayList<>();
 		
-		if(!characterNotes.contains(characterNote)) {
-			characterNotes.add(characterNote);
-			if(characterNote.getCharacter() != null) {
-				characterNote.getCharacter().getCharacterNotes().remove(characterNote);
+		if(!playerNotes.contains(playerNote)) {
+			playerNotes.add(playerNote);
+			if(playerNote.getPlayer() != null) {
+				playerNote.getPlayer().getPlayerNotes().remove(playerNote);
 				
 			}
-			characterNote.setCharacter(this);
+			playerNote.setPlayer(this);
 		}
 	}
 	
-	public void removeCharacterNote(CharacterNote characterNote) {
-		characterNote.setCharacter(null);
-		if(characterNotes != null) {
-			characterNotes.remove(characterNote);
+	public void removePlayerNote(PlayerNote playerNote) {
+		playerNote.setPlayer(null);
+		if(playerNotes != null) {
+			playerNotes.remove(playerNote);
 		}
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -79,59 +79,59 @@ public class Character {
 		this.name = name;
 	}
 
-	public int getHpMax() {
+	public Integer getHpMax() {
 		return maxHp;
 	}
 
-	public void setHpMax(int hpMax) {
+	public void setHpMax(Integer hpMax) {
 		this.maxHp = hpMax;
 	}
 
-	public int getHpCurrent() {
+	public Integer getHpCurrent() {
 		return currentHp;
 	}
 
-	public void setHpCurrent(int hpCurrent) {
+	public void setHpCurrent(Integer hpCurrent) {
 		this.currentHp = hpCurrent;
 	}
 
-	public int getIntiative() {
-		return intiative;
+	public Integer getInitiative() {
+		return initiative;
 	}
 
-	public void setIntiative(int intiative) {
-		this.intiative = intiative;
+	public void setInitiative(Integer Initiative) {
+		this.initiative = Initiative;
 	}
 
-	public int getAc() {
+	public Integer getAc() {
 		return ac;
 	}
 
-	public void setAc(int ac) {
+	public void setAc(Integer ac) {
 		this.ac = ac;
 	}
 
-	public int getPerception() {
+	public Integer getPerception() {
 		return perception;
 	}
 
-	public void setPerception(int perception) {
+	public void setPerception(Integer perception) {
 		this.perception = perception;
 	}
 
-	public int getInvestigation() {
+	public Integer getInvestigation() {
 		return investigation;
 	}
 
-	public void setInvestigation(int investigation) {
+	public void setInvestigation(Integer investigation) {
 		this.investigation = investigation;
 	}
 
-	public int getInsight() {
+	public Integer getInsight() {
 		return insight;
 	}
 
-	public void setInsight(int insight) {
+	public void setInsight(Integer insight) {
 		this.insight = insight;
 	}
 
@@ -151,27 +151,27 @@ public class Character {
 		this.campaign = campaign;
 	}
 
-	public List<CharacterNote> getCharacterNotes() {
-		return characterNotes;
+	public List<PlayerNote> getPlayerNotes() {
+		return playerNotes;
 	}
 
-	public void setCharacterNotes(List<CharacterNote> characterNotes) {
-		this.characterNotes = characterNotes;
+	public void setPlayerNotes(List<PlayerNote> playerNotes) {
+		this.playerNotes = playerNotes;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ac;
 		result = prime * result + ((campaign == null) ? 0 : campaign.hashCode());
-		result = prime * result + ((characterNotes == null) ? 0 : characterNotes.hashCode());
+		result = prime * result + ((playerNotes == null) ? 0 : playerNotes.hashCode());
 		result = prime * result + currentHp;
 		result = prime * result + maxHp;
 		result = prime * result + id;
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + insight;
-		result = prime * result + intiative;
+		result = prime * result + initiative;
 		result = prime * result + investigation;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + perception;
@@ -186,7 +186,7 @@ public class Character {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Character other = (Character) obj;
+		Player other = (Player) obj;
 		if (ac != other.ac)
 			return false;
 		if (campaign == null) {
@@ -194,10 +194,10 @@ public class Character {
 				return false;
 		} else if (!campaign.equals(other.campaign))
 			return false;
-		if (characterNotes == null) {
-			if (other.characterNotes != null)
+		if (playerNotes == null) {
+			if (other.playerNotes != null)
 				return false;
-		} else if (!characterNotes.equals(other.characterNotes))
+		} else if (!playerNotes.equals(other.playerNotes))
 			return false;
 		if (currentHp != other.currentHp)
 			return false;
@@ -212,7 +212,7 @@ public class Character {
 			return false;
 		if (insight != other.insight)
 			return false;
-		if (intiative != other.intiative)
+		if (initiative != other.initiative)
 			return false;
 		if (investigation != other.investigation)
 			return false;
@@ -229,7 +229,7 @@ public class Character {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Character [id=");
+		builder.append("player [id=");
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
@@ -238,7 +238,7 @@ public class Character {
 		builder.append(", hpCurrent=");
 		builder.append(currentHp);
 		builder.append(", intiative=");
-		builder.append(intiative);
+		builder.append(initiative);
 		builder.append(", ac=");
 		builder.append(ac);
 		builder.append(", perception=");
@@ -249,8 +249,8 @@ public class Character {
 		builder.append(insight);
 		builder.append(", imageUrl=");
 		builder.append(imageUrl);
-		builder.append(", characterNotes=");
-		builder.append(characterNotes);
+		builder.append(", playerNotes=");
+		builder.append(playerNotes);
 		builder.append("]");
 		return builder.toString();
 	}

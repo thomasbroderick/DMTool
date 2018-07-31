@@ -12,7 +12,7 @@
 
     <class>com.skilldistillery.finaljpa.entities.Campaign</class>
     <class>com.skilldistillery.finaljpa.entities.CampaignNote</class>
-    <class>com.skilldistillery.finaljpa.entities.Character</class>
+    <class>com.skilldistillery.finaljpa.entities.Player</class>
     <class>com.skilldistillery.finaljpa.entities.CharacterNote</class>
     <class>com.skilldistillery.finaljpa.entities.Item</class>
     <class>com.skilldistillery.finaljpa.entities.Monster</class>
