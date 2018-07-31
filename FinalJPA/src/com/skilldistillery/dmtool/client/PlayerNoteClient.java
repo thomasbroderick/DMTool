@@ -4,18 +4,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.skilldistillery.dmtool.entities.Campaign;
+import com.skilldistillery.dmtool.entities.Player;
+import com.skilldistillery.dmtool.entities.PlayerNote;
 
-public class CampaignNote {
+public class PlayerNoteClient {
 	
 	public static void main(String[] args) {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("DMTool");
 		EntityManager em = emf.createEntityManager();
 
-		CampignNote campignNote = em.find(Campaign.class, 1);
+		PlayerNote playerNote = em.find(PlayerNote.class, 1);
 
-		System.out.println(campaign);
+		System.out.println(playerNote);
 
 		em.close();
 		emf.close();
