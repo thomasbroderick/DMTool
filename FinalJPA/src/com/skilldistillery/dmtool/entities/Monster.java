@@ -15,8 +15,11 @@ public class Monster {
 	private String type;
 	private String subtype;
 	private String alignment;
+	@Column(name="damage_vulnerabilities")
 	private String vulnerabilities;
+	@Column(name="damage_resistances")
 	private String resistances;
+	@Column(name="damage_immunities")
 	private String immunnities;
 	@Column(name="condition_immunities")
 	private String conditionImmunities;
@@ -31,11 +34,12 @@ public class Monster {
 	private String imageUrl;
 	@Column(name="hit_dice")
 	private String hitDice;
-	
+	@Column(name="armor_class")
 	private int ac;
 	private int stealth;
+	@Column(name="hit_points")
 	private int hitPoints;
-	private int speed;
+	private String speed;
 	private int strength;
 	private int dexterity;
 	private int intelligence;
@@ -216,11 +220,11 @@ public class Monster {
 		this.hitPoints = hitPoints;
 	}
 
-	public int getSpeed() {
+	public String getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(String speed) {
 		this.speed = speed;
 	}
 
@@ -312,6 +316,9 @@ public class Monster {
 		this.user = user;
 	}
 
+
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -339,7 +346,7 @@ public class Monster {
 		result = prime * result + ((senses == null) ? 0 : senses.hashCode());
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		result = prime * result + ((specialAbilities == null) ? 0 : specialAbilities.hashCode());
-		result = prime * result + speed;
+		result = prime * result + ((speed == null) ? 0 : speed.hashCode());
 		result = prime * result + stealth;
 		result = prime * result + strength;
 		result = prime * result + ((subtype == null) ? 0 : subtype.hashCode());
@@ -445,7 +452,10 @@ public class Monster {
 				return false;
 		} else if (!specialAbilities.equals(other.specialAbilities))
 			return false;
-		if (speed != other.speed)
+		if (speed == null) {
+			if (other.speed != null)
+				return false;
+		} else if (!speed.equals(other.speed))
 			return false;
 		if (stealth != other.stealth)
 			return false;

@@ -6,10 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="campaign_note")
 public class CampaignNote {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,7 @@ public class CampaignNote {
 	@JoinColumn(name = "campaign_id")
 	private Campaign campaign;
 	
-	private String content;
+	private String text;
 
 	public int getId() {
 		return id;
@@ -40,11 +42,11 @@ public class CampaignNote {
 	}
 
 	public String getContent() {
-		return content;
+		return text;
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		this.text = content;
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class CampaignNote {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((campaign == null) ? 0 : campaign.hashCode());
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + id;
 		return result;
 	}
@@ -71,10 +73,10 @@ public class CampaignNote {
 				return false;
 		} else if (!campaign.equals(other.campaign))
 			return false;
-		if (content == null) {
-			if (other.content != null)
+		if (text == null) {
+			if (other.text != null)
 				return false;
-		} else if (!content.equals(other.content))
+		} else if (!text.equals(other.text))
 			return false;
 		if (id != other.id)
 			return false;
@@ -86,8 +88,8 @@ public class CampaignNote {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CampaignNotes [id=");
 		builder.append(id);
-		builder.append(", content=");
-		builder.append(content);
+		builder.append(", text=");
+		builder.append(text);
 		builder.append("]");
 		return builder.toString();
 	}

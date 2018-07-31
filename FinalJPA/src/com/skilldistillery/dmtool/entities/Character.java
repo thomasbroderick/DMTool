@@ -21,10 +21,10 @@ public class Character {
 	@Id
 	private int id;
 	private String name;
-	@Column(name="hp_max")
-	private int hpMax;
-	@Column(name="hp_curent")
-	private int hpCurrent;
+	@Column(name="max_hp")
+	private int maxHp;
+	@Column(name="current_hp")
+	private int currentHp;
 	private int intiative;
 	private int ac;
 	private int perception;
@@ -80,19 +80,19 @@ public class Character {
 	}
 
 	public int getHpMax() {
-		return hpMax;
+		return maxHp;
 	}
 
 	public void setHpMax(int hpMax) {
-		this.hpMax = hpMax;
+		this.maxHp = hpMax;
 	}
 
 	public int getHpCurrent() {
-		return hpCurrent;
+		return currentHp;
 	}
 
 	public void setHpCurrent(int hpCurrent) {
-		this.hpCurrent = hpCurrent;
+		this.currentHp = hpCurrent;
 	}
 
 	public int getIntiative() {
@@ -166,8 +166,8 @@ public class Character {
 		result = prime * result + ac;
 		result = prime * result + ((campaign == null) ? 0 : campaign.hashCode());
 		result = prime * result + ((characterNotes == null) ? 0 : characterNotes.hashCode());
-		result = prime * result + hpCurrent;
-		result = prime * result + hpMax;
+		result = prime * result + currentHp;
+		result = prime * result + maxHp;
 		result = prime * result + id;
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + insight;
@@ -199,9 +199,9 @@ public class Character {
 				return false;
 		} else if (!characterNotes.equals(other.characterNotes))
 			return false;
-		if (hpCurrent != other.hpCurrent)
+		if (currentHp != other.currentHp)
 			return false;
-		if (hpMax != other.hpMax)
+		if (maxHp != other.maxHp)
 			return false;
 		if (id != other.id)
 			return false;
@@ -234,9 +234,9 @@ public class Character {
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", hpMax=");
-		builder.append(hpMax);
+		builder.append(maxHp);
 		builder.append(", hpCurrent=");
-		builder.append(hpCurrent);
+		builder.append(currentHp);
 		builder.append(", intiative=");
 		builder.append(intiative);
 		builder.append(", ac=");

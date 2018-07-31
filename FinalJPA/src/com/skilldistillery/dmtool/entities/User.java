@@ -16,7 +16,6 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String email;
-	private String username;
 	private String password;
 	private boolean enabled;
 	private String role;
@@ -147,13 +146,6 @@ public class User {
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return password;
@@ -225,7 +217,6 @@ public class User {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((spells == null) ? 0 : spells.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -277,11 +268,6 @@ public class User {
 				return false;
 		} else if (!spells.equals(other.spells))
 			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
 		return true;
 	}
 
@@ -292,8 +278,6 @@ public class User {
 		builder.append(id);
 		builder.append(", email=");
 		builder.append(email);
-		builder.append(", username=");
-		builder.append(username);
 		builder.append(", password=");
 		builder.append(password);
 		builder.append(", enabled=");
@@ -312,9 +296,4 @@ public class User {
 		return builder.toString();
 	}
 
-	
-	
-	
-	
-
-}
+	}

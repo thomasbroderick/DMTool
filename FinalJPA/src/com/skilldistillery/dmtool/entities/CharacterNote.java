@@ -5,13 +5,14 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="character_note")
 public class CharacterNote {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String content;
+	private String text;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -26,10 +27,10 @@ public class CharacterNote {
 		this.id = id;
 	}
 	public String getContent() {
-		return content;
+		return text;
 	}
 	public void setContent(String content) {
-		this.content = content;
+		this.text = content;
 	}
 	public Character getCharacter() {
 		return character;
@@ -42,7 +43,7 @@ public class CharacterNote {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((character == null) ? 0 : character.hashCode());
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + id;
 		return result;
 	}
@@ -60,10 +61,10 @@ public class CharacterNote {
 				return false;
 		} else if (!character.equals(other.character))
 			return false;
-		if (content == null) {
-			if (other.content != null)
+		if (text == null) {
+			if (other.text != null)
 				return false;
-		} else if (!content.equals(other.content))
+		} else if (!text.equals(other.text))
 			return false;
 		if (id != other.id)
 			return false;
@@ -75,7 +76,7 @@ public class CharacterNote {
 		builder.append("CharacterNote [id=");
 		builder.append(id);
 		builder.append(", content=");
-		builder.append(content);
+		builder.append(text);
 		builder.append("]");
 		return builder.toString();
 	}
