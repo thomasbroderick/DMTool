@@ -80,11 +80,11 @@ CREATE INDEX `fk_campaign_note_idx` ON `dm_tool_db`.`campaign_note` (`campaign_i
 
 
 -- -----------------------------------------------------
--- Table `dm_tool_db`.`character`
+-- Table `dm_tool_db`.`player`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dm_tool_db`.`character` ;
+DROP TABLE IF EXISTS `dm_tool_db`.`player` ;
 
-CREATE TABLE IF NOT EXISTS `dm_tool_db`.`character` (
+CREATE TABLE IF NOT EXISTS `dm_tool_db`.`player` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `campaign_id` INT(11) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`character` (
   `insight` INT(11) NULL DEFAULT NULL,
   `image_url` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_character_campaign`
+  CONSTRAINT `fk_player_campaign`
     FOREIGN KEY (`campaign_id`)
     REFERENCES `dm_tool_db`.`campaign` (`id`)
     ON DELETE CASCADE
@@ -105,28 +105,28 @@ CREATE TABLE IF NOT EXISTS `dm_tool_db`.`character` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_character_campaign_idx` ON `dm_tool_db`.`character` (`campaign_id` ASC);
+CREATE INDEX `fk_player_campaign_idx` ON `dm_tool_db`.`player` (`campaign_id` ASC);
 
 
 -- -----------------------------------------------------
--- Table `dm_tool_db`.`character_note`
+-- Table `dm_tool_db`.`player_note`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dm_tool_db`.`character_note` ;
+DROP TABLE IF EXISTS `dm_tool_db`.`player_note` ;
 
-CREATE TABLE IF NOT EXISTS `dm_tool_db`.`character_note` (
+CREATE TABLE IF NOT EXISTS `dm_tool_db`.`player_note` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `character_id` INT(11) NOT NULL,
+  `player_id` INT(11) NOT NULL,
   `text` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_character_note`
-    FOREIGN KEY (`character_id`)
-    REFERENCES `dm_tool_db`.`character` (`id`)
+  CONSTRAINT `fk_player_note`
+    FOREIGN KEY (`player_id`)
+    REFERENCES `dm_tool_db`.`player` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_character_note_idx` ON `dm_tool_db`.`character_note` (`character_id` ASC);
+CREATE INDEX `fk_player_note_idx` ON `dm_tool_db`.`player_note` (`player_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -333,22 +333,22 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `dm_tool_db`.`character`
+-- Data for table `dm_tool_db`.`player`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`character` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (1, 1, 'Legolas the Original', 30, 30, 1, 18, 6, 2, 0, NULL);
-INSERT INTO `dm_tool_db`.`character` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (2, 1, 'Gimli the Null', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dm_tool_db`.`player` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (1, 1, 'Legolas the Original', 30, 30, 1, 18, 6, 2, 0, NULL);
+INSERT INTO `dm_tool_db`.`player` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (2, 1, 'Gimli the Null', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `dm_tool_db`.`character_note`
+-- Data for table `dm_tool_db`.`player_note`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `dm_tool_db`.`character_note` (`id`, `character_id`, `text`) VALUES (1, 1, 'Best character evar!');
+INSERT INTO `dm_tool_db`.`player_note` (`id`, `player_id`, `text`) VALUES (1, 1, 'Best player evar!');
 
 COMMIT;
 
