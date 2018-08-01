@@ -32,7 +32,8 @@ public class TownServiceImpl implements TownService {
 	}
 
 	@Override
-	public Town update(int tid, Town town) {
+	public Town update(int cid, int tid, Town town) {
+		town.setCampaign(campRepo.findOneById(cid));
 		town.setId(tid);
 		return townRepo.saveAndFlush(town);
 	}

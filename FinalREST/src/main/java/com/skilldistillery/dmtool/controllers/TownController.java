@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.dmtool.entities.Town;
+import com.skilldistillery.dmtool.services.CampaignService;
 import com.skilldistillery.dmtool.services.TownService;
 
 @RestController
@@ -54,10 +55,10 @@ public class TownController {
 		return to;
 	}
 
-	@RequestMapping(path = "town/{tid}", method = RequestMethod.PUT)
-	public Town update(@PathVariable int tid, @RequestBody Town town, HttpServletRequest request,
+	@RequestMapping(path = "town/{cid}/{tid}", method = RequestMethod.PATCH)
+	public Town update(@PathVariable int tid, @PathVariable int cid, @RequestBody Town town, HttpServletRequest request,
 			HttpServletResponse response) {
-		Town to = townServ.update(tid, town);
+		Town to = townServ.update(cid, tid, town);
 
 		if (to != null) {
 			response.setStatus(200);
