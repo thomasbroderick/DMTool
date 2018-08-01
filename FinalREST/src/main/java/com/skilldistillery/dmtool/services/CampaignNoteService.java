@@ -12,7 +12,7 @@ public interface CampaignNoteService {
 
 	  public CampaignNote create(int campId, CampaignNote campaignNote);
 
-	  public CampaignNote update(int noteId, CampaignNote campaignNote);
+	  public CampaignNote update(int campId, int noteId, CampaignNote campaignNote);
 
 	  public void destroy(int cid);
 

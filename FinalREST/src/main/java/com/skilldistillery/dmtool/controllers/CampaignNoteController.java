@@ -53,9 +53,9 @@ public class CampaignNoteController {
 		  return note;
 	}
 
-	  @RequestMapping(path="campaignnote/{nid}", method=RequestMethod.PUT)
-	  public CampaignNote update(@PathVariable int nid, @RequestBody CampaignNote campaignNote, HttpServletRequest request, HttpServletResponse response){ 
-		  CampaignNote note = noteServ.update(nid, campaignNote); 
+	  @RequestMapping(path="campaignnote/{cid}/{nid}", method=RequestMethod.PUT)
+	  public CampaignNote update(@PathVariable int cid, @PathVariable int nid, @RequestBody CampaignNote campaignNote, HttpServletRequest request, HttpServletResponse response){ 
+		  CampaignNote note = noteServ.update(cid, nid, campaignNote); 
 		  
 		  if(note != null) {
 			  response.setStatus(200);
