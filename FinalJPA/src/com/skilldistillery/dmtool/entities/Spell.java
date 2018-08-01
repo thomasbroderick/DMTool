@@ -14,6 +14,7 @@ public class Spell {
 	private String description;
 	@Column(name="higher_lvl")
 	private String higherLevel;
+	@Column(name = "rng")
 	private String range;
 	private String components;
 	private String material;

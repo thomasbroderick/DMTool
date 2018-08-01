@@ -14,6 +14,7 @@ public class Item {
 	private String equipmentCategory;
 	@Column(name = "weapon_category")
 	private String weaponCategory;
+	@Column(name = "rng")
 	private String range;
 	private String cost;
 	private String damage;
