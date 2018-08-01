@@ -34,7 +34,8 @@ public class CampaignNoteServiceImpl implements CampaignNoteService {
 	}
 
 	@Override
-	public CampaignNote update(int noteId, CampaignNote campaignNote) {
+	public CampaignNote update(int campId, int noteId, CampaignNote campaignNote) {
+		campaignNote.setCampaign(campRepo.findById(campId).get());
 		campaignNote.setId(noteId);
 		return campNoteRepo.saveAndFlush(campaignNote);
 		
