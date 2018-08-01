@@ -4,9 +4,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.skilldistillery.dmtool.entities.Monster;
 import com.skilldistillery.dmtool.entities.User;
-import com.skilldistillery.dmtool.repositories.MonsterRepository;
 import com.skilldistillery.dmtool.repositories.UserRepository;
 
 public class UserServiceImpl implements UserService {
