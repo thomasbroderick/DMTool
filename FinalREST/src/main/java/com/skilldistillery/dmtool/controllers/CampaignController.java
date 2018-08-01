@@ -61,7 +61,7 @@ public class CampaignController {
 	@RequestMapping(path = "campaign/{uid}/{cid}", method = RequestMethod.PATCH)
 	public Campaign update(@PathVariable int uid, @PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
 			HttpServletResponse response) {
-		
+		System.out.println(campaign);
 		Campaign camp = campServ.update(userServ.show(uid).getEmail(), cid, campaign);
 
 		if (camp != null) {
