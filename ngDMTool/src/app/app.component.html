@@ -1,37 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <div lb-gridstack>
- <div lb-gridstack-item index="0" height="5"  width="20" >
-<table class='table table-dark'>
-  <tr>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-  </tr>
-  <tr>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-  </tr>
-  <tr>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-  </tr>
-</table>
-</div>
-<div lb-gridstack-item index="0" height="5"  width="20" >
-<img src='https://cdn.newsapi.com.au/image/v1/9fdbf585d17c95f7a31ccacdb6466af9'/>
-</div>
-    <div lb-gridstack-item
-    x="3"
-    y="0"
-    width="2"
-    index="1" >
-    Widget 2
-  </div>
-  <button (click)='loadGrid()'>Load</button>
-<button (click)='saveGrid()'>Save</button>
-</div>
+<body>
+<div lb-gridstack>
+    <div lb-gridstack-item index="0" height="5" width="5">
+      <app-dice-roller></app-dice-roller>
+    </div>
 
-</div>
+  </div>
+</body>
