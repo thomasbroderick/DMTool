@@ -11,7 +11,7 @@ public interface ItemService {
 
 	  public Item create(String email, Item item);
 
-	  public Item update(int iid, Item item);
+	  public Item update(String email, int iid, Item item);
 
 	  public void destroy(int iid);
 

@@ -33,7 +33,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Item update(int iid, Item item) {
+	public Item update(String email, int iid, Item item) {
+		item.setUser(userRepo.findOneByEmail(email));
 		item.setId(iid);
 		return itemRepo.saveAndFlush(item);
 	}

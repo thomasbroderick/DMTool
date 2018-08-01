@@ -57,10 +57,10 @@ public class ItemController {
 		return it;
 	}
 
-	@RequestMapping(path = "item/{iid}", method = RequestMethod.PUT)
-	public Item update(@PathVariable int iid, @RequestBody Item item, HttpServletRequest request,
+	@RequestMapping(path = "item/{uid}/{iid}", method = RequestMethod.PUT)
+	public Item update(@PathVariable int uid, @PathVariable int iid, @RequestBody Item item, HttpServletRequest request,
 			HttpServletResponse response) {
-		Item it = itemServ.update(iid, item);
+		Item it = itemServ.update(userServ.show(uid).getEmail(), iid, item);
 
 		if (it != null) {
 			response.setStatus(200);
