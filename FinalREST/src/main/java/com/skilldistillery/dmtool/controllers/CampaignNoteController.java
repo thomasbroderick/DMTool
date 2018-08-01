@@ -68,12 +68,12 @@ public class CampaignNoteController {
 		@RequestMapping(path = "campaignnote/{nid}", method = RequestMethod.DELETE)
 		public void destroy(@PathVariable int nid, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 			noteServ.destroy(nid);
-			CampaignNote note = noteServ.show(nid);
-			if (note != null) {
+			res.setStatus(500);
+			try {
+			noteServ.show(nid);
+			}
+			catch(Exception e) {
 				res.setStatus(200);
-
-			} else {
-				res.setStatus(500);
 			}
 		}
 		

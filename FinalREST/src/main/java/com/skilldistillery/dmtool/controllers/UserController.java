@@ -71,13 +71,14 @@ public class UserController {
 	@RequestMapping(path = "user/{uid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int uid, HttpServletRequest request, HttpServletResponse response) {
 		userServ.destroy(uid);
-		User us = userServ.show(uid);
-		if (us != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		userServ.show(uid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
+	
 	}
 
 }

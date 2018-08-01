@@ -71,11 +71,11 @@ public class TownController {
 	@RequestMapping(path = "town/{tid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int tid, HttpServletRequest request, HttpServletResponse response) {
 		townServ.destroy(tid);
-		Town to = townServ.show(tid);
-		if (to != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		townServ.show(tid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

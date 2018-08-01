@@ -71,11 +71,11 @@ public class PlayerController {
 	@RequestMapping(path = "player/{pid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int pid, HttpServletRequest request, HttpServletResponse response) {
 		playerServ.destroy(pid);
-		Player play = playerServ.show(pid);
-		if (play != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		playerServ.show(pid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

@@ -74,11 +74,11 @@ public class SpellController {
 	@RequestMapping(path = "spell/{sid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int sid, HttpServletRequest request, HttpServletResponse response) {
 		spellServ.destroy(sid);
-		Spell sp = spellServ.show(sid);
-		if (sp != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		spellServ.show(sid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

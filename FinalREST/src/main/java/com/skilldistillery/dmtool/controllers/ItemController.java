@@ -74,11 +74,11 @@ public class ItemController {
 	@RequestMapping(path = "item/{iid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int iid, HttpServletRequest request, HttpServletResponse response) {
 		itemServ.destroy(iid);
-		Item it = itemServ.show(iid);
-		if (it != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		itemServ.show(iid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

@@ -76,11 +76,11 @@ public class CampaignController {
 	@RequestMapping(path = "campaign/{cid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int cid, HttpServletRequest request, HttpServletResponse response) {
 		campServ.destroy(cid);
-		Campaign camp = campServ.show(cid);
-		if (camp != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		campServ.show(cid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

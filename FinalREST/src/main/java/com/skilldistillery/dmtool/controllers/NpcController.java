@@ -71,11 +71,11 @@ public class NpcController {
 	@RequestMapping(path = "npc/{nid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int nid, HttpServletRequest request, HttpServletResponse response) {
 		npcServ.destroy(nid);
-		Npc n = npcServ.show(nid);
-		if (n != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		npcServ.show(nid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

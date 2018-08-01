@@ -75,11 +75,11 @@ public class MonsterController {
 	@RequestMapping(path = "monster/{mid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int mid, HttpServletRequest request, HttpServletResponse response) {
 		monServ.destroy(mid);
-		Monster mon = monServ.show(mid);
-		if (mon != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		monServ.show(mid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}

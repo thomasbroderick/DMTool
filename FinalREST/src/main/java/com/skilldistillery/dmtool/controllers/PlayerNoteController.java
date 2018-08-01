@@ -71,11 +71,11 @@ public class PlayerNoteController {
 	@RequestMapping(path = "playernote/{pid}", method = RequestMethod.DELETE)
 	public void destroy(@PathVariable int pid, HttpServletRequest request, HttpServletResponse response) {
 		noteServ.destroy(pid);
-		PlayerNote note = noteServ.show(pid);
-		if (note != null) {
-			response.setStatus(500);
-
-		} else {
+		response.setStatus(500);
+		try {
+		noteServ.show(pid);
+		}
+		catch(Exception e) {
 			response.setStatus(200);
 		}
 	}
