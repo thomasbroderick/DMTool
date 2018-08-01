@@ -11,7 +11,7 @@ public interface TownService {
 
 	  public Town create(int cid, Town town);
 
-	  public Town update(int tid, Town town);
+	  public Town update(int cid, int tid, Town town);
 
 	  public void destroy(int tid);
 
