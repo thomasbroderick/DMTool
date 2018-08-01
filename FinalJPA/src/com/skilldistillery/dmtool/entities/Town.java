@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Town {
 	
@@ -19,36 +21,36 @@ public class Town {
 	private int id;
 	private String name;
 	private String description;
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "campaign_id")
 	private Campaign campaign;
 	
-	@OneToMany(mappedBy="town")
-	private List<TownNote> townNotes;
+//	@OneToMany(mappedBy="town")
+//	private List<TownNote> townNotes;
 
 	
 	//add and remove CharacterNotes from Character list
 	
-	public void addTownNote(TownNote townNote) {
-		if(townNotes == null) townNotes = new ArrayList<>();
-		
-		if(!townNotes.contains(townNote)) {
-			townNotes.add(townNote);
-			if(townNote.getTown() != null) {
-				townNote.getTown().getTownNotes().remove(townNote);
-				
-			}
-			townNote.setTown(this);
-		}
-	}
-	
-	public void removeTownNote(TownNote townNote) {
-		townNote.setTown(null);
-		if(townNotes != null) {
-			townNotes.remove(townNote);
-		}
-	}
+//	public void addTownNote(TownNote townNote) {
+//		if(townNotes == null) townNotes = new ArrayList<>();
+//		
+//		if(!townNotes.contains(townNote)) {
+//			townNotes.add(townNote);
+//			if(townNote.getTown() != null) {
+//				townNote.getTown().getTownNotes().remove(townNote);
+//				
+//			}
+//			townNote.setTown(this);
+//		}
+//	}
+//	
+//	public void removeTownNote(TownNote townNote) {
+//		townNote.setTown(null);
+//		if(townNotes != null) {
+//			townNotes.remove(townNote);
+//		}
+//	}
 	
 	
 	public int getId() {
@@ -83,13 +85,13 @@ public class Town {
 		this.campaign = campaign;
 	}
 
-	public List<TownNote> getTownNotes() {
-		return townNotes;
-	}
-
-	public void setTownNotes(List<TownNote> townNotes) {
-		this.townNotes = townNotes;
-	}
+//	public List<TownNote> getTownNotes() {
+//		return townNotes;
+//	}
+//
+//	public void setTownNotes(List<TownNote> townNotes) {
+//		this.townNotes = townNotes;
+//	}
 
 	@Override
 	public int hashCode() {

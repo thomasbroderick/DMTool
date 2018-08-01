@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.dmtool.entities.Campaign;
+import com.skilldistillery.dmtool.entities.User;
 import com.skilldistillery.dmtool.services.CampaignService;
 import com.skilldistillery.dmtool.services.UserService;
 
@@ -57,10 +58,11 @@ public class CampaignController {
 		return camp;
 	}
 
-	@RequestMapping(path = "campaign/{cid}", method = RequestMethod.PUT)
-	public Campaign update(@PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
+	@RequestMapping(path = "campaign/{uid}/{cid}", method = RequestMethod.PATCH)
+	public Campaign update(@PathVariable int uid, @PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
 			HttpServletResponse response) {
-		Campaign camp = campServ.update(cid, campaign);
+		
+		Campaign camp = campServ.update(userServ.show(uid).getEmail(), cid, campaign);
 
 		if (camp != null) {
 			response.setStatus(200);
