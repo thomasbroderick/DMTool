@@ -3,12 +3,13 @@ package com.skilldistillery.dmtool.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.CampaignNote;
 import com.skilldistillery.dmtool.repositories.CampaignNoteRepository;
 import com.skilldistillery.dmtool.repositories.CampaignRepository;
 
-
+@Service
 public class CampaignNoteServiceImpl implements CampaignNoteService {
 
 	@Autowired

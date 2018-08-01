@@ -3,11 +3,12 @@ package com.skilldistillery.dmtool.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.Npc;
 import com.skilldistillery.dmtool.repositories.CampaignRepository;
 import com.skilldistillery.dmtool.repositories.NpcRepository;
-
+@Service
 public class NpcServiceImpl implements NpcService {
 	
 	@Autowired

@@ -23,6 +23,7 @@ import com.skilldistillery.dmtool.services.UserService;
 public class MonsterController {
 	@Autowired
 	private MonsterService monServ;
+	
 	@Autowired
 	private UserService userServ;
 	

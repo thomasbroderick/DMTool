@@ -1,16 +1,18 @@
 package com.skilldistillery.dmtool.services;
 
 import java.util.List;
+
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.Monster;
 import com.skilldistillery.dmtool.entities.Spell;
 import com.skilldistillery.dmtool.repositories.MonsterRepository;
 import com.skilldistillery.dmtool.repositories.SpellRepository;
 import com.skilldistillery.dmtool.repositories.UserRepository;
-
+@Service
 public class MonsterServiceImpl implements MonsterService {
 
 	@Autowired
@@ -21,7 +23,7 @@ public class MonsterServiceImpl implements MonsterService {
 	private SpellRepository spellRepo;
 	
 	//Find all by default Id then add in user created spells?
-	private List<Spell> spells = spellRepo.findAll();
+//	private List<Spell> spells = spellRepo.findAll();
 			
 
 	@Override

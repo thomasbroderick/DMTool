@@ -3,11 +3,12 @@ package com.skilldistillery.dmtool.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.PlayerNote;
 import com.skilldistillery.dmtool.repositories.PlayerNoteRepository;
 import com.skilldistillery.dmtool.repositories.PlayerRepository;
-
+@Service
 public class PlayerNoteServiceImpl implements PlayerNoteService {
 	
 	@Autowired

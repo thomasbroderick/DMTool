@@ -3,10 +3,11 @@ package com.skilldistillery.dmtool.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.User;
 import com.skilldistillery.dmtool.repositories.UserRepository;
-
+@Service
 public class UserServiceImpl implements UserService {
 	
 

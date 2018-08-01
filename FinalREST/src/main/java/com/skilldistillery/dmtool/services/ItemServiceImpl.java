@@ -3,11 +3,12 @@ package com.skilldistillery.dmtool.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.Item;
 import com.skilldistillery.dmtool.repositories.ItemRepository;
 import com.skilldistillery.dmtool.repositories.UserRepository;
-
+@Service
 public class ItemServiceImpl implements ItemService {
 
 	@Autowired
