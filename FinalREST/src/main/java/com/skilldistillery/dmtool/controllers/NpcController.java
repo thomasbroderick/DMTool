@@ -30,7 +30,7 @@ public class NpcController {
 	}
 
 	// Need to include campaign id in path to get all npcs for a specific campaign
-	@RequestMapping(path = "npc/all/{cid}", method = RequestMethod.GET)
+	@RequestMapping(path = "campaign/{cid}/npc/all", method = RequestMethod.GET)
 	public Set<Npc> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		return npcServ.index(cid);
 	}
@@ -40,7 +40,7 @@ public class NpcController {
 		return npcServ.show(nid);
 	}
 
-	@RequestMapping(path = "npc/{cid}", method = RequestMethod.POST)
+	@RequestMapping(path = "campaign/{cid}/npc", method = RequestMethod.POST)
 	public Npc create(@RequestBody Npc npc, @PathVariable int cid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Npc n = npcServ.create(cid, npc);
@@ -54,10 +54,10 @@ public class NpcController {
 		return n;
 	}
 
-	@RequestMapping(path = "npc/{nid}", method = RequestMethod.PUT)
-	public Npc update(@PathVariable int nid, @RequestBody Npc npc, HttpServletRequest request,
+	@RequestMapping(path = "campaign/{cid}/npc/{nid}", method = RequestMethod.PATCH)
+	public Npc update(@PathVariable int cid, @PathVariable int nid, @RequestBody Npc npc, HttpServletRequest request,
 			HttpServletResponse response) {
-		Npc n = npcServ.update(nid, npc);
+		Npc n = npcServ.update(cid, nid, npc);
 
 		if (n != null) {
 			response.setStatus(200);

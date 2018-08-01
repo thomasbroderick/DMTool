@@ -11,7 +11,7 @@ public interface MonsterService {
 
 	  public Monster create(String email, Monster monster);
 
-	  public Monster update(int mid, Monster monster);
+	  public Monster update(String email, int mid, Monster monster);
 
 	  public void destroy(int mid);
 }

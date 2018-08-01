@@ -43,7 +43,8 @@ public class MonsterServiceImpl implements MonsterService {
 	}
 
 	@Override
-	public Monster update(int mid, Monster monster) {
+	public Monster update(String email, int mid, Monster monster) {
+		monster.setUser(userRepo.findOneByEmail(email));
 		monster.setId(mid);
 		return monRepo.saveAndFlush(monster);
 	}

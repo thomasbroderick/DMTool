@@ -33,7 +33,7 @@ public class ItemController {
 	}
 
 	// Need to include user id in path to get all notes for a specific campaign
-	@RequestMapping(path = "item/all/{uid}", method = RequestMethod.GET)
+	@RequestMapping(path = "user/{uid}/item/all", method = RequestMethod.GET)
 	public Set<Item> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
 		return itemServ.index(userServ.show(uid).getEmail());
 	}
@@ -43,7 +43,7 @@ public class ItemController {
 		return itemServ.show(iid);
 	}
 
-	@RequestMapping(path = "item/{uid}", method = RequestMethod.POST)
+	@RequestMapping(path = "user/{uid}/item", method = RequestMethod.POST)
 	public Item create(@RequestBody Item item, @PathVariable int uid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Item it = itemServ.create(userServ.show(uid).getEmail(), item);
@@ -57,7 +57,7 @@ public class ItemController {
 		return it;
 	}
 
-	@RequestMapping(path = "item/{uid}/{iid}", method = RequestMethod.PUT)
+	@RequestMapping(path = "user/{uid}/item/{iid}", method = RequestMethod.PUT)
 	public Item update(@PathVariable int uid, @PathVariable int iid, @RequestBody Item item, HttpServletRequest request,
 			HttpServletResponse response) {
 		Item it = itemServ.update(userServ.show(uid).getEmail(), iid, item);

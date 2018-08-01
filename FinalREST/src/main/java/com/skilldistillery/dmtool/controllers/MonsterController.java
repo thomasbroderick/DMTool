@@ -34,7 +34,7 @@ public class MonsterController {
 	}
 
 	// Need to include user id in path to get all notes for a specific campaign
-	@RequestMapping(path = "monster/all/{uid}", method = RequestMethod.GET)
+	@RequestMapping(path = "user/{uid}/monster/all", method = RequestMethod.GET)
 	public Set<Monster> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
 		return monServ.index(userServ.show(uid).getEmail());
 	}
@@ -44,7 +44,7 @@ public class MonsterController {
 		return monServ.show(mid);
 	}
 
-	@RequestMapping(path = "monster/{uid}", method = RequestMethod.POST)
+	@RequestMapping(path = "user/{uid}/monster", method = RequestMethod.POST)
 	public Monster create(@RequestBody Monster monster, @PathVariable int uid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Monster mon = monServ.create(userServ.show(uid).getEmail(), monster);
@@ -58,10 +58,10 @@ public class MonsterController {
 		return mon;
 	}
 
-	@RequestMapping(path = "monster/{mid}", method = RequestMethod.PUT)
-	public Monster update(@PathVariable int mid, @RequestBody Monster monster, HttpServletRequest request,
+	@RequestMapping(path = "user/{uid}/monster/{mid}", method = RequestMethod.PATCH)
+	public Monster update(@PathVariable int uid, @PathVariable int mid, @RequestBody Monster monster, HttpServletRequest request,
 			HttpServletResponse response) {
-		Monster mon = monServ.update(mid, monster);
+		Monster mon = monServ.update(userServ.show(uid).getEmail(), mid, monster);
 
 		if (mon != null) {
 			response.setStatus(200);

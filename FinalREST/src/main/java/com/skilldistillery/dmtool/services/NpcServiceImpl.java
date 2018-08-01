@@ -33,7 +33,8 @@ public class NpcServiceImpl implements NpcService {
 	}
 
 	@Override
-	public Npc update(int nid, Npc npc) {
+	public Npc update(int cid, int nid, Npc npc) {
+		npc.setCampaign(campRepo.findOneById(cid));
 		npc.setId(nid);
 		return npcRepo.saveAndFlush(npc);
 	}

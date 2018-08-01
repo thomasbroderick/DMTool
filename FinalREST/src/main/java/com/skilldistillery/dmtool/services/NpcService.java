@@ -11,7 +11,7 @@ public interface NpcService {
 
 	  public Npc create(int nid, Npc npc);
 
-	  public Npc update(int nid, Npc npc);
+	  public Npc update(int cid, int nid, Npc npc);
 
 	  public void destroy(int nid);
 
