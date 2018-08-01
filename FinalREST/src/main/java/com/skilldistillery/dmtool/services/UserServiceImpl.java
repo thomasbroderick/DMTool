@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public Set<User> index() {
-		return (Set<User>) userRepo.findAll();
+
+	public List<User> index() {
+		return userRepo.findAll();
 	}
 
 	@Override

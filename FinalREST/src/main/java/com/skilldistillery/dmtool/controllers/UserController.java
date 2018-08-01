@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "user/all", method = RequestMethod.GET)
-	public Set<User> index(HttpServletRequest req, HttpServletResponse res) {
+	public List<User> index(HttpServletRequest req, HttpServletResponse res) {
 		return userServ.index();
 	}
 

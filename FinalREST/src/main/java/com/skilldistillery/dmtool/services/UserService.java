@@ -1,11 +1,12 @@
 package com.skilldistillery.dmtool.services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.skilldistillery.dmtool.entities.User;
 
 public interface UserService {
-	  public Set<User> index();
+	  public List<User> index();
 
 	  public User show(int uid);
 
