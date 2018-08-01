@@ -31,8 +31,6 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Campaign> campaigns;
 	
-
-	
 	@OneToMany(mappedBy="user")
 	private List<Item> items;
 	
