@@ -33,7 +33,8 @@ public class CampaignServiceImpl implements CampaignService {
 	}
 
 	@Override
-	public Campaign update(int cid, Campaign campaign) {
+	public Campaign update(String email, int cid, Campaign campaign) {
+		campaign.setUser(userRepo.findOneByEmail(email));
 		campaign.setId(cid);
 		return campRepo.saveAndFlush(campaign);
 	}
