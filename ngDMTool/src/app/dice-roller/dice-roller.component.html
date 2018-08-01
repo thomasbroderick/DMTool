@@ -1,3 +1,42 @@
-<p>
-  dice-roller works!
-</p>
+<div id='dieMain'>
+  <div class="container" height=40px>
+    <h1>Die Roller</h1>
+    <form [formGroup]="radioGroupForm">
+      <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="model" [(ngModel)]="dieType">
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="4"> d4
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="6"> d6
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="8"> d8
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="10"> d10
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="12"> d12
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="20"> d20
+        </label>
+      </div>
+    </form>
+    <br>
+    <mat-form-field id="dropdown">
+      <mat-select placeholder="Dice Quantity" [(ngModel)]="dieQuant">
+        <mat-option *ngFor="let num of nums" [value]="num.value">
+          {{num.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button id="rollSubmit" class="btn btn-primary btn-lg" (click)="roll()">Roll!</button>
+    <br>
+    <br>
+    <br *ngIf=!dieResult>
+    <br *ngIf=!dieResult>
+     <h3 *ngIf=dieResult id="result">{{dieResult}}</h3>
+  </div>
+</div>

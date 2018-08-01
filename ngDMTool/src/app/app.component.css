@@ -1,16 +1,16 @@
-@import "~bootstrap/dist/css/bootstrap.css";
 body {
-   /* The image used */
-   background-image: url("/assets/fantasy-2925250_1920.jpg");
+  /* The image used */
+  background-image: url('/assets/fantasy-2925250_1920.jpg');
 
-   /* Full height */
-   height: 1000px;
-   width: auto;
-   border: black 5px solid;
+  /* Full height */
+  height: 1000px;
+  width: auto;
+  border: black 5px solid;
 
-   /* Center and scale the image nicely */
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 

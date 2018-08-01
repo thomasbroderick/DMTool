@@ -1,0 +1,40 @@
+#dieMain {
+  background-color: rgb(235, 13, 13);
+  background-color: rgba(252, 8, 8, 0.5);
+  height: auto;
+  width: auto;
+  border: black 5px solid;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-primary{
+  background-color: darkmagenta;
+  color: rgb(211, 197, 5);
+  border: black solid;
+}
+
+#dropdown {
+  background-color: darkmagenta;
+  color: rgb(211, 197, 5);
+  border: black solid;
+}
+
+#rollSubmit {
+  position:absolute;
+  transition: .5s ease;
+  height: 74px;
+  width: 130px;
+  top: 42%;
+  left: 55%;
+}
+
+#result {
+  background-color: darkmagenta;
+  color: rgb(211, 197, 5);
+  border: black solid;
+  text-align: center;
+}

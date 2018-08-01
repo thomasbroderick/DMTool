@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { GridstackModule } from '@libria/gridstack';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DiceRollerComponent } from './dice-roller/dice-roller.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,12 @@ import { DiceRollerComponent } from './dice-roller/dice-roller.component';
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
-    GridstackModule.forRoot()
+    GridstackModule.forRoot(),
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSliderModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
