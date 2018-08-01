@@ -33,8 +33,9 @@ public class PlayerNoteServiceImpl implements PlayerNoteService {
 	}
 
 	@Override
-	public PlayerNote update(int pid, PlayerNote playerNote) {
-		playerNote.setId(pid);
+	public PlayerNote update(int pid, int pnid, PlayerNote playerNote) {
+		playerNote.setPlayer(playerRepo.findById(pid).get());
+		playerNote.setId(pnid);
 		return noteRepo.saveAndFlush(playerNote);
 	}
 

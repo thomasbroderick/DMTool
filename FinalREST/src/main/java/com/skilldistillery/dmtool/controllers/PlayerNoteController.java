@@ -30,7 +30,7 @@ public class PlayerNoteController {
 	}
 
 	// Need to include player id in path to get all notes for a specific player
-	@RequestMapping(path = "playernote/all/{pid}", method = RequestMethod.GET)
+	@RequestMapping(path = "playernote/all/player/{pid}", method = RequestMethod.GET)
 	public Set<PlayerNote> index(@PathVariable int pid, HttpServletRequest req, HttpServletResponse res) {
 		return noteServ.index(pid);
 	}
@@ -40,7 +40,7 @@ public class PlayerNoteController {
 		return noteServ.show(pid);
 	}
 
-	@RequestMapping(path = "playernote/{pid}", method = RequestMethod.POST)
+	@RequestMapping(path = "playernote/player/{pid}", method = RequestMethod.POST)
 	public PlayerNote create(@RequestBody PlayerNote playerNote, @PathVariable int pid, HttpServletRequest request,
 			HttpServletResponse response) {
 		PlayerNote note = noteServ.create(pid, playerNote);
@@ -54,10 +54,11 @@ public class PlayerNoteController {
 		return note;
 	}
 
-	@RequestMapping(path = "playernote/{pid}", method = RequestMethod.PUT)
-	public PlayerNote update(@PathVariable int pid, @RequestBody PlayerNote playerNote, HttpServletRequest request,
+	@RequestMapping(path = "player/{pid}/playernote/{pnid}", method = RequestMethod.PATCH)
+	public PlayerNote update(@PathVariable int pid ,@PathVariable int pnid, @RequestBody PlayerNote playerNote, HttpServletRequest request,
 			HttpServletResponse response) {
-		PlayerNote note = noteServ.update(pid, playerNote);
+		PlayerNote note = noteServ.update(pid, pnid, playerNote);
+		
 
 		if (note != null) {
 			response.setStatus(200);

@@ -11,7 +11,7 @@ public interface SpellService {
 
 	  public Spell create(String email, Spell spell);
 
-	  public Spell update(int sid, Spell spell);
+	  public Spell update(String email,int sid, Spell spell);
 
 	  public void destroy(int sid);
 }

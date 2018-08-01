@@ -33,7 +33,7 @@ public class SpellController {
 	}
 
 	// Need to include user id in path to get all spells for a specific user
-	@RequestMapping(path = "spell/all/{uid}", method = RequestMethod.GET)
+	@RequestMapping(path = "spell/all/user/{uid}", method = RequestMethod.GET)
 	public Set<Spell> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
 		return spellServ.index(userServ.show(uid).getEmail());
 	}
@@ -43,7 +43,7 @@ public class SpellController {
 		return spellServ.show(sid);
 	}
 
-	@RequestMapping(path = "spell/{uid}", method = RequestMethod.POST)
+	@RequestMapping(path = "spell/user/{uid}", method = RequestMethod.POST)
 	public Spell create(@RequestBody Spell spell, @PathVariable int uid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Spell sp = spellServ.create(userServ.show(uid).getEmail(), spell);
@@ -57,10 +57,10 @@ public class SpellController {
 		return sp;
 	}
 
-	@RequestMapping(path = "spell/{sid}", method = RequestMethod.PUT)
-	public Spell update(@PathVariable int sid, @RequestBody Spell spell, HttpServletRequest request,
+	@RequestMapping(path = "user/{uid}/spell/{sid}", method = RequestMethod.PATCH)
+	public Spell update(@PathVariable int uid, @PathVariable int sid, @RequestBody Spell spell, HttpServletRequest request,
 			HttpServletResponse response) {
-		Spell sp = spellServ.update(sid, spell);
+		Spell sp = spellServ.update(userServ.show(uid).getEmail(), sid, spell);
 
 		if (sp != null) {
 			response.setStatus(200);

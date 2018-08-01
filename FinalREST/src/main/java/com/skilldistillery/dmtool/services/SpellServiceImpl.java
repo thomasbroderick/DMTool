@@ -33,8 +33,9 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public Spell update(int sid, Spell spell) {
+	public Spell update(String email, int sid, Spell spell) {
 		spell.setId(sid);
+		spell.setUser(userRepo.findOneByEmail(email));
 		return spellRepo.saveAndFlush(spell);
 	}
 

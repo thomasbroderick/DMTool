@@ -11,7 +11,7 @@ public interface PlayerNoteService {
 
 	  public PlayerNote create(int pid, PlayerNote playerNote);
 
-	  public PlayerNote update(int pid, PlayerNote playerNote);
+	  public PlayerNote update(int pid, int pnid, PlayerNote playerNote);
 
 	  public void destroy(int pid);
 }
