@@ -5,13 +5,13 @@ import java.util.Set;
 import com.skilldistillery.dmtool.entities.Player;
 
 public interface PlayerService {
-	  public Set<Player> index(String username);
+	  public Set<Player> index(int cid);
 
-	  public Player show(String username, int pid);
+	  public Player show(int pid);
 
-	  public Player create(String username, Player player);
+	  public Player create(int cid, Player player);
 
-	  public Player update(String username, int pid, Player player);
+	  public Player update(int pid, Player player);
 
-	  public void destroy(String username, int pid);
+	  public void destroy(int pid);
 }

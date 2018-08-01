@@ -5,13 +5,13 @@ import java.util.Set;
 import com.skilldistillery.dmtool.entities.PlayerNote;
 
 public interface PlayerNoteService {
-	  public Set<PlayerNote> index(String username);
+	  public Set<PlayerNote> index(int pid);
 
-	  public PlayerNote show(String username, int pid);
+	  public PlayerNote show(int pid);
 
-	  public PlayerNote create(String username, PlayerNote playerNote);
+	  public PlayerNote create(int pid, PlayerNote playerNote);
 
-	  public PlayerNote update(String username, int pid, PlayerNote playerNote);
+	  public PlayerNote update(int pid, PlayerNote playerNote);
 
-	  public void destroy(String username, int pid);
+	  public void destroy(int pid);
 }

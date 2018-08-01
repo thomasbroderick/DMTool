@@ -5,13 +5,13 @@ import java.util.Set;
 import com.skilldistillery.dmtool.entities.Monster;
 
 public interface MonsterService {
-	  public Set<Monster> index(String username);
+	  public Set<Monster> index(String email);
 
-	  public Monster show(String username, int mid);
+	  public Monster show(int mid);
 
-	  public Monster create(String username, Monster monster);
+	  public Monster create(String email, Monster monster);
 
-	  public Monster update(String username, int mid, Monster monster);
+	  public Monster update(int mid, Monster monster);
 
-	  public void destroy(String username, int mid);
+	  public void destroy(int mid);
 }

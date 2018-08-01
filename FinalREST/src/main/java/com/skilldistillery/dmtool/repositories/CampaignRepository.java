@@ -9,5 +9,6 @@ import com.skilldistillery.dmtool.entities.Campaign;
 public interface CampaignRepository extends JpaRepository<Campaign, Integer>{
 	
 	public Set<Campaign> findByUser_Email(String email);
+	public Campaign findOneById(int cid);
 
 }

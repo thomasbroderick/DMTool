@@ -5,14 +5,14 @@ import java.util.Set;
 import com.skilldistillery.dmtool.entities.Campaign;
 
 public interface CampaignService {
-	  public Set<Campaign> index(String username);
+	  public Set<Campaign> index(String email);
 
-	  public Campaign show(String username, int cid);
+	  public Campaign show(int cid);
 
-	  public Campaign create(String username, Campaign campaign);
+	  public Campaign create(String email, Campaign campaign);
 
-	  public Campaign update(String username, int cid, Campaign campaign);
+	  public Campaign update(int cid, Campaign campaign);
 
-	  public void destroy(String username, int cid);
+	  public void destroy(int cid);
 
 }
