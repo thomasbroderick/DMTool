@@ -18,7 +18,7 @@ export class CampaignNoteService {
   };
 
   index(cid) {
-    console.log(`${this.url} + campaignnote/all/${cid}`);
+    console.log(`${this.url} + campaignnote/all/campaign/${cid}`);
     return this.http.get<CampaignNote[]>(`${this.url} + campaignnote/all/${cid}`).pipe(
       catchError((err: any) => {
         console.log(err);

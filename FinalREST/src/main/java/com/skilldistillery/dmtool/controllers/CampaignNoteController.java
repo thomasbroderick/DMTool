@@ -30,7 +30,7 @@ public class CampaignNoteController {
 	}
 	
 	//Need to include campaign id in path to get all notes for a specific campaign
-	@RequestMapping(path = "campaignnote/all/{cid}", method = RequestMethod.GET)
+	@RequestMapping(path = "campaignnote/all/campaign{cid}", method = RequestMethod.GET)
 	public Set<CampaignNote> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		return noteServ.index(cid);
 	}
