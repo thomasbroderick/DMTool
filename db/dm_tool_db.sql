@@ -58,11 +58,11 @@ CREATE INDEX `fk_campaign_user_idx` ON `campaign` (`user_id` ASC);
 
 
 -- -----------------------------------------------------
--- Table `campaign_notes`
+-- Table `campaign_note`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `campaign_notes` ;
+DROP TABLE IF EXISTS `campaign_note` ;
 
-CREATE TABLE IF NOT EXISTS `campaign_notes` (
+CREATE TABLE IF NOT EXISTS `campaign_note` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `campaign_id` INT(11) NOT NULL,
   `text` MEDIUMTEXT NULL DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `campaign_notes` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_campaign_notes_idx` ON `campaign_notes` (`campaign_id` ASC);
+CREATE INDEX `fk_campaign_notes_idx` ON `campaign_note` (`campaign_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -329,11 +329,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `campaign_notes`
+-- Data for table `campaign_note`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `campaign_notes` (`id`, `campaign_id`, `text`) VALUES (1, 1, 'Boss fight coming up!');
+INSERT INTO `campaign_note` (`id`, `campaign_id`, `text`) VALUES (1, 1, 'Boss fight coming up!');
 
 COMMIT;
 
