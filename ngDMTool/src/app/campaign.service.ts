@@ -18,8 +18,8 @@ export class CampaignService {
   };
 
   index(uid) {
-    console.log(`${this.url} + campaign/all/${uid}`);
-    return this.http.get<Campaign[]>(this.url + 'user/1/monster/all').pipe(
+    console.log(`${this.url} + campaign/all/user/${uid}`);
+    return this.http.get<Campaign[]>(`${this.url} + campaign/all/user/${uid}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -27,8 +27,8 @@ export class CampaignService {
     );
   }
 
-  create(cid, campaignnote) {
-    return this.http.post<Campaign>(`${this.url}campaignnote/campaign/${cid}/`, campaignnote).pipe(
+  create(uid, campaign) {
+    return this.http.post<Campaign>(`${this.url}campaign/user/${uid}/`, campaign).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -36,9 +36,9 @@ export class CampaignService {
     );
   }
 
-  update(cid, nid, campaignnote) {
-    console.log(`${this.url}campaign/${cid}/campaignnote/${nid}`);
-    return this.http.patch<CampaignNote>(`${this.url}campaign/${cid}/campaignnote/${nid}`, campaignnote).pipe(
+  update(uid, cid, campaign) {
+    console.log(`${this.url}user/${uid}/campaign/${cid}`);
+    return this.http.patch<CampaignNote>(`${this.url}user/${uid}/campaign/${cid}`, campaign).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -47,7 +47,7 @@ export class CampaignService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/campaignnote/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}/campaign/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

@@ -58,7 +58,7 @@ public class CampaignController {
 		return camp;
 	}
 
-	@RequestMapping(path = "campaign/{uid}/{cid}", method = RequestMethod.PATCH)
+	@RequestMapping(path = "user/{uid}/campaign/{cid}", method = RequestMethod.PATCH)
 	public Campaign update(@PathVariable int uid, @PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println(campaign);
