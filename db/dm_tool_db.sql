@@ -114,18 +114,18 @@ DROP TABLE IF EXISTS `player_note` ;
 
 CREATE TABLE IF NOT EXISTS `player_note` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `character_id` INT(11) NOT NULL,
+  `player_id` INT(11) NOT NULL,
   `text` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_character_notes`
-    FOREIGN KEY (`character_id`)
+  CONSTRAINT `fk_player_notes`
+    FOREIGN KEY (`player_id`)
     REFERENCES `player` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE INDEX `fk_character_notes_idx` ON `player_note` (`character_id` ASC);
+CREATE INDEX `fk_character_notes_idx` ON `player_note` (`player_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -354,7 +354,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `player_note` (`id`, `character_id`, `text`) VALUES (1, 1, 'Best character evar!');
+INSERT INTO `player_note` (`id`, `player_id`, `text`) VALUES (1, 1, 'Best character evar!');
 
 COMMIT;
 
