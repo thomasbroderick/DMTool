@@ -1,6 +1,4 @@
 import { PlayerNote } from './models/player-note';
-import { Npc } from './models/npc';
-import { Campaign } from './models/campaign';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -29,7 +27,7 @@ export class PlayerNoteService {
   }
 
   create(pid, playernote) {
-    return this.http.post<Npc>(`${this.url}player/${pid}/playernote`, playernote).pipe(
+    return this.http.post<PlayerNote>(`${this.url}player/${pid}/playernote`, playernote).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -39,7 +37,7 @@ export class PlayerNoteService {
 
   update(pid, pnid, playernote) {
     console.log(`${this.url}player/${pid}/playernote/${pnid}`);
-    return this.http.patch<Npc>(`${this.url}player/${pid}/playernote/${pnid}`, playernote).pipe(
+    return this.http.patch<PlayerNote>(`${this.url}player/${pid}/playernote/${pnid}`, playernote).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

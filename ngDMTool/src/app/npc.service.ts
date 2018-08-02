@@ -1,5 +1,4 @@
 import { Npc } from './models/npc';
-import { Campaign } from './models/campaign';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
 import { Observable, throwError } from 'rxjs';
