@@ -44,7 +44,7 @@ public class CampaignController {
 		return campServ.show(cid);
 	}
 
-	@RequestMapping(path = "campaign/{uid}", method = RequestMethod.POST)
+	@RequestMapping(path = "campaign/user/{uid}", method = RequestMethod.POST)
 	public Campaign create(@RequestBody Campaign campaign, @PathVariable int uid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Campaign camp = campServ.create(userServ.show(uid).getEmail(), campaign);
