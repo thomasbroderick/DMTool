@@ -26,8 +26,8 @@ export class MonsterService {
     );
   }
 
-  create(monster, userid) {
-    return this.http.post<Monster>(`${this.url}user/${userid}/monster`, monster).pipe(
+  create(uid, monster) {
+    return this.http.post<Monster>(`${this.url}user/${uid}/monster`, monster).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

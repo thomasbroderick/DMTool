@@ -1,4 +1,3 @@
-import { CampaignNote } from './models/campaign-note';
 import { Campaign } from './models/campaign';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
