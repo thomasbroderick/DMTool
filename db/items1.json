@@ -1,0 +1,75 @@
+[{
+	"index": 1,
+	"name": "Club",
+	"equipment_category": "Weapon",
+	"weapon_category:": "Simple",
+	"weapon_range": "Melee",
+	"category_range": "Simple Melee",
+	"cost": {
+		"quantity": 1,
+		"unit": "sp"
+	},
+	"damage": {
+		"dice_count": 1,
+		"dice_value": 4,
+		"damage_type": {
+			"url": "http://www.dnd5eapi.co/api/damage-types/2",
+			"name": "Bludgeoning"
+		}
+	},
+	"range": {
+		"normal": 5,
+		"long": null
+	},
+	"weight": 2,
+	"properties": [{
+		"url": "http://www.dnd5eapi.co/api/weapon-properties/4",
+		"name": "Light"
+	}, {
+		"url": "http://www.dnd5eapi.co/api/weapon-properties/11",
+		"name": "Monk"
+	}],
+	"url": "http://www.dnd5eapi.co/api/equipment/1"
+}, {
+	"index": 2,
+	"name": "Dagger",
+	"equipment_category": "Weapon",
+	"weapon_category:": "Simple",
+	"weapon_range": "Melee",
+	"category_range": "Simple Melee",
+	"cost": {
+		"quantity": 2,
+		"unit": "gp"
+	},
+	"damage": {
+		"dice_count": 1,
+		"dice_value": 4,
+		"damage_type": {
+			"url": "http://www.dnd5eapi.co/api/damage-types/8",
+			"name": "Piercing"
+		}
+	},
+	"range": {
+		"normal": 5,
+		"long": null
+	},
+	"weight": 1,
+	"properties": [{
+		"url": "http://www.dnd5eapi.co/api/weapon-properties/2",
+		"name": "Finesse"
+	}, {
+		"url": "http://www.dnd5eapi.co/api/weapon-properties/4",
+		"name": "Light"
+	}, {
+		"url": "http://www.dnd5eapi.co/api/weapon-properties/8",
+		"name": "Thrown"
+	}, {
+		"url": "http://www.dnd5eapi.co/api/weapon-properties/11",
+		"name": "Monk"
+	}],
+	"throw_range": {
+		"normal": 20,
+		"long": 60
+	},
+	"url": "http://www.dnd5eapi.co/api/equipment/2"
+}]
