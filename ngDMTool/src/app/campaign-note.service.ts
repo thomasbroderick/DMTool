@@ -18,8 +18,8 @@ export class CampaignNoteService {
   };
 
   index(cid) {
-    console.log(`${this.url} + campaignnote/all/campaign/${cid}`);
-    return this.http.get<CampaignNote[]>(`${this.url} + campaignnote/all/${cid}`).pipe(
+    console.log(`${this.url} campaign/${cid}/campaignnote/all/`);
+    return this.http.get<CampaignNote[]>(`${this.url}campaign/${cid}/campaignnote/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -28,7 +28,7 @@ export class CampaignNoteService {
   }
 
   create(cid, campaignnote) {
-    return this.http.post<Campaign>(`${this.url}campaignnote/campaign/${cid}/`, campaignnote).pipe(
+    return this.http.post<Campaign>(`${this.url}campaign/${cid}/campaignnote`, campaignnote).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

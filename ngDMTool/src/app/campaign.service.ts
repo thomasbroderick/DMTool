@@ -18,8 +18,8 @@ export class CampaignService {
   };
 
   index(uid) {
-    console.log(`${this.url} + campaign/all/user/${uid}`);
-    return this.http.get<Campaign[]>(`${this.url} + campaign/all/user/${uid}`).pipe(
+    console.log(`${this.url}user/${uid}/campaign/all`);
+    return this.http.get<Campaign[]>(`${this.url}user/${uid}/campaign/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -28,7 +28,7 @@ export class CampaignService {
   }
 
   create(uid, campaign) {
-    return this.http.post<Campaign>(`${this.url}campaign/user/${uid}/`, campaign).pipe(
+    return this.http.post<Campaign>(`${this.url}user/${uid}campaign/`, campaign).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
