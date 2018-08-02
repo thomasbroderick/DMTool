@@ -1,5 +1,5 @@
 import { CampaignNote } from './models/campaign-note';
-import { Campaign } from './models/campaign';
+import { Item } from './models/item';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -18,8 +18,8 @@ export class ItemService {
   };
 
   index(uid) {
-    console.log(`${this.url} + user/${uid}/item/all`);
-    return this.http.get<Campaign[]>(`${this.url} + campaign/all/user/${uid}`).pipe(
+    console.log(`${this.url} user/${uid}/item/all`);
+    return this.http.get<[Item]>(`${this.url}user/${uid}/campaign/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -27,8 +27,8 @@ export class ItemService {
     );
   }
 
-  create(uid, campaign) {
-    return this.http.post<Campaign>(`${this.url}campaign/user/${uid}/`, campaign).pipe(
+  create(uid, item) {
+    return this.http.post<Item>(`${this.url}user/${uid}/item`, item).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -36,9 +36,9 @@ export class ItemService {
     );
   }
 
-  update(uid, cid, campaign) {
-    console.log(`${this.url}user/${uid}/campaign/${cid}`);
-    return this.http.patch<CampaignNote>(`${this.url}user/${uid}/campaign/${cid}`, campaign).pipe(
+  update(uid, iid, item) {
+    console.log(`${this.url}user/${uid}/item/${iid}`);
+    return this.http.patch<CampaignNote>(`${this.url}user/${uid}/item/${iid}`, item).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -47,7 +47,7 @@ export class ItemService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/campaign/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}/item/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

@@ -16,9 +16,9 @@ export class MonsterService {
     })
   };
 
-  index() {
-    console.log(this.url + 'user/1/monster/all');
-    return this.http.get<Monster[]>(this.url + 'user/1/monster/all').pipe(
+  index(uid) {
+    console.log(`${this.url}user/${uid}/monster/all`);
+    return this.http.get<Monster[]>(`${this.url}user/${uid}/monster/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -35,9 +35,9 @@ export class MonsterService {
     );
   }
 
-  update(monster, uid) {
-    console.log(`${this.url}user/${uid}/monster/${monster.id}`);
-    return this.http.patch<Monster>(`${this.url}user/${uid}/monster/${monster.id}`, monster).pipe(
+  update(uid, mid, monster) {
+    console.log(`${this.url}user/${uid}/monster/${mid}`);
+    return this.http.patch<Monster>(`${this.url}user/${uid}/monster/${mid}`, monster).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
