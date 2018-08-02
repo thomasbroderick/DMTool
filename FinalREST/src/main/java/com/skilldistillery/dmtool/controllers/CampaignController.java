@@ -34,7 +34,7 @@ public class CampaignController {
 	}
 
 	// Need to include user id in path to get all notes for a specific campaign
-	@RequestMapping(path = "campaign/all/{uid}", method = RequestMethod.GET)
+	@RequestMapping(path = "user/{uid}/campaign/all", method = RequestMethod.GET)
 	public Set<Campaign> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
 		return campServ.index(userServ.show(uid).getEmail());
 	}
@@ -44,7 +44,7 @@ public class CampaignController {
 		return campServ.show(cid);
 	}
 
-	@RequestMapping(path = "campaign/{uid}", method = RequestMethod.POST)
+	@RequestMapping(path = "user/{uid}/campaign", method = RequestMethod.POST)
 	public Campaign create(@RequestBody Campaign campaign, @PathVariable int uid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Campaign camp = campServ.create(userServ.show(uid).getEmail(), campaign);
@@ -58,7 +58,7 @@ public class CampaignController {
 		return camp;
 	}
 
-	@RequestMapping(path = "campaign/{uid}/{cid}", method = RequestMethod.PATCH)
+	@RequestMapping(path = "user/{uid}/campaign/{cid}", method = RequestMethod.PATCH)
 	public Campaign update(@PathVariable int uid, @PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println(campaign);

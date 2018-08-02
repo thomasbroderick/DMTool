@@ -15,6 +15,7 @@ export class DiceRollerComponent implements OnInit {
   dieType = null;
   dieQuant = null;
   dieResult = null;
+
   public radioGroupForm: FormGroup;
   nums: Num[] = [
     { value: 1, viewValue: '1' },

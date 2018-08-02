@@ -10,17 +10,23 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
+import { TimerComponent } from './timer/timer.component';
+import { BeastiaryComponent } from './beastiary/beastiary.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DiceRollerComponent
+    DiceRollerComponent,
+    TimerComponent,
+    BeastiaryComponent
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
     GridstackModule.forRoot(),
     BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MatSliderModule,
