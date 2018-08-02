@@ -48,7 +48,7 @@ export class SpellService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/spell/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}spell/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

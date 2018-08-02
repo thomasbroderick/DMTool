@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.Npc;
 import com.skilldistillery.dmtool.repositories.CampaignRepository;
+import com.skilldistillery.dmtool.repositories.MonsterRepository;
 import com.skilldistillery.dmtool.repositories.NpcRepository;
 @Service
 public class NpcServiceImpl implements NpcService {
@@ -15,6 +16,8 @@ public class NpcServiceImpl implements NpcService {
 	private NpcRepository npcRepo;
 	@Autowired
 	private CampaignRepository campRepo;
+	@Autowired
+	private MonsterRepository monRepo;
 
 	@Override
 	public Set<Npc> index(int cid) {
@@ -28,6 +31,9 @@ public class NpcServiceImpl implements NpcService {
 
 	@Override
 	public Npc create(int cid, Npc npc) {
+		if(npc.getMonster() == null) {
+			npc.setMonster(monRepo.findById(71).get());
+		}
 		npc.setCampaign(campRepo.findOneById(cid));
 		return npcRepo.saveAndFlush(npc);
 	}

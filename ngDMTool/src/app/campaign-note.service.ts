@@ -46,7 +46,7 @@ export class CampaignNoteService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/campaignnote/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}campaignnote/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

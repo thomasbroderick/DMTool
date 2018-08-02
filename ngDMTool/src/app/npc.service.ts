@@ -46,7 +46,7 @@ export class NpcService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/npc/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}npc/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
