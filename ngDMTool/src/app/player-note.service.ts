@@ -46,7 +46,7 @@ export class PlayerNoteService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/playernote/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}playernote/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

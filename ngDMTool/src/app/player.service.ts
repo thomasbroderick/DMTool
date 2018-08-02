@@ -47,7 +47,7 @@ export class PlayerService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/player/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}player/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
