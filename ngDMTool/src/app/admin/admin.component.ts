@@ -179,9 +179,9 @@ export class AdminComponent implements OnInit {
     private userService: UserService, private itemService: ItemService) {}
 
   ngOnInit() {
-    // this.loadUser();
-    // this.loadItem();
-    // this.loadCampaign();
+    this.loadUser();
+    this.loadItem();
+    this.loadCampaign();
     this.loadNpc();
   }
 
