@@ -1,4 +1,3 @@
-import { CampaignNote } from './models/campaign-note';
 import { Campaign } from './models/campaign';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
@@ -28,7 +27,7 @@ export class CampaignService {
   }
 
   create(uid, campaign) {
-    return this.http.post<Campaign>(`${this.url}user/${uid}campaign/`, campaign).pipe(
+    return this.http.post<Campaign>(`${this.url}user/${uid}/campaign/`, campaign).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

@@ -19,7 +19,7 @@ export class ItemService {
 
   index(uid) {
     console.log(`${this.url} user/${uid}/item/all`);
-    return this.http.get<Item[]>(`${this.url}user/${uid}/campaign/all`).pipe(
+    return this.http.get<Item[]>(`${this.url}user/${uid}/item/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -38,7 +38,7 @@ export class ItemService {
 
   update(uid, iid, item) {
     console.log(`${this.url}user/${uid}/item/${iid}`);
-    return this.http.patch<CampaignNote>(`${this.url}user/${uid}/item/${iid}`, item).pipe(
+    return this.http.patch<Item>(`${this.url}user/${uid}/item/${iid}`, item).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

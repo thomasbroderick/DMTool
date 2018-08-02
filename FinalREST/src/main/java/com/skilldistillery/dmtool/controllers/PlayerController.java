@@ -30,7 +30,7 @@ public class PlayerController {
 	}
 
 	// Need to include campaign id in path to get all players for a specific campaign
-	@RequestMapping(path = "campaign/{cid}player/all", method = RequestMethod.GET)
+	@RequestMapping(path = "campaign/{cid}/player/all", method = RequestMethod.GET)
 	public Set<Player> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		return playerServ.index(cid);
 	}

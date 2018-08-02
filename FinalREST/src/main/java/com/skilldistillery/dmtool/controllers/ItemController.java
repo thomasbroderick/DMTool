@@ -57,7 +57,7 @@ public class ItemController {
 		return it;
 	}
 
-	@RequestMapping(path = "user/{uid}/item/{iid}", method = RequestMethod.PUT)
+	@RequestMapping(path = "user/{uid}/item/{iid}", method = RequestMethod.PATCH)
 	public Item update(@PathVariable int uid, @PathVariable int iid, @RequestBody Item item, HttpServletRequest request,
 			HttpServletResponse response) {
 		Item it = itemServ.update(userServ.show(uid).getEmail(), iid, item);
