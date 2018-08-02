@@ -19,7 +19,7 @@ export class ItemService {
 
   index(uid) {
     console.log(`${this.url} user/${uid}/item/all`);
-    return this.http.get<Item[]>(`${this.url}user/${uid}/campaign/all`).pipe(
+    return this.http.get<Item[]>(`${this.url}user/${uid}/item/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
