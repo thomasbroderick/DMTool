@@ -102,7 +102,7 @@
               <th>Name</th>
             </tr>
           </thead>
-          <tr *ngFor='let Item of Items'>
+          <tr *ngFor='let Item of items'>
             <td>{{Item.name}}</td>
             <td>
               <button (click)="selectedItem=Item">Details</button>
@@ -175,6 +175,178 @@
         </table>
       </div>
   </mat-tab>
+  <mat-tab label="Campaign">
+    <div *ngIf='!selectedCampaign' style="margin:auto;width: 60%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=6>Campaigns</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let Campaign of campaigns'>
+          <td>{{Campaign.name}}</td>
+          <td>
+            <button (click)="selectedCampaign=Campaign">Details</button>
+          </td>
+          <td>
+            <button (click)="destroyCampaign(Campaign.id)">Delete</button>
+          </td>
+        </tr>
+      </table>
+
+      <form>
+        <input type="text" name="name" placeholder="name" [(ngModel)]="newCampaign.name"/>
+        <br />
+          <button class="button" (click)="createCampaign()">CREATE</button>
+      </form>
+
+    </div>
+
+    <div *ngIf='selectedCampaign&&!editCampaign' style="margin:auto;width: 50%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>Campaign Details</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>Id:</td>
+          <td> {{selectedCampaign.id}}</td>
+        </tr>
+        <tr>
+          <td>name: </td>
+          <td>{{selectedCampaign.name}}</td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="setEditCampaign()">Edit</button>
+          </td>
+          <td align=center colspan=2>
+            <button class="button" (click)="selectedCampaign=null">Back</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf=editCampaign style="margin:auto;width: 20%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>name: {{editCampaign.name}}</td>
+            <td>
+              <input type='text' name="name" [(ngModel)]="editCampaign.name">
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="updateCampaign()">Save Changes</button>
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="editCampaign=null">Cancel Changes</button>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+</mat-tab>
+<mat-tab label="Npc">
+  <div *ngIf='!selectedNpc' style="margin:auto;width: 60%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=6>Npcs</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tr *ngFor='let Npc of npcs'>
+        <td>{{Npc.name}}</td>
+        <td>
+          <button (click)="selectedNpc=Npc">Details</button>
+        </td>
+        <td>
+          <button (click)="destroyNpc(Npc.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="text" name="name" placeholder="name" [(ngModel)]="newNpc.name"/>
+      <br />
+        <button class="button" (click)="createNpc()">CREATE</button>
+    </form>
+
+  </div>
+
+  <div *ngIf='selectedNpc&&!editNpc' style="margin:auto;width: 50%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=2>Npc Details</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedNpc.id}}</td>
+      </tr>
+      <tr>
+        <td>name: </td>
+        <td>{{selectedNpc.name}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditNpc()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedNpc=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editNpc style="margin:auto;width: 20%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>name: {{editNpc.name}}</td>
+          <td>
+            <input type='text' name="name" [(ngModel)]="editNpc.name">
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updateNpc()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editNpc=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</mat-tab>
   <mat-tab label="Monster"> Content 3 </mat-tab>
 </mat-tab-group>
 

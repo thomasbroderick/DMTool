@@ -17,8 +17,7 @@ export class NpcService {
   };
 
   index(cid) {
-    console.log(`${this.url} campaign/${cid}/npc/all/`);
-    return this.http.get<Npc[]>(`${this.url}campaign/${cid}/npc/all`).pipe(
+=    return this.http.get<Npc[]>(`${this.url}campaign/${cid}/npc/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
