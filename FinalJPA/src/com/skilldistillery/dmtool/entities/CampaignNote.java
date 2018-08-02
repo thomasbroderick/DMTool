@@ -41,12 +41,12 @@ public class CampaignNote {
 		this.campaign = campaign;
 	}
 
-	public String getContent() {
+	public String getText() {
 		return text;
 	}
 
-	public void setContent(String content) {
-		this.text = content;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	@Override
