@@ -41,7 +41,7 @@ public class CampaignNoteController {
 	}
 
 
-	@RequestMapping(path = "campaignnote/{cid}", method = RequestMethod.POST)
+	@RequestMapping(path = "campaignnote/campaign/{cid}", method = RequestMethod.POST)
 	public CampaignNote create(@RequestBody CampaignNote campaignNote,  @PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		CampaignNote note = noteServ.create(cid, campaignNote);
 		  if(note != null) {
@@ -53,7 +53,7 @@ public class CampaignNoteController {
 		  return note;
 	}
 
-	  @RequestMapping(path="campaignnote/{cid}/{nid}", method=RequestMethod.PUT)
+	  @RequestMapping(path="campaign/{cid}/campaignnote/{nid}", method=RequestMethod.PUT)
 	  public CampaignNote update(@PathVariable int cid, @PathVariable int nid, @RequestBody CampaignNote campaignNote, HttpServletRequest request, HttpServletResponse response){ 
 		  CampaignNote note = noteServ.update(cid, nid, campaignNote); 
 		  
