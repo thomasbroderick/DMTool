@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `name` VARCHAR(45) NOT NULL,
   `equipment_category` VARCHAR(45) NULL DEFAULT NULL,
   `weapon_category` VARCHAR(45) NULL DEFAULT NULL,
-  `range` VARCHAR(45) NULL DEFAULT NULL,
+  `rng` VARCHAR(45) NULL DEFAULT NULL,
   `cost` VARCHAR(45) NULL DEFAULT NULL,
   `damage` VARCHAR(45) NULL DEFAULT NULL,
   `weight` VARCHAR(45) NULL DEFAULT NULL,
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `spell` (
   `user_id` INT(11) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `description` MEDIUMTEXT NULL DEFAULT NULL,
-  `range` VARCHAR(45) NULL DEFAULT NULL,
+  `rng` VARCHAR(45) NULL DEFAULT NULL,
   `components` MEDIUMTEXT NULL DEFAULT NULL,
   `material` MEDIUMTEXT NULL DEFAULT NULL,
   `ritual` VARCHAR(45) NULL DEFAULT NULL,
@@ -364,7 +364,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `item` (`id`, `user_id`, `name`, `equipment_category`, `weapon_category`, `range`, `cost`, `damage`, `weight`, `properties`, `description`, `image_url`) VALUES (1, 2, 'Testhammer', 'Weapon', 'Hammer', 'Melee', '50 gold', '1d10', '50 kg', 'testy', 'Much hammer', NULL);
+INSERT INTO `item` (`id`, `user_id`, `name`, `equipment_category`, `weapon_category`, `rng`, `cost`, `damage`, `weight`, `properties`, `description`, `image_url`) VALUES (1, 2, 'Testhammer', 'Weapon', 'Hammer', 'Melee', '50 gold', '1d10', '50 kg', 'testy', 'Much hammer', NULL);
 
 COMMIT;
 
@@ -708,7 +708,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `spell` (`id`, `user_id`, `name`, `description`, `range`, `components`, `material`, `ritual`, `duration`, `concentration`, `casting_time`, `level`, `school`, `classes`, `higher_lvl`) VALUES (1, 2, 'Test Spell', 'Tests the darkness', '10 feet', 'V', 'S', 'None', 'Years', 'No', 'Long', 1, NULL, NULL, NULL);
+INSERT INTO `spell` (`id`, `user_id`, `name`, `description`, `rng`, `components`, `material`, `ritual`, `duration`, `concentration`, `casting_time`, `level`, `school`, `classes`, `higher_lvl`) VALUES (1, 2, 'Test Spell', 'Tests the darkness', '10 feet', 'V', 'S', 'None', 'Years', 'No', 'Long', 1, NULL, NULL, NULL);
 
 COMMIT;
 
