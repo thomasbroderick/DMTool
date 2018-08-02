@@ -47,7 +47,7 @@ public class Monster {
 	private Integer charisma;
 	private Integer constitution;
 	@Column(name="challenge_rating")
-	private Integer challengeRating;
+	private Double challengeRating;
 	@Column(name="dexterity_save")
 	private Integer dexteritySave;
 	@Column(name="constitution_save")
@@ -277,11 +277,11 @@ public class Monster {
 		this.constitution = constitution;
 	}
 
-	public Integer getChallengeRating() {
+	public Double getChallengeRating() {
 		return challengeRating;
 	}
 
-	public void setChallengeRating(Integer challengeRating) {
+	public void setChallengeRating(Double challengeRating) {
 		this.challengeRating = challengeRating;
 	}
 
