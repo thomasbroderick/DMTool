@@ -27,7 +27,7 @@ export class CampaignService {
   }
 
   create(uid, campaign) {
-    return this.http.post<Campaign>(`${this.url}user/${uid}campaign/`, campaign).pipe(
+    return this.http.post<Campaign>(`${this.url}user/${uid}/campaign/`, campaign).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
