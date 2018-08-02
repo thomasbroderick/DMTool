@@ -17,7 +17,7 @@ var requiredProperties = [
 ];
 
 
-fs.readFile('items1.json', (err, data) => {
+fs.readFile('items.json', (err, data) => {
   if (err) throw err;
   let arrayOfObjects = JSON.parse(data);
   //console.log(arrayOfObjects);
@@ -27,11 +27,14 @@ fs.readFile('items1.json', (err, data) => {
 
 function fix(input) {
   input.forEach(function(item) {
+
     item.rng = item.range;
     item.user_id = 1;
     item.cost = "" + item.cost.quantity + item.cost.unit;
-    item.damage = "" + item.damage.dice_count + "d" + item.damage.dice_value + " " + item.damage.damage_type.name;
-    item.rng = "normal: " + item.rng.normal + " long: " + item.rng.long;
+    if (item.damage) {
+    item.damage = "" + item.damage.dice_count + "d" + item.damage.dice_value + " " + item.damage.damage_type.name;}
+    if (item.rng) {
+    item.rng = "normal: " + item.rng.normal + " long: " + item.rng.long;}
 
     requiredProperties.forEach(function(prop) {
       if (item[prop] == undefined) {
