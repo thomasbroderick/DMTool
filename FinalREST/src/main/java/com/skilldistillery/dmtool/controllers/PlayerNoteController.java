@@ -30,7 +30,7 @@ public class PlayerNoteController {
 	}
 
 	// Need to include player id in path to get all notes for a specific player
-	@RequestMapping(path = "playernote/all/player/{pid}", method = RequestMethod.GET)
+	@RequestMapping(path = "player/{pid}/playernote/all", method = RequestMethod.GET)
 	public Set<PlayerNote> index(@PathVariable int pid, HttpServletRequest req, HttpServletResponse res) {
 		return noteServ.index(pid);
 	}
@@ -40,7 +40,7 @@ public class PlayerNoteController {
 		return noteServ.show(pid);
 	}
 
-	@RequestMapping(path = "playernote/player/{pid}", method = RequestMethod.POST)
+	@RequestMapping(path = "player/{pid}/playernote", method = RequestMethod.POST)
 	public PlayerNote create(@RequestBody PlayerNote playerNote, @PathVariable int pid, HttpServletRequest request,
 			HttpServletResponse response) {
 		PlayerNote note = noteServ.create(pid, playerNote);

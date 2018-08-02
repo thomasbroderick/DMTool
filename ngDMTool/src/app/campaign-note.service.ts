@@ -1,5 +1,4 @@
 import { CampaignNote } from './models/campaign-note';
-import { Campaign } from './models/campaign';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -28,7 +27,7 @@ export class CampaignNoteService {
   }
 
   create(cid, campaignnote) {
-    return this.http.post<Campaign>(`${this.url}campaign/${cid}/campaignnote`, campaignnote).pipe(
+    return this.http.post<CampaignNote>(`${this.url}campaign/${cid}/campaignnote`, campaignnote).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

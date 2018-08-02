@@ -11,7 +11,7 @@ public interface PlayerService {
 
 	  public Player create(int cid, Player player);
 
-	  public Player update(int pid, Player player);
+	  public Player update(int cid, int pid, Player player);
 
 	  public void destroy(int pid);
 }

@@ -31,7 +31,7 @@ public class TownController {
 	}
 
 	// Need to include campaign id in path to get all towns for a specific campaign
-	@RequestMapping(path = "town/all/{cid}", method = RequestMethod.GET)
+	@RequestMapping(path = "campaign/{cid}/town/all", method = RequestMethod.GET)
 	public Set<Town> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		return townServ.index(cid);
 	}
@@ -41,7 +41,7 @@ public class TownController {
 		return townServ.show(tid);
 	}
 
-	@RequestMapping(path = "town/{cid}", method = RequestMethod.POST)
+	@RequestMapping(path = "campaign/{cid}/town", method = RequestMethod.POST)
 	public Town create(@RequestBody Town town, @PathVariable int cid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Town to = townServ.create(cid, town);
@@ -55,7 +55,7 @@ public class TownController {
 		return to;
 	}
 
-	@RequestMapping(path = "town/{cid}/{tid}", method = RequestMethod.PATCH)
+	@RequestMapping(path = "campaign/{cid}/town/{tid}", method = RequestMethod.PATCH)
 	public Town update(@PathVariable int tid, @PathVariable int cid, @RequestBody Town town, HttpServletRequest request,
 			HttpServletResponse response) {
 		Town to = townServ.update(cid, tid, town);

@@ -38,7 +38,7 @@ export class CampaignService {
 
   update(uid, cid, campaign) {
     console.log(`${this.url}user/${uid}/campaign/${cid}`);
-    return this.http.patch<CampaignNote>(`${this.url}user/${uid}/campaign/${cid}`, campaign).pipe(
+    return this.http.patch<Campaign>(`${this.url}user/${uid}/campaign/${cid}`, campaign).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
