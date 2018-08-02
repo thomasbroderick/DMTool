@@ -1,4 +1,4 @@
-{
+[{
   "index": 1,
   "name": "Acid Arrow",
   "desc": [
@@ -41,4 +41,4 @@
     }
   ],
   "url": "http://www.dnd5eapi.co/api/spells/1"
-}
+}]

@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `npc` (
   `campaign_id` INT(11) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `description` MEDIUMTEXT NULL DEFAULT NULL,
-  `monster_id` INT(11) NOT NULL,
+  `monster_id` INT(11) NOT NULL DEFAULT 71,
   `image_url` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_npc_campaign`
