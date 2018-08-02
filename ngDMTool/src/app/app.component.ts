@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   test = 0;
   title = 'app';
   grids = [];
+  theme = 'mountain';
   constructor() {}
   saveGrid() {
     const res = _.map($('.grid-stack .grid-stack-item:visible'), el => {

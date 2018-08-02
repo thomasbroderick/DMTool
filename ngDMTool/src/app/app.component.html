@@ -1,22 +1,41 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<body>
-  <div lb-gridstack>
-    <!-- <div lb-gridstack-item class="ui-resizable ui-resizable-autohide ui-resizable-disabled" index="0" height="3" width="4">
+<body id='{{theme}}'>
+    <div class="form-group">
+        <label for="sel1">Theme:</label>
+        <select class="form-control" id="sel1" [(ngModel)]=theme>
+          <option value='snow'>Snow</option>
+          <option value='mountain'>Mountain</option>
+        </select>
+      </div>
+    <div lb-gridstack>
+      <!-- <div lb-gridstack-item class="ui-resizable ui-resizable-autohide ui-resizable-disabled" index="0" height="3" width="4">
       <app-dice-roller></app-dice-roller>
     </div> -->
-    <div class="grid-stack-item ui-draggable ui-resizable ui-resizable-autohide ui-resizable-disabled" data-gs-width="4" data-gs-height="4"
-      data-gs-min-width="2" data-gs-no-resize="yes">
-      <div class="grid-stack-item-content ui-draggable-handle">
-        <span class="fa fa-hand-o-up"></span>
-        <app-dice-roller></app-dice-roller>
+      <div class="grid-stack-item ui-draggable ui-resizable ui-resizable-autohide ui-resizable-disabled" data-gs-width="4" data-gs-height="4"
+        data-gs-min-width="2" data-gs-no-resize="yes">
+        <div class="grid-stack-item-content ui-draggable-handle">
+          <span class="fa fa-hand-o-up"></span>
+          <app-dice-roller></app-dice-roller>
+        </div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90; display: none;"></div>
       </div>
-      <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; display: none;"></div>
-      <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;"></div>
-      <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; display: none;"></div>
-      <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90; display: none;"></div>
-      <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90; display: none;"></div>
-    </div>
+      <div class="grid-stack-item ui-draggable ui-resizable ui-resizable-autohide ui-resizable-disabled" data-gs-width="4" data-gs-height="4"
+        data-gs-min-width="2" data-gs-no-resize="yes">
+        <div class="grid-stack-item-content ui-draggable-handle">
+          <span class="fa fa-hand-o-up"></span>
+        <app-beastiary></app-beastiary>
+        </div>
+        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90; display: none;"></div>
+        <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90; display: none;"></div>
+      </div>
 
-  </div>
+    </div>
 </body>

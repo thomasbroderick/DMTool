@@ -1,0 +1,81 @@
+<div *ngIf='!selected' style="margin:auto;width: 60%;
+border: 3px solid rgb(33, 41, 33);
+padding: 10px;">
+  <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+    <thead class="thead-dark">
+      <tr align=center>
+        <th colspan=6>Monsters</th>
+      </tr>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tr *ngFor='let monster of monsters'>
+      <td>{{monster.name}}</td>
+      <td>
+        <button (click)="selected=monster">Details</button>
+      </td>
+      <td>
+        <button (click)="destroyMonster(monster.id)">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <form>
+    <input type="text" name="name" placeholder="Name" [(ngModel)]="newMonster.name" />
+    <br />
+      <button class="button" (click)="createMonster()">CREATE</button>
+  </form>
+
+</div>
+
+<div *ngIf='selected&&!editMonster' style="margin:auto;width: 50%;
+border: 3px solid rgb(33, 41, 33);
+padding: 10px;">
+  <table class="table table-condensed table-hover table-bordered table-light">
+    <thead class="thead-dark">
+      <tr align=center>
+        <th colspan=2>Monster Details</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>Id:</td>
+      <td> {{selected.id}}</td>
+    </tr>
+    <tr>
+      <td>Name: </td>
+      <td>{{selected.name}}</td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td align=center colspan=2>
+        <button class="button" (click)="selected=null">Back</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<div *ngIf=editMonster style="margin:auto;width: 20%;
+border: 3px solid rgb(33, 41, 33);
+padding: 10px;">
+  <table class="table table-condensed table-hover table-bordered table-light">
+    <form>
+      <tr>
+        <td>Name: {{editMonster.name}}</td>
+        <td>
+          <input type='text' name="name" [(ngModel)]="editMonster.name">
+        </td>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="update()">Save Changes</button>
+        </td>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="editMonster=null">Cancel Changes</button>
+        </td>
+      </tr>
+    </form>
+  </table>
+</div>
