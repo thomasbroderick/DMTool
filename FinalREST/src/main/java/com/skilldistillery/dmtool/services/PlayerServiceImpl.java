@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class PlayerServiceImpl implements PlayerService {
 	private CampaignRepository campRepo;
 
 	@Override
-	public Set<Player> index(int cid) {
-		return (Set<Player>) playerRepo.findByCampaign_Id(cid);
+	public List<Player> index(int cid) {
+		return playerRepo.findByCampaign_Id(cid);
 	}
 
 	@Override
