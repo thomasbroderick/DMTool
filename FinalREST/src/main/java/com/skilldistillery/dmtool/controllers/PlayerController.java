@@ -1,6 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ public class PlayerController {
 
 	// Need to include campaign id in path to get all players for a specific campaign
 	@RequestMapping(path = "campaign/{cid}/player/all", method = RequestMethod.GET)
-	public Set<Player> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
+	public List<Player> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		return playerServ.index(cid);
 	}
 

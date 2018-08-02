@@ -29,7 +29,7 @@ export class SpellService {
   }
 
   create(uid, spell) {
-    return this.http.post<Spell>(`${this.url}user/${uid}spell`, spell).pipe(
+    return this.http.post<Spell>(`${this.url}user/${uid}/spell`, spell).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
