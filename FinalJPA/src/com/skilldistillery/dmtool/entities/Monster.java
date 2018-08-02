@@ -16,11 +16,11 @@ public class Monster {
 	private String subtype;
 	private String alignment;
 	@Column(name="damage_vulnerabilities")
-	private String vulnerabilities;
+	private String damageVulnerabilities;
 	@Column(name="damage_resistances")
-	private String resistances;
+	private String damageResistances;
 	@Column(name="damage_immunities")
-	private String immunnities;
+	private String damageImmunities;
 	@Column(name="condition_immunities")
 	private String conditionImmunities;
 	private String senses;
@@ -47,11 +47,9 @@ public class Monster {
 	private Integer charisma;
 	private Integer constitution;
 	@Column(name="challenge_rating")
-	private Double challengeRating;
+	private String challengeRating;
 	@Column(name="dexterity_save")
 	private Integer dexteritySave;
-	@Column(name="constitution_save")
-	private Integer constitutionSave;
 	@Column(name="wisdom_save")
 	private Integer wisdomSave;
 	@Column(name="charisma_save")
@@ -110,27 +108,27 @@ public class Monster {
 	}
 
 	public String getVulnerabilities() {
-		return vulnerabilities;
+		return damageVulnerabilities;
 	}
 
 	public void setVulnerabilities(String vulnerabilities) {
-		this.vulnerabilities = vulnerabilities;
+		this.damageVulnerabilities = vulnerabilities;
 	}
 
 	public String getResistances() {
-		return resistances;
+		return damageResistances;
 	}
 
 	public void setResistances(String resistances) {
-		this.resistances = resistances;
+		this.damageResistances = resistances;
 	}
 
 	public String getImmunnities() {
-		return immunnities;
+		return damageImmunities;
 	}
 
 	public void setImmunnities(String immunnities) {
-		this.immunnities = immunnities;
+		this.damageImmunities = immunnities;
 	}
 
 	public String getConditionImmunities() {
@@ -277,11 +275,11 @@ public class Monster {
 		this.constitution = constitution;
 	}
 
-	public Double getChallengeRating() {
+	public String getChallengeRating() {
 		return challengeRating;
 	}
 
-	public void setChallengeRating(Double challengeRating) {
+	public void setChallengeRating(String challengeRating) {
 		this.challengeRating = challengeRating;
 	}
 
@@ -293,13 +291,6 @@ public class Monster {
 		this.dexteritySave = dexteritySave;
 	}
 
-	public Integer getConstitutionSave() {
-		return constitutionSave;
-	}
-
-	public void setConstitutionSave(Integer constitutionSave) {
-		this.constitutionSave = constitutionSave;
-	}
 
 	public Integer getWisdomSave() {
 		return wisdomSave;
@@ -339,19 +330,18 @@ public class Monster {
 		result = prime * result + ((charismaSave == null) ? 0 : charismaSave.hashCode());
 		result = prime * result + ((conditionImmunities == null) ? 0 : conditionImmunities.hashCode());
 		result = prime * result + ((constitution == null) ? 0 : constitution.hashCode());
-		result = prime * result + ((constitutionSave == null) ? 0 : constitutionSave.hashCode());
 		result = prime * result + ((dexterity == null) ? 0 : dexterity.hashCode());
 		result = prime * result + ((dexteritySave == null) ? 0 : dexteritySave.hashCode());
 		result = prime * result + ((hitDice == null) ? 0 : hitDice.hashCode());
 		result = prime * result + ((hitPoints == null) ? 0 : hitPoints.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
-		result = prime * result + ((immunnities == null) ? 0 : immunnities.hashCode());
+		result = prime * result + ((damageImmunities == null) ? 0 : damageImmunities.hashCode());
 		result = prime * result + ((intelligence == null) ? 0 : intelligence.hashCode());
 		result = prime * result + ((languages == null) ? 0 : languages.hashCode());
 		result = prime * result + ((legendaryActions == null) ? 0 : legendaryActions.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((resistances == null) ? 0 : resistances.hashCode());
+		result = prime * result + ((damageResistances == null) ? 0 : damageResistances.hashCode());
 		result = prime * result + ((senses == null) ? 0 : senses.hashCode());
 		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		result = prime * result + ((specialAbilities == null) ? 0 : specialAbilities.hashCode());
@@ -361,7 +351,7 @@ public class Monster {
 		result = prime * result + ((subtype == null) ? 0 : subtype.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + ((vulnerabilities == null) ? 0 : vulnerabilities.hashCode());
+		result = prime * result + ((damageVulnerabilities == null) ? 0 : damageVulnerabilities.hashCode());
 		result = prime * result + ((wisdom == null) ? 0 : wisdom.hashCode());
 		result = prime * result + ((wisdomSave == null) ? 0 : wisdomSave.hashCode());
 		return result;
@@ -416,11 +406,6 @@ public class Monster {
 				return false;
 		} else if (!constitution.equals(other.constitution))
 			return false;
-		if (constitutionSave == null) {
-			if (other.constitutionSave != null)
-				return false;
-		} else if (!constitutionSave.equals(other.constitutionSave))
-			return false;
 		if (dexterity == null) {
 			if (other.dexterity != null)
 				return false;
@@ -451,10 +436,10 @@ public class Monster {
 				return false;
 		} else if (!imageUrl.equals(other.imageUrl))
 			return false;
-		if (immunnities == null) {
-			if (other.immunnities != null)
+		if (damageImmunities == null) {
+			if (other.damageImmunities != null)
 				return false;
-		} else if (!immunnities.equals(other.immunnities))
+		} else if (!damageImmunities.equals(other.damageImmunities))
 			return false;
 		if (intelligence == null) {
 			if (other.intelligence != null)
@@ -476,10 +461,10 @@ public class Monster {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (resistances == null) {
-			if (other.resistances != null)
+		if (damageResistances == null) {
+			if (other.damageResistances != null)
 				return false;
-		} else if (!resistances.equals(other.resistances))
+		} else if (!damageResistances.equals(other.damageResistances))
 			return false;
 		if (senses == null) {
 			if (other.senses != null)
@@ -526,10 +511,10 @@ public class Monster {
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
-		if (vulnerabilities == null) {
-			if (other.vulnerabilities != null)
+		if (damageVulnerabilities == null) {
+			if (other.damageVulnerabilities != null)
 				return false;
-		} else if (!vulnerabilities.equals(other.vulnerabilities))
+		} else if (!damageVulnerabilities.equals(other.damageVulnerabilities))
 			return false;
 		if (wisdom == null) {
 			if (other.wisdom != null)
@@ -560,11 +545,11 @@ public class Monster {
 		builder.append(", alignment=");
 		builder.append(alignment);
 		builder.append(", vulnerabilities=");
-		builder.append(vulnerabilities);
+		builder.append(damageVulnerabilities);
 		builder.append(", resistances=");
-		builder.append(resistances);
+		builder.append(damageResistances);
 		builder.append(", immunnities=");
-		builder.append(immunnities);
+		builder.append(damageImmunities);
 		builder.append(", conditionImmunities=");
 		builder.append(conditionImmunities);
 		builder.append(", senses=");
@@ -605,8 +590,6 @@ public class Monster {
 		builder.append(challengeRating);
 		builder.append(", dexteritySave=");
 		builder.append(dexteritySave);
-		builder.append(", constitutionSave=");
-		builder.append(constitutionSave);
 		builder.append(", wisdomSave=");
 		builder.append(wisdomSave);
 		builder.append(", charismaSave=");

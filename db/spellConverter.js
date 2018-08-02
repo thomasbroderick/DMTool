@@ -3,51 +3,19 @@ var stringify = require('json-stable-stringify');
 
 
 var requiredProperties = [
-"user_id", "name", "description", "range", "components", "material", "ritual", "duration", "concentration", "casting_time", "level", "school", "classes", "higher_lvl"
-"user_id",
-"name",
-"size",
-"type",
-"subtype",
-"alignment",
-"armor_class",
-"hit_points",
-"hit_dice",
-"speed",
-"strength",
-"dexterity",
-"intelligence",
-"wisdom",
-"charisma",
-"constitution",
-"dexterity_save",
-"charisma_save",
-"wisdom_save",
-"stealth",
-"damage_vulnerabilities",
-"damage_resistances",
-"damage_immunities",
-"condition_immunities",
-"senses",
-"languages",
-"challenge_rating",
-"special_abilities",
-"actions",
-"legendary_actions",
-"image_url"
-];
+"user_id", "name", "description", "range", "components", "material", "ritual", "duration", "concentration", "casting_time", "level", "school", "classes", "higher_lvl"];
 
 
-fs.readFile('monsters.json', (err, data) => {
+fs.readFile('spells.json', (err, data) => {
     if (err) throw err;
     let arrayOfObjects = JSON.parse(data);
     //console.log(arrayOfObjects);
     var fixedJson = fix(arrayOfObjects);
-    writeFixedData("fixedMonsters.json", fixedJson);
+    writeFixedData("fixedspells.json", fixedJson);
 });
 
 function fix(input) {
-  input.forEach(function(monster){
+  input.forEach(function(spell){
     var saString = "";
     if (monster.special_abilities && monster.special_abilities.length > 0) {
       for (var i=0; i < monster.special_abilities.length; i++) {
@@ -91,23 +59,16 @@ function fix(input) {
     }
     monster.legendary_actions = legActString;
 
-    delete monster.history;
-    monster.image_url = monster.url;
-    delete monster.url;
-    delete monster.index;
-    delete monster.perception;
-    delete monster.constitution_save;
-    monster.challenge_rating = "CR: " + monster.challenge_rating;
 
     requiredProperties.forEach(function(prop){
-      if ( monster[prop] == undefined ) {
-        monster[prop] = null;
+      if ( spell[prop] == undefined ) {
+        spell[prop] = null;
       }
     });
 
-    for ( p in monster ) {
+    for ( p in spell ) {
       if ( ! requiredProperties.includes(p)) {
-        delete monster[p];
+        delete spell[p];
       }
     }
 
