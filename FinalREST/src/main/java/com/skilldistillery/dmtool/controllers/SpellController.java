@@ -33,7 +33,7 @@ public class SpellController {
 	}
 
 	// Need to include user id in path to get all spells for a specific user
-	@RequestMapping(path = "spell/all/user/{uid}", method = RequestMethod.GET)
+	@RequestMapping(path = "user/{uid}/spell/all", method = RequestMethod.GET)
 	public Set<Spell> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
 		return spellServ.index(userServ.show(uid).getEmail());
 	}
@@ -43,7 +43,7 @@ public class SpellController {
 		return spellServ.show(sid);
 	}
 
-	@RequestMapping(path = "spell/user/{uid}", method = RequestMethod.POST)
+	@RequestMapping(path = "user/{uid}/spell", method = RequestMethod.POST)
 	public Spell create(@RequestBody Spell spell, @PathVariable int uid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Spell sp = spellServ.create(userServ.show(uid).getEmail(), spell);

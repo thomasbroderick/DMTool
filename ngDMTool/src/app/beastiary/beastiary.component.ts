@@ -23,7 +23,7 @@ export class BeastiaryComponent implements OnInit {
     this.loadMonster();
   }
   update() {
-    this.monsterService.update(this.editMonster, 1).subscribe(
+    this.monsterService.update(1, this.selected.id, this.editMonster).subscribe(
       data => {
         this.loadMonster(),
           (this.selected = this.editMonster),
@@ -43,7 +43,7 @@ export class BeastiaryComponent implements OnInit {
   }
   loadMonster() {
     this.monsterService
-      .index()
+      .index(1)
       .subscribe(data => (this.monsters = data), err => console.log(err));
   }
   constructor(private monsterService: MonsterService) {}

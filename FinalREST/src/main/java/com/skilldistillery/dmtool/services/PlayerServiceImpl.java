@@ -33,7 +33,8 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	public Player update(int pid, Player player) {
+	public Player update(int cid, int pid, Player player) {
+		player.setCampaign(campRepo.findOneById(cid));
 		player.setId(pid);
 		return playerRepo.saveAndFlush(player);
 	}

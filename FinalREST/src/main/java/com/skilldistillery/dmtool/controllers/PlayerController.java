@@ -30,7 +30,7 @@ public class PlayerController {
 	}
 
 	// Need to include campaign id in path to get all players for a specific campaign
-	@RequestMapping(path = "player/all/{cid}", method = RequestMethod.GET)
+	@RequestMapping(path = "campaign/{cid}player/all", method = RequestMethod.GET)
 	public Set<Player> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
 		return playerServ.index(cid);
 	}
@@ -40,7 +40,7 @@ public class PlayerController {
 		return playerServ.show(pid);
 	}
 
-	@RequestMapping(path = "player/{cid}", method = RequestMethod.POST)
+	@RequestMapping(path = "campaign/{cid}/player", method = RequestMethod.POST)
 	public Player create(@RequestBody Player player, @PathVariable int cid, HttpServletRequest request,
 			HttpServletResponse response) {
 		Player play = playerServ.create(cid, player);
@@ -54,10 +54,10 @@ public class PlayerController {
 		return play;
 	}
 
-	@RequestMapping(path = "player/{pid}", method = RequestMethod.PUT)
-	public Player update(@PathVariable int pid, @RequestBody Player player, HttpServletRequest request,
+	@RequestMapping(path = "campaign/{cid}/player/{pid}", method = RequestMethod.PATCH)
+	public Player update(@PathVariable int cid, @PathVariable int pid, @RequestBody Player player, HttpServletRequest request,
 			HttpServletResponse response) {
-		Player play = playerServ.update(pid, player);
+		Player play = playerServ.update(cid, pid, player);
 
 		if (play != null) {
 			response.setStatus(200);

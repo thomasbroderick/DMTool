@@ -1,3 +1,4 @@
+import { PlayerNote } from './models/player-note';
 import { Npc } from './models/npc';
 import { Campaign } from './models/campaign';
 import { Injectable } from '@angular/core';
@@ -17,9 +18,9 @@ export class PlayerNoteService {
     })
   };
 
-  index(cid) {
-    console.log(`${this.url} player/${cid}/npc/all/`);
-    return this.http.get<Npc[]>(`${this.url}campaign/${cid}/campaignnote/all`).pipe(
+  index(pid) {
+    console.log(`${this.url} player/${pid}/playernote/all/`);
+    return this.http.get<PlayerNote[]>(`${this.url}player/${pid}/playernote/all`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -27,8 +28,8 @@ export class PlayerNoteService {
     );
   }
 
-  create(cid, npc) {
-    return this.http.post<Npc>(`${this.url}campaign/${cid}/npc`, npc).pipe(
+  create(pid, playernote) {
+    return this.http.post<Npc>(`${this.url}player/${pid}/playernote`, playernote).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -36,9 +37,9 @@ export class PlayerNoteService {
     );
   }
 
-  update(cid, nid, npc) {
-    console.log(`${this.url}campaign/${cid}/npc/${nid}`);
-    return this.http.patch<Npc>(`${this.url}campaign/${cid}/npc/${nid}`, npc).pipe(
+  update(pid, pnid, playernote) {
+    console.log(`${this.url}player/${pid}/playernote/${pnid}`);
+    return this.http.patch<Npc>(`${this.url}player/${pid}/playernote/${pnid}`, playernote).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -47,7 +48,7 @@ export class PlayerNoteService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}/npc/${id}`, {}).pipe(
+    return this.http.delete<any>(`${this.url}/playernote/${id}`, {}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

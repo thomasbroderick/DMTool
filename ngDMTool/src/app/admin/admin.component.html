@@ -1,0 +1,180 @@
+<mat-tab-group>
+  <mat-tab label="User">
+
+
+
+    <div *ngIf='!selectedUser' style="margin:auto;width: 60%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=6>Users</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let user of users'>
+          <td>{{user.email}}</td>
+          <td>
+            <button (click)="selectedUser=user">Details</button>
+          </td>
+          <td>
+            <button (click)="destroyUser(user.id)">Delete</button>
+          </td>
+        </tr>
+      </table>
+
+      <form>
+        <input type="text" name="email" placeholder="Email" [(ngModel)]="newUser.email"/>
+        <br />
+          <button class="button" (click)="createUser()">CREATE</button>
+      </form>
+
+    </div>
+
+    <div *ngIf='selectedUser&&!editUser' style="margin:auto;width: 50%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>User Details</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>Id:</td>
+          <td> {{selectedUser.id}}</td>
+        </tr>
+        <tr>
+          <td>Email: </td>
+          <td>{{selectedUser.email}}</td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="setEditUser()">Edit</button>
+          </td>
+          <td align=center colspan=2>
+            <button class="button" (click)="selectedUser=null">Back</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf=editUser style="margin:auto;width: 20%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>Email: {{editUser.email}}</td>
+            <td>
+              <input type='text' name="email" [(ngModel)]="editUser.email">
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="updateUser()">Save Changes</button>
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="editUser=null">Cancel Changes</button>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Item">
+      <div *ngIf='!selectedItem' style="margin:auto;width: 60%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+        <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+          <thead class="thead-dark">
+            <tr align=center>
+              <th colspan=6>Items</th>
+            </tr>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tr *ngFor='let Item of Items'>
+            <td>{{Item.name}}</td>
+            <td>
+              <button (click)="selectedItem=Item">Details</button>
+            </td>
+            <td>
+              <button (click)="destroyItem(Item.id)">Delete</button>
+            </td>
+          </tr>
+        </table>
+
+        <form>
+          <input type="text" name="name" placeholder="name" [(ngModel)]="newItem.name"/>
+          <br />
+            <button class="button" (click)="createItem()">CREATE</button>
+        </form>
+
+      </div>
+
+      <div *ngIf='selectedItem&&!editItem' style="margin:auto;width: 50%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+        <table class="table table-condensed table-hover table-bordered table-light">
+          <thead class="thead-dark">
+            <tr align=center>
+              <th colspan=2>Item Details</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Id:</td>
+            <td> {{selectedItem.id}}</td>
+          </tr>
+          <tr>
+            <td>name: </td>
+            <td>{{selectedItem.name}}</td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="setEditItem()">Edit</button>
+            </td>
+            <td align=center colspan=2>
+              <button class="button" (click)="selectedItem=null">Back</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf=editItem style="margin:auto;width: 20%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+        <table class="table table-condensed table-hover table-bordered table-light">
+          <form>
+            <tr>
+              <td>name: {{editItem.name}}</td>
+              <td>
+                <input type='text' name="name" [(ngModel)]="editItem.name">
+              </td>
+            </tr>
+            <tr>
+              <td align=center colspan=2>
+                <button class="button" (click)="updateItem()">Save Changes</button>
+              </td>
+            </tr>
+            <tr>
+              <td align=center colspan=2>
+                <button class="button" (click)="editItem=null">Cancel Changes</button>
+              </td>
+            </tr>
+          </form>
+        </table>
+      </div>
+  </mat-tab>
+  <mat-tab label="Monster"> Content 3 </mat-tab>
+</mat-tab-group>
+

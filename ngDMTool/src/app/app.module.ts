@@ -13,18 +13,24 @@ import {MatSelectModule} from '@angular/material/select';
 import { TimerComponent } from './timer/timer.component';
 import { BeastiaryComponent } from './beastiary/beastiary.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { AppRoutingModule } from './app-routing.module';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
     DiceRollerComponent,
     TimerComponent,
-    BeastiaryComponent
+    BeastiaryComponent,
+    AdminComponent
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
     GridstackModule.forRoot(),
+    AppRoutingModule,
+    MatTabsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
