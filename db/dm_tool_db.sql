@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` MEDIUMTEXT NOT NULL,
   `role` VARCHAR(45) NULL DEFAULT 'standard',
   `enabled` TINYINT(1) NULL DEFAULT '1',
   PRIMARY KEY (`id`))
@@ -95,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `player` (
   `investigation` INT(11) NULL DEFAULT NULL,
   `insight` INT(11) NULL DEFAULT NULL,
   `image_url` VARCHAR(100) NULL DEFAULT NULL,
+  `level` INT NULL DEFAULT 1,
+  `profession` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_character_campaign`
     FOREIGN KEY (`campaign_id`)
@@ -343,8 +345,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `player` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (1, 1, 'Legolas the Original', 30, 30, 1, 18, 6, 2, 0, NULL);
-INSERT INTO `player` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`) VALUES (2, 1, 'Gimli the Null', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `player` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`, `level`, `profession`) VALUES (1, 1, 'Legolas the Original', 30, 30, 1, 18, 6, 2, 0, NULL, NULL, NULL);
+INSERT INTO `player` (`id`, `campaign_id`, `name`, `max_hp`, `current_hp`, `initiative`, `ac`, `perception`, `investigation`, `insight`, `image_url`, `level`, `profession`) VALUES (2, 1, 'Gimli the Null', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
