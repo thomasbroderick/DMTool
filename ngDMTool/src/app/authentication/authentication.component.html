@@ -8,3 +8,12 @@
 </form>
 
 <input *ngIf=checkLogin() type="submit" value="Logout" (click)=logout()>
+
+<form #form="ngForm" *ngIf=!checkLogin()>
+    <h1>REGISTER</h1>
+    Email: <input type="text" name="email" ngModel>
+    Username: <input type="text" name="username" ngModel>
+    Password: <input type="text" name="password" ngModel>
+
+    <input type="submit" value="Submit" (click)=register(form)>
+  </form>

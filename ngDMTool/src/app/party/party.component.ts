@@ -12,11 +12,16 @@ export class PartyComponent implements OnInit {
   newPlayer = new Player();
   editPlayer = null;
   selectedPlayer = null;
+  creating = false;
 
   createPlayer() {
-    this.playerService
-      .create(1, this.newPlayer)
-      .subscribe(data => this.players.push(data), err => console.log(err));
+    this.playerService.create(1, this.newPlayer).subscribe(
+      data => {
+        this.players.push(data);
+        this.creating = false;
+      },
+      err => console.log(err)
+    );
   }
 
   updatePlayer() {
