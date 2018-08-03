@@ -11,7 +11,6 @@ export class Player {
   imageUrl: string;
 
   constructor(
-    $id?: number,
     $name?: string,
     $maxHp?: number,
     $currentHp?: number,
@@ -22,7 +21,6 @@ export class Player {
     $insight?: number,
     $imageUrl?: string
   ) {
-    this.id = $id;
     this.name = $name;
     this.maxHp = $maxHp;
     this.currentHp = $currentHp;

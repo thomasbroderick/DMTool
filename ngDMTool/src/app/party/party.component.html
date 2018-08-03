@@ -1,5 +1,10 @@
 <div id='partyMain'>
-
-party
-sdfds
+  <h1>Party</h1>
+  <ul>
+    <p *ngFor='let player of players'>
+      <li>{{player.name}}</li>
+      <li>HP: {{player.currentHp}} / {{player.maxHp}} AC: {{player.ac}}</li>
+      <li>Perception: {{player.perception}} Investigation: {{player.investigation}} Insight: {{player.insight}}</li>
+    </p>
+  </ul>
 </div>

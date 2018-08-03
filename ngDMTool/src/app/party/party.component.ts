@@ -8,7 +8,6 @@ import { PlayerService } from '../player.service';
   styleUrls: ['./party.component.css']
 })
 export class PartyComponent implements OnInit {
-
   players: Player[] = [];
   newPlayer = new Player();
   editPlayer = null;
@@ -18,7 +17,6 @@ export class PartyComponent implements OnInit {
     this.playerService
       .create(1, this.newPlayer)
       .subscribe(data => this.players.push(data), err => console.log(err));
-
   }
 
   updatePlayer() {
@@ -41,14 +39,18 @@ export class PartyComponent implements OnInit {
       .subscribe(data => this.loadPlayer(), err => console.log(err));
   }
   loadPlayer() {
-    this.playerService
-      .index(1)
-      .subscribe(data => (this.players = data), err => console.log(err));
+    this.playerService.index(1).subscribe(
+      data => {
+        this.players = data;
+        console.log(this.players[0]);
+      },
+      err => console.log(err)
+    );
   }
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService) {}
 
   ngOnInit() {
+    this.loadPlayer();
   }
-
 }
