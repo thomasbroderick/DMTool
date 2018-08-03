@@ -32,7 +32,8 @@ public class MonsterServiceImpl implements MonsterService {
 		
 		if(userRepo.findOneByUsername(username).getId() != 1) {
 			results.addAll(index("admin"));
-		}	
+		}
+		
 		return results;
 	}
 

@@ -31,11 +31,9 @@ public class AuthServiceImpl implements AuthService {
 	public User register(String json) {
 		ObjectMapper om = new ObjectMapper();
 		User user = null;
-		System.out.println("****in auth serv****");
 		
 
 		try {
-			System.out.println("****in auth serv****");
 			user = om.readValue(json, User.class);
 			System.out.println(user);
 
