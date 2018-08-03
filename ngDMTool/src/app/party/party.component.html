@@ -1,5 +1,5 @@
 <div id='partyMain'>
-  <div *ngIf=!creating&&!selectedPlayer>
+  <div>
     <h1>Party</h1>
     <ul>
       <p *ngFor='let player of players'>
@@ -26,106 +26,148 @@
     <button class="button" (click)="creating=false">BACK</button>
 
   </div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
 
-  <div *ngIf='selectedPlayer&&!editPlayer' style="margin:auto;width: 50%;
-    border: 3px solid rgb(33, 41, 33);
-    padding: 10px;
-    color: black;">
-    <table class="table  table-hover table-bordered table-light">
-      <tr>
-        <td>Id:</td>
-        <td> {{selectedPlayer.id}}</td>
-        <td>Name: </td>
-        <td>{{selectedPlayer.name}}</td>
-      </tr>
-      <tr>
-        <td>Max HP: </td>
-        <td>{{selectedPlayer.maxHp}}</td>
-        <td>Current HP: </td>
-        <td>{{selectedPlayer.currentHp}}</td>
-      </tr>
-      <tr>
-        <td>Initiative: </td>
-        <td>{{selectedPlayer.initiative}}</td>
-        <td>Armor Class: </td>
-        <td>{{selectedPlayer.ac}}</td>
-      </tr>
-      <tr>
-        <td>Passive Perception: </td>
-        <td>{{selectedPlayer.perception}}</td>
-        <td>Passive Investigation: </td>
-        <td>{{selectedPlayer.investigation}}</td>
-      </tr>
-      <tr>
-        <td>Passive Insight: </td>
-        <td>{{selectedPlayer.insight}}</td>
-        <td>Image URL: </td>
-        <td>{{selectedPlayer.imageUrl}}</td>
-      </tr>
-      <tr>
-      </tr>
-      <tr>
-        <td align=center colspan=2>
-          <button class="button" (click)="setEditPlayer()">Edit</button>
-        </td>
-        <td align=center colspan=2>
-          <button class="button" (click)="selectedPlayer=null">Back</button>
-        </td>
-      </tr>
-    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div *ngIf='selectedPlayer&&!editPlayer' style="margin:auto;width: 50%;
+            border: 3px solid rgb(33, 41, 33);
+            padding: 10px;
+            color: black;">
+            <table class="table  table-hover table-bordered table-light">
+              <tr>
+                <td>Id:</td>
+                <td> {{selectedPlayer.id}}</td>
+                <td>Name: </td>
+                <td>{{selectedPlayer.name}}</td>
+              </tr>
+              <tr>
+                <td>Max HP: </td>
+                <td>{{selectedPlayer.maxHp}}</td>
+                <td>Current HP: </td>
+                <td>{{selectedPlayer.currentHp}}</td>
+              </tr>
+              <tr>
+                <td>Initiative: </td>
+                <td>{{selectedPlayer.initiative}}</td>
+                <td>Armor Class: </td>
+                <td>{{selectedPlayer.ac}}</td>
+              </tr>
+              <tr>
+                <td>Passive Perception: </td>
+                <td>{{selectedPlayer.perception}}</td>
+                <td>Passive Investigation: </td>
+                <td>{{selectedPlayer.investigation}}</td>
+              </tr>
+              <tr>
+                <td>Passive Insight: </td>
+                <td>{{selectedPlayer.insight}}</td>
+                <td>Image URL: </td>
+                <td>{{selectedPlayer.imageUrl}}</td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td align=center colspan=2>
+                  <button class="button" (click)="setEditPlayer()">Edit</button>
+                </td>
+                <td align=center colspan=2>
+                  <button class="button" (click)="selectedPlayer=null">Back</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div *ngIf=editPlayer style="margin:auto;width: 20%;
+            border: 3px solid rgb(33, 41, 33);
+            padding: 10px;
+            color: black;">
+            <table class="table table-condensed table-hover table-bordered table-light">
+              <form>
+                <tr>
+                  <td>
+                    <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" />
+                  </td>
+                </tr>
+                <tr>
+                  <td align=center colspan=2>
+                    <button class="button" (click)="updatePlayer()">Save Changes</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=center colspan=2>
+                    <button class="button" (click)="editPlayer=null">Cancel Changes</button>
+                  </td>
+                </tr>
+              </form>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div *ngIf=editPlayer style="margin:auto;width: 20%;
-    border: 3px solid rgb(33, 41, 33);
-    padding: 10px;
-    color: black;">
-    <table class="table table-condensed table-hover table-bordered table-light">
-      <form>
-        <tr>
-          <td>
-            <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" />
-          </td>
-        </tr>
-        <tr>
-          <td align=center colspan=2>
-            <button class="button" (click)="updatePlayer()">Save Changes</button>
-          </td>
-        </tr>
-        <tr>
-          <td align=center colspan=2>
-            <button class="button" (click)="editPlayer=null">Cancel Changes</button>
-          </td>
-        </tr>
-      </form>
-    </table>
-  </div>
+
 </div>
