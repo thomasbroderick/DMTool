@@ -22,7 +22,7 @@ public class SpellServiceImpl implements SpellService {
 		Set<Spell> results = (Set<Spell>) spellRepo.findByUser_Username(username);
 		
 		if(userRepo.findOneByUsername(username).getId() != 1) {
-			results.addAll(index("admin@admin.com"));
+			results.addAll(index("admin"));
 		}	
 		return results;
 	}
