@@ -17,6 +17,8 @@ import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import { LibraryComponent } from './library/library.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { PartyComponent } from './party/party.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { LibraryComponent } from './library/library.component';
     TimerComponent,
     BeastiaryComponent,
     AdminComponent,
-    LibraryComponent
+    LibraryComponent,
+    AuthenticationComponent,
+    PartyComponent
   ],
   imports: [
     NgbModule.forRoot(),

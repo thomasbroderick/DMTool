@@ -1,0 +1,131 @@
+<div id='partyMain'>
+  <div *ngIf=!creating&&!selectedPlayer>
+    <h1>Party</h1>
+    <ul>
+      <p *ngFor='let player of players'>
+        <li>{{player.name}}</li>
+        <button (click)="selectedPlayer=player">Details</button>
+        <button (click)="destroyPlayer(player.id)">Delete</button>
+        <li>HP: {{player.currentHp}} / {{player.maxHp}} AC: {{player.ac}}</li>
+        <li>Perception: {{player.perception}} Investigation: {{player.investigation}} Insight: {{player.insight}}</li>
+      </p>
+      <button class="button" (click)="creating=true">CREATE</button>
+    </ul>
+  </div>
+
+  <div *ngIf=creating>
+    <input type="text" name="name" placeholder="Name" [(ngModel)]="newPlayer.name" />
+    <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="newPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
+    <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="newPlayer.initiative" />
+    <input type="number" name="ac" placeholder="AC" [(ngModel)]="newPlayer.ac" />
+    <input type="number" name="perception" placeholder="Perception" [(ngModel)]="newPlayer.perception" />
+    <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="newPlayer.investigation" />
+    <input type="number" name="insight" placeholder="insight" [(ngModel)]="newPlayer.insight" />
+    <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="newPlayer.imageUrl" />
+    <button class="button" (click)="createPlayer()">CREATE</button>
+    <button class="button" (click)="creating=false">BACK</button>
+
+  </div>
+
+  <div *ngIf='selectedPlayer&&!editPlayer' style="margin:auto;width: 50%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;
+    color: black;">
+    <table class="table  table-hover table-bordered table-light">
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedPlayer.id}}</td>
+        <td>Name: </td>
+        <td>{{selectedPlayer.name}}</td>
+      </tr>
+      <tr>
+        <td>Max HP: </td>
+        <td>{{selectedPlayer.maxHp}}</td>
+        <td>Current HP: </td>
+        <td>{{selectedPlayer.currentHp}}</td>
+      </tr>
+      <tr>
+        <td>Initiative: </td>
+        <td>{{selectedPlayer.initiative}}</td>
+        <td>Armor Class: </td>
+        <td>{{selectedPlayer.ac}}</td>
+      </tr>
+      <tr>
+        <td>Passive Perception: </td>
+        <td>{{selectedPlayer.perception}}</td>
+        <td>Passive Investigation: </td>
+        <td>{{selectedPlayer.investigation}}</td>
+      </tr>
+      <tr>
+        <td>Passive Insight: </td>
+        <td>{{selectedPlayer.insight}}</td>
+        <td>Image URL: </td>
+        <td>{{selectedPlayer.imageUrl}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditPlayer()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedPlayer=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editPlayer style="margin:auto;width: 20%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;
+    color: black;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>
+            <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" />
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updatePlayer()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editPlayer=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</div>

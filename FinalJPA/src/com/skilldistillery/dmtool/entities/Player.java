@@ -79,19 +79,19 @@ public class Player {
 		this.name = name;
 	}
 
-	public Integer getHpMax() {
+	public Integer getMaxHp() {
 		return maxHp;
 	}
 
-	public void setHpMax(Integer hpMax) {
+	public void setMaxHp(Integer hpMax) {
 		this.maxHp = hpMax;
 	}
 
-	public Integer getHpCurrent() {
+	public Integer getCurrentHp() {
 		return currentHp;
 	}
 
-	public void setHpCurrent(Integer hpCurrent) {
+	public void setCurrentHp(Integer hpCurrent) {
 		this.currentHp = hpCurrent;
 	}
 

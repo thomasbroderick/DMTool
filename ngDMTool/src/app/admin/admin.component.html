@@ -347,6 +347,436 @@
     </table>
   </div>
 </mat-tab>
+<mat-tab label="Player">
+  <div *ngIf='!selectedPlayer' style="margin:auto;width: 60%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=6>Players</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tr *ngFor='let Player of players'>
+        <td>{{Player.name}}</td>
+        <td>
+          <button (click)="selectedPlayer=Player">Details</button>
+        </td>
+        <td>
+          <button (click)="destroyPlayer(Player.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="text" name="name" placeholder="name" [(ngModel)]="newPlayer.name"/>
+      <br />
+        <button class="button" (click)="createPlayer()">CREATE</button>
+    </form>
+
+  </div>
+
+  <div *ngIf='selectedPlayer&&!editPlayer' style="margin:auto;width: 50%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=2>Player Details</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedPlayer.id}}</td>
+      </tr>
+      <tr>
+        <td>name: </td>
+        <td>{{selectedPlayer.name}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditPlayer()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedPlayer=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editPlayer style="margin:auto;width: 20%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>name: {{editPlayer.name}}</td>
+          <td>
+            <input type='text' name="name" [(ngModel)]="editPlayer.name">
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updatePlayer()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editPlayer=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</mat-tab>
+<mat-tab label="Spell">
+  <div *ngIf='!selectedSpell' style="margin:auto;width: 60%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=6>Spells</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tr *ngFor='let Spell of spells'>
+        <td>{{Spell.name}}</td>
+        <td>
+          <button (click)="selectedSpell=Spell">Details</button>
+        </td>
+        <td>
+          <button (click)="destroySpell(Spell.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="text" name="name" placeholder="name" [(ngModel)]="newSpell.name"/>
+      <br />
+        <button class="button" (click)="createSpell()">CREATE</button>
+    </form>
+
+  </div>
+
+  <div *ngIf='selectedSpell&&!editSpell' style="margin:auto;width: 50%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=2>Spell Details</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedSpell.id}}</td>
+      </tr>
+      <tr>
+        <td>name: </td>
+        <td>{{selectedSpell.name}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditSpell()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedSpell=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editSpell style="margin:auto;width: 20%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>name: {{editSpell.name}}</td>
+          <td>
+            <input type='text' name="name" [(ngModel)]="editSpell.name">
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updateSpell()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editSpell=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</mat-tab>
+<mat-tab label="Town">
+  <div *ngIf='!selectedTown' style="margin:auto;width: 60%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=6>Towns</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tr *ngFor='let Town of towns'>
+        <td>{{Town.name}}</td>
+        <td>
+          <button (click)="selectedTown=Town">Details</button>
+        </td>
+        <td>
+          <button (click)="destroyTown(Town.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="text" name="name" placeholder="name" [(ngModel)]="newTown.name"/>
+      <br />
+        <button class="button" (click)="createTown()">CREATE</button>
+    </form>
+
+  </div>
+
+  <div *ngIf='selectedTown&&!editTown' style="margin:auto;width: 50%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=2>Town Details</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedTown.id}}</td>
+      </tr>
+      <tr>
+        <td>name: </td>
+        <td>{{selectedTown.name}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditTown()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedTown=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editTown style="margin:auto;width: 20%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>name: {{editTown.name}}</td>
+          <td>
+            <input type='text' name="name" [(ngModel)]="editTown.name">
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updateTown()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editTown=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</mat-tab>
+<mat-tab label="CampaignNote">
+  <div *ngIf='!selectedCampaignNote' style="margin:auto;width: 60%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=6>CampaignNotes</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tr *ngFor='let CampaignNote of campaignNotes'>
+        <td>{{CampaignNote.text}}</td>
+        <td>
+          <button (click)="selectedCampaignNote=CampaignNote">Details</button>
+        </td>
+        <td>
+          <button (click)="destroyCampaignNote(CampaignNote.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="text" name="name" placeholder="name" [(ngModel)]="newCampaignNote.text"/>
+      <br />
+        <button class="button" (click)="createCampaignNote()">CREATE</button>
+    </form>
+
+  </div>
+
+  <div *ngIf='selectedCampaignNote&&!editCampaignNote' style="margin:auto;width: 50%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=2>CampaignNote Details</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedCampaignNote.id}}</td>
+      </tr>
+      <tr>
+        <td>name: </td>
+        <td>{{selectedCampaignNote.text}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditCampaignNote()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedCampaignNote=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editCampaignNote style="margin:auto;width: 20%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>name: {{editCampaignNote.text}}</td>
+          <td>
+            <input type='text' name="text" [(ngModel)]="editCampaignNote.text">
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updateCampaignNote()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editCampaignNote=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</mat-tab>
+<mat-tab label="PlayerNote">
+  <div *ngIf='!selectedPlayerNote' style="margin:auto;width: 60%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=6>PlayerNotes</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tr *ngFor='let PlayerNote of playerNotes'>
+        <td>{{PlayerNote.text}}</td>
+        <td>
+          <button (click)="selectedPlayerNote=PlayerNote">Details</button>
+        </td>
+        <td>
+          <button (click)="destroyPlayerNote(PlayerNote.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="text" name="name" placeholder="name" [(ngModel)]="newPlayerNote.text"/>
+      <br />
+        <button class="button" (click)="createPlayerNote()">CREATE</button>
+    </form>
+
+  </div>
+
+  <div *ngIf='selectedPlayerNote&&!editPlayerNote' style="margin:auto;width: 50%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <thead class="thead-dark">
+        <tr align=center>
+          <th colspan=2>PlayerNote Details</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>Id:</td>
+        <td> {{selectedPlayerNote.id}}</td>
+      </tr>
+      <tr>
+        <td>name: </td>
+        <td>{{selectedPlayerNote.text}}</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td align=center colspan=2>
+          <button class="button" (click)="setEditPlayerNote()">Edit</button>
+        </td>
+        <td align=center colspan=2>
+          <button class="button" (click)="selectedPlayerNote=null">Back</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf=editPlayerNote style="margin:auto;width: 20%;
+  border: 3px solid rgb(33, 41, 33);
+  padding: 10px;">
+    <table class="table table-condensed table-hover table-bordered table-light">
+      <form>
+        <tr>
+          <td>name: {{editPlayerNote.text}}</td>
+          <td>
+            <input type='text' name="text" [(ngModel)]="editPlayerNote.text">
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="updatePlayerNote()">Save Changes</button>
+          </td>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="editPlayerNote=null">Cancel Changes</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+</mat-tab>
   <mat-tab label="Monster"> Content 3 </mat-tab>
 </mat-tab-group>
 

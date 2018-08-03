@@ -1,0 +1,11 @@
+#partyMain {
+  background-color: rgba(8, 32, 252, 0.658);
+  height: auto;
+  width: auto;
+  border: black 5px solid;
+  color: white;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
