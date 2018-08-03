@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)='showItems()'>Items</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Monsters</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Spells</a>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- Overview content div -->
+<div>
+  <h1>Tome of Arcane Knowledge</h1>
+  <p>Archive of all open source 5e SRD items, monsters, and spells. You can also create your own
+    custom content!
+  </p>
+</div>
+<!-- Items display -->
+<div>
+    <div *ngIf='!selectedItem && itemsVisible' style="margin:auto;width: 60%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=6>Items</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>Damage</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let Item of items'>
+          <td (click)="selectedItem=Item">{{Item.name}}</td>
+          <td>{{Item.damage}}</td>
+          <td *ngIf='Item.user.id > 1'>
+            <button (click)="destroyItem(Item.id)">Delete</button>
+          </td>
+        </tr>
+      </table>
+
+      <form>
+        <input type="text" name="name" placeholder="name" [(ngModel)]="newItem.name"/>
+        <br />
+          <button class="button" (click)="createItem()">CREATE</button>
+      </form>
+
+    </div>
+
+    <div *ngIf='selectedItem&&!editItem' style="margin:auto;width: 50%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>Item Details</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>Id:</td>
+          <td> {{selectedItem.id}}</td>
+        </tr>
+        <tr>
+          <td>name: </td>
+          <td>{{selectedItem.name}}</td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="setEditItem()">Edit</button>
+          </td>
+          <td align=center colspan=2>
+            <button class="button" (click)="selectedItem=null">Back</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf=editItem style="margin:auto;width: 20%;
+    border: 3px solid rgb(33, 41, 33);
+    padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>name: {{editItem.name}}</td>
+            <td>
+              <input type='text' name="name" [(ngModel)]="editItem.name">
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="updateItem()">Save Changes</button>
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="editItem=null">Cancel Changes</button>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+</div>

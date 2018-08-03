@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class Item {
   id: number;
   name: string;
@@ -10,6 +12,7 @@ export class Item {
   properties: string;
   description: string;
   imageUrl: string;
+  user: User;
 
   constructor(
     $id?: number,

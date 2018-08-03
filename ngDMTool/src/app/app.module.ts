@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import { LibraryComponent } from './library/library.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { PartyComponent } from './party/party.component';
 
@@ -26,6 +27,7 @@ import { PartyComponent } from './party/party.component';
     TimerComponent,
     BeastiaryComponent,
     AdminComponent,
+    LibraryComponent,
     AuthenticationComponent,
     PartyComponent
   ],
