@@ -34,7 +34,7 @@ return this.authenticationService.checkLogin();
 register(form: NgForm) {
   this.authenticationService
     .register(
-      new User(form.value.email, form.value.password, true, 'standard')
+      new User(form.value.username, form.value.password, true, 'standard')
     )
     .subscribe(
       data => {
