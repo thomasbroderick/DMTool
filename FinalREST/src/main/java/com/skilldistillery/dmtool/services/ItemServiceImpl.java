@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService {
 		Set<Item> results = (Set<Item>) itemRepo.findByUser_Username(username);
 		
 		if(userRepo.findOneByUsername(username).getId() != 1) {
-			results.addAll(index("admin@admin.com"));
+			results.addAll(index("admin"));
 		}	
 		return results;
 	}
