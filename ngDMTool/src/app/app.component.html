@@ -1,4 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
+
 <router-outlet></router-outlet>
 <body id='{{theme}}'>
     <div class="form-group col-md-1">
@@ -37,5 +38,18 @@
         <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90; display: none;"></div>
       </div>
 
+      <div class="grid-stack-item ui-draggable ui-resizable ui-resizable-autohide ui-resizable-disabled" data-gs-width="4" data-gs-height="4"
+      data-gs-min-width="2" data-gs-no-resize="yes">
+      <div class="grid-stack-item-content ui-draggable-handle">
+        <span class="fa fa-hand-o-up"></span>
+        <app-party></app-party>
+      </div>
+      <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; display: none;"></div>
+      <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;"></div>
+      <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; display: none;"></div>
+      <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90; display: none;"></div>
+      <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90; display: none;"></div>
     </div>
+  </div>
+
 </body>

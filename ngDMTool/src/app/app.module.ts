@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { PartyComponent } from './party/party.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     DiceRollerComponent,
     TimerComponent,
     BeastiaryComponent,
-    AdminComponent
+    AdminComponent,
+    AuthenticationComponent,
+    PartyComponent
   ],
   imports: [
     NgbModule.forRoot(),
