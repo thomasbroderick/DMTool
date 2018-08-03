@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,18 +32,18 @@ public class NpcController {
 
 	// Need to include campaign id in path to get all npcs for a specific campaign
 	@RequestMapping(path = "campaign/{cid}/npc/all", method = RequestMethod.GET)
-	public Set<Npc> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
+	public Set<Npc> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		return npcServ.index(cid);
 	}
 
 	@RequestMapping(path = "npc/{nid}")
-	public Npc show(HttpServletRequest req, HttpServletResponse res, @PathVariable int nid) {
+	public Npc show(HttpServletRequest req, HttpServletResponse res, @PathVariable int nid, Principal principal) {
 		return npcServ.show(nid);
 	}
 
 	@RequestMapping(path = "campaign/{cid}/npc", method = RequestMethod.POST)
 	public Npc create(@RequestBody Npc npc, @PathVariable int cid, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		Npc n = npcServ.create(cid, npc);
 
 		if (n != null) {
@@ -56,7 +57,7 @@ public class NpcController {
 
 	@RequestMapping(path = "campaign/{cid}/npc/{nid}", method = RequestMethod.PATCH)
 	public Npc update(@PathVariable int cid, @PathVariable int nid, @RequestBody Npc npc, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		Npc n = npcServ.update(cid, nid, npc);
 
 		if (n != null) {
@@ -69,7 +70,7 @@ public class NpcController {
 	}
 
 	@RequestMapping(path = "npc/{nid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int nid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int nid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		npcServ.destroy(nid);
 		response.setStatus(500);
 		try {

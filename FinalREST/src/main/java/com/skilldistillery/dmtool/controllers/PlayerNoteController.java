@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,18 +32,18 @@ public class PlayerNoteController {
 
 	// Need to include player id in path to get all notes for a specific player
 	@RequestMapping(path = "player/{pid}/playernote/all", method = RequestMethod.GET)
-	public Set<PlayerNote> index(@PathVariable int pid, HttpServletRequest req, HttpServletResponse res) {
+	public Set<PlayerNote> index(@PathVariable int pid, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		return noteServ.index(pid);
 	}
 
 	@RequestMapping(path = "playernote/{pid}")
-	public PlayerNote show(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid) {
+	public PlayerNote show(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid, Principal principal) {
 		return noteServ.show(pid);
 	}
 
 	@RequestMapping(path = "player/{pid}/playernote", method = RequestMethod.POST)
 	public PlayerNote create(@RequestBody PlayerNote playerNote, @PathVariable int pid, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		PlayerNote note = noteServ.create(pid, playerNote);
 
 		if (note != null) {
@@ -56,7 +57,7 @@ public class PlayerNoteController {
 
 	@RequestMapping(path = "player/{pid}/playernote/{pnid}", method = RequestMethod.PATCH)
 	public PlayerNote update(@PathVariable int pid ,@PathVariable int pnid, @RequestBody PlayerNote playerNote, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		PlayerNote note = noteServ.update(pid, pnid, playerNote);
 		
 
@@ -70,7 +71,7 @@ public class PlayerNoteController {
 	}
 
 	@RequestMapping(path = "playernote/{pid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int pid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int pid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		noteServ.destroy(pid);
 		response.setStatus(500);
 		try {

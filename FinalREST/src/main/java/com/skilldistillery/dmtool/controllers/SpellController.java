@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.dmtool.entities.Spell;
 import com.skilldistillery.dmtool.services.SpellService;
-import com.skilldistillery.dmtool.services.UserService;
 
 @RestController
 @RequestMapping(path = "api")
@@ -23,8 +23,6 @@ import com.skilldistillery.dmtool.services.UserService;
 public class SpellController {
 	@Autowired
 	private SpellService spellServ;
-	@Autowired
-	private UserService userServ;
 	
 
 	@RequestMapping(path = "spell/ping", method = RequestMethod.GET)
@@ -33,20 +31,20 @@ public class SpellController {
 	}
 
 	// Need to include user id in path to get all spells for a specific user
-	@RequestMapping(path = "user/{uid}/spell/all", method = RequestMethod.GET)
-	public Set<Spell> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
-		return spellServ.index(userServ.show(uid).getEmail());
+	@RequestMapping(path = "spell/all", method = RequestMethod.GET)
+	public Set<Spell> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		return spellServ.index(principal.getName());
 	}
 
 	@RequestMapping(path = "spell/{sid}")
-	public Spell show(HttpServletRequest req, HttpServletResponse res, @PathVariable int sid) {
+	public Spell show(HttpServletRequest req, HttpServletResponse res, @PathVariable int sid, Principal principal) {
 		return spellServ.show(sid);
 	}
 
-	@RequestMapping(path = "user/{uid}/spell", method = RequestMethod.POST)
-	public Spell create(@RequestBody Spell spell, @PathVariable int uid, HttpServletRequest request,
-			HttpServletResponse response) {
-		Spell sp = spellServ.create(userServ.show(uid).getEmail(), spell);
+	@RequestMapping(path = "spell", method = RequestMethod.POST)
+	public Spell create(@RequestBody Spell spell, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Spell sp = spellServ.create(principal.getName(), spell);
 
 		if (sp != null) {
 			response.setStatus(200);
@@ -57,10 +55,10 @@ public class SpellController {
 		return sp;
 	}
 
-	@RequestMapping(path = "user/{uid}/spell/{sid}", method = RequestMethod.PATCH)
-	public Spell update(@PathVariable int uid, @PathVariable int sid, @RequestBody Spell spell, HttpServletRequest request,
-			HttpServletResponse response) {
-		Spell sp = spellServ.update(userServ.show(uid).getEmail(), sid, spell);
+	@RequestMapping(path = "spell/{sid}", method = RequestMethod.PATCH)
+	public Spell update(@PathVariable int sid, @RequestBody Spell spell, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Spell sp = spellServ.update(principal.getName(), sid, spell);
 
 		if (sp != null) {
 			response.setStatus(200);
@@ -72,7 +70,7 @@ public class SpellController {
 	}
 
 	@RequestMapping(path = "spell/{sid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int sid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int sid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		spellServ.destroy(sid);
 		response.setStatus(500);
 		try {

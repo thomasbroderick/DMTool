@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.dmtool.entities.Monster;
 import com.skilldistillery.dmtool.services.MonsterService;
-import com.skilldistillery.dmtool.services.UserService;
 
 @RestController
 @RequestMapping(path = "api")
@@ -24,8 +24,7 @@ public class MonsterController {
 	@Autowired
 	private MonsterService monServ;
 	
-	@Autowired
-	private UserService userServ;
+
 	
 
 	@RequestMapping(path = "monster/ping", method = RequestMethod.GET)
@@ -34,20 +33,20 @@ public class MonsterController {
 	}
 
 	// Need to include user id in path to get all notes for a specific campaign
-	@RequestMapping(path = "user/{uid}/monster/all", method = RequestMethod.GET)
-	public Set<Monster> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
-		return monServ.index(userServ.show(uid).getEmail());
+	@RequestMapping(path = "monster/all", method = RequestMethod.GET)
+	public Set<Monster> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		return monServ.index(principal.getName());
 	}
 
 	@RequestMapping(path = "monster/{mid}")
-	public Monster show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid) {
+	public Monster show(HttpServletRequest req, HttpServletResponse res, @PathVariable int mid, Principal principal) {
 		return monServ.show(mid);
 	}
 
-	@RequestMapping(path = "user/{uid}/monster", method = RequestMethod.POST)
-	public Monster create(@RequestBody Monster monster, @PathVariable int uid, HttpServletRequest request,
-			HttpServletResponse response) {
-		Monster mon = monServ.create(userServ.show(uid).getEmail(), monster);
+	@RequestMapping(path = "monster", method = RequestMethod.POST)
+	public Monster create(@RequestBody Monster monster, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Monster mon = monServ.create(principal.getName(), monster);
 
 		if (mon != null) {
 			response.setStatus(200);
@@ -58,10 +57,10 @@ public class MonsterController {
 		return mon;
 	}
 
-	@RequestMapping(path = "user/{uid}/monster/{mid}", method = RequestMethod.PATCH)
-	public Monster update(@PathVariable int uid, @PathVariable int mid, @RequestBody Monster monster, HttpServletRequest request,
-			HttpServletResponse response) {
-		Monster mon = monServ.update(userServ.show(uid).getEmail(), mid, monster);
+	@RequestMapping(path = "monster/{mid}", method = RequestMethod.PATCH)
+	public Monster update(@PathVariable int mid, @RequestBody Monster monster, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Monster mon = monServ.update(principal.getName(), mid, monster);
 
 		if (mon != null) {
 			response.setStatus(200);
@@ -73,7 +72,7 @@ public class MonsterController {
 	}
 
 	@RequestMapping(path = "monster/{mid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int mid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int mid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		monServ.destroy(mid);
 		response.setStatus(500);
 		try {

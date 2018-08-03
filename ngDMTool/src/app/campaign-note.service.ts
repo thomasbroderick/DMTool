@@ -1,9 +1,11 @@
+import { AuthenticationService } from './authentication.service';
 import { CampaignNote } from './models/campaign-note';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,11 @@ export class CampaignNoteService {
   };
 
   index(cid) {
-    console.log(`${this.url} campaign/${cid}/campaignnote/all`);
-    return this.http.get<CampaignNote[]>(`${this.url}campaign/${cid}/campaignnote/all`).pipe(
+  this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+
+    return this.http.get<CampaignNote[]>(`${this.url}campaign/${cid}/campaignnote/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -27,7 +32,10 @@ export class CampaignNoteService {
   }
 
   create(cid, campaignnote) {
-    return this.http.post<CampaignNote>(`${this.url}campaign/${cid}/campaignnote`, campaignnote).pipe(
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<CampaignNote>(`${this.url}campaign/${cid}/campaignnote`, campaignnote, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -36,8 +44,10 @@ export class CampaignNoteService {
   }
 
   update(cid, nid, campaignnote) {
-    console.log(`${this.url}campaign/${cid}/campaignnote/${nid}`);
-    return this.http.patch<CampaignNote>(`${this.url}campaign/${cid}/campaignnote/${nid}`, campaignnote).pipe(
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<CampaignNote>(`${this.url}campaign/${cid}/campaignnote/${nid}`, campaignnote, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -46,13 +56,22 @@ export class CampaignNoteService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}campaignnote/${id}`, {}).pipe(
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}campaignnote/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private authService: AuthenticationService) { }
 }
+

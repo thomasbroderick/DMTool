@@ -16,14 +16,14 @@ export class BeastiaryComponent implements OnInit {
 
   createMonster() {
     this.monsterService
-      .create(this.newMonster, 1)
+      .create(this.newMonster)
       .subscribe(data => this.monsters.push(data), err => console.log(err));
 
     this.newMonster = new Monster();
     this.loadMonster();
   }
   update() {
-    this.monsterService.update(1, this.selected.id, this.editMonster).subscribe(
+    this.monsterService.update(this.selected.id, this.editMonster).subscribe(
       data => {
         this.loadMonster(),
           (this.selected = this.editMonster),
@@ -43,7 +43,7 @@ export class BeastiaryComponent implements OnInit {
   }
   loadMonster() {
     this.monsterService
-      .index(1)
+      .index()
       .subscribe(data => (this.monsters = data), err => console.log(err));
   }
   constructor(private monsterService: MonsterService) {}

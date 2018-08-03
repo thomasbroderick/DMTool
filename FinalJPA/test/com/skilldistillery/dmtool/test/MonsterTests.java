@@ -51,7 +51,7 @@ class MonsterTests {
 	
 	@Test
 	void test_monster_mapping_to_user() {
-		assertEquals("admin@admin.com", m.getUser().getEmail());
+		assertEquals("admin@admin.com", m.getUser().getUsername());
 	}
 	
 	

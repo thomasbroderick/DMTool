@@ -10,6 +10,8 @@ import { environment } from '../environments/environment';
 })
 export class AuthenticationService {
   url = environment.baseUrl;
+
+
   login(username, password) {
     console.log(username + ' ' + password);
     const token = this.generateBasicAuthToken(username, password);
@@ -17,7 +19,7 @@ export class AuthenticationService {
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
 
     return this.http
-    .get(`${this.url}authentication`, {headers})
+    .get(`${this.url}authenticate`, {headers})
     .pipe(
       tap((res) => {
         console.log('token in');

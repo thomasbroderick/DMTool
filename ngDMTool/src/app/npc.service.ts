@@ -4,6 +4,8 @@ import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,10 @@ export class NpcService {
   };
 
   index(cid) {
-  return this.http.get<Npc[]>(`${this.url}campaign/${cid}/npc/all`).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+  return this.http.get<Npc[]>(`${this.url}campaign/${cid}/npc/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -26,7 +31,10 @@ export class NpcService {
   }
 
   create(cid, npc) {
-    return this.http.post<Npc>(`${this.url}campaign/${cid}/npc`, npc).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<Npc>(`${this.url}campaign/${cid}/npc`, npc, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -35,8 +43,10 @@ export class NpcService {
   }
 
   update(cid, nid, npc) {
-    console.log(`${this.url}campaign/${cid}/npc/${nid}`);
-    return this.http.patch<Npc>(`${this.url}campaign/${cid}/npc/${nid}`, npc).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<Npc>(`${this.url}campaign/${cid}/npc/${nid}`, npc, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -45,13 +55,21 @@ export class NpcService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}npc/${id}`, {}).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}npc/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private authService: AuthenticationService, private http: HttpClient) { }
 }

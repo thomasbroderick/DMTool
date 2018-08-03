@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,18 +32,18 @@ public class PlayerController {
 
 	// Need to include campaign id in path to get all players for a specific campaign
 	@RequestMapping(path = "campaign/{cid}/player/all", method = RequestMethod.GET)
-	public List<Player> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res) {
+	public List<Player> index(@PathVariable int cid, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		return playerServ.index(cid);
 	}
 
 	@RequestMapping(path = "player/{pid}")
-	public Player show(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid) {
+	public Player show(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid, Principal principal) {
 		return playerServ.show(pid);
 	}
 
 	@RequestMapping(path = "campaign/{cid}/player", method = RequestMethod.POST)
 	public Player create(@RequestBody Player player, @PathVariable int cid, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		Player play = playerServ.create(cid, player);
 
 		if (play != null) {
@@ -56,7 +57,7 @@ public class PlayerController {
 
 	@RequestMapping(path = "campaign/{cid}/player/{pid}", method = RequestMethod.PATCH)
 	public Player update(@PathVariable int cid, @PathVariable int pid, @RequestBody Player player, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		Player play = playerServ.update(cid, pid, player);
 
 		if (play != null) {
@@ -69,7 +70,7 @@ public class PlayerController {
 	}
 
 	@RequestMapping(path = "player/{pid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int pid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int pid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		playerServ.destroy(pid);
 		response.setStatus(500);
 		try {

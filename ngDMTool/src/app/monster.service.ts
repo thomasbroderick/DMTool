@@ -1,9 +1,11 @@
+import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
 import { Monster } from './models/monster';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +18,11 @@ export class MonsterService {
     })
   };
 
-  index(uid) {
-    console.log(`${this.url}user/${uid}/monster/all`);
-    return this.http.get<Monster[]>(`${this.url}user/${uid}/monster/all`).pipe(
+  index() {
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.get<Monster[]>(`${this.url}monster/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -26,8 +30,11 @@ export class MonsterService {
     );
   }
 
-  create(uid, monster) {
-    return this.http.post<Monster>(`${this.url}user/${uid}/monster`, monster).pipe(
+  create(monster) {
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<Monster>(`${this.url}monster`, monster, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -35,9 +42,11 @@ export class MonsterService {
     );
   }
 
-  update(uid, mid, monster) {
-    console.log(`${this.url}user/${uid}/monster/${mid}`);
-    return this.http.patch<Monster>(`${this.url}user/${uid}/monster/${mid}`, monster).pipe(
+  update(mid, monster) {
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<Monster>(`${this.url}monster/${mid}`, monster, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -46,13 +55,22 @@ export class MonsterService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}monster/${id}`, {}).pipe(
+    this.checkLogout();
+   const token = this.authService.getToken();
+   const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}monster/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private authService: AuthenticationService, private router: Router) { }
 }

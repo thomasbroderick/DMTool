@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tr *ngFor='let user of users'>
-          <td>{{user.email}}</td>
+          <td>{{user.username}}</td>
           <td>
             <button (click)="selectedUser=user">Details</button>
           </td>
@@ -27,7 +27,7 @@
       </table>
 
       <form>
-        <input type="text" name="email" placeholder="Email" [(ngModel)]="newUser.email"/>
+        <input type="text" name="username" placeholder="username" [(ngModel)]="newUser.username"/>
         <br />
           <button class="button" (click)="createUser()">CREATE</button>
       </form>
@@ -48,8 +48,8 @@
           <td> {{selectedUser.id}}</td>
         </tr>
         <tr>
-          <td>Email: </td>
-          <td>{{selectedUser.email}}</td>
+          <td>username: </td>
+          <td>{{selectedUser.username}}</td>
         </tr>
         <tr>
         </tr>
@@ -69,9 +69,9 @@
       <table class="table table-condensed table-hover table-bordered table-light">
         <form>
           <tr>
-            <td>Email: {{editUser.email}}</td>
+            <td>username: {{editUser.username}}</td>
             <td>
-              <input type='text' name="email" [(ngModel)]="editUser.email">
+              <input type='text' name="username" [(ngModel)]="editUser.username">
             </td>
           </tr>
           <tr>

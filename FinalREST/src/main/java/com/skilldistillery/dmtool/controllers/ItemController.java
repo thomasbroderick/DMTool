@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.dmtool.entities.Item;
 import com.skilldistillery.dmtool.services.ItemService;
-import com.skilldistillery.dmtool.services.UserService;
 
 @RestController
 @RequestMapping(path = "api")
@@ -23,8 +23,6 @@ import com.skilldistillery.dmtool.services.UserService;
 public class ItemController {
 	@Autowired
 	private ItemService itemServ;
-	@Autowired
-	private UserService userServ;
 	
 
 	@RequestMapping(path = "item/ping", method = RequestMethod.GET)
@@ -33,20 +31,20 @@ public class ItemController {
 	}
 
 	// Need to include user id in path to get all notes for a specific campaign
-	@RequestMapping(path = "user/{uid}/item/all", method = RequestMethod.GET)
-	public Set<Item> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
-		return itemServ.index(userServ.show(uid).getEmail());
+	@RequestMapping(path = "item/all", method = RequestMethod.GET)
+	public Set<Item> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		return itemServ.index(principal.getName());
 	}
 
 	@RequestMapping(path = "item/{iid}")
-	public Item show(HttpServletRequest req, HttpServletResponse res, @PathVariable int iid) {
+	public Item show(HttpServletRequest req, HttpServletResponse res, @PathVariable int iid, Principal principal) {
 		return itemServ.show(iid);
 	}
 
-	@RequestMapping(path = "user/{uid}/item", method = RequestMethod.POST)
-	public Item create(@RequestBody Item item, @PathVariable int uid, HttpServletRequest request,
-			HttpServletResponse response) {
-		Item it = itemServ.create(userServ.show(uid).getEmail(), item);
+	@RequestMapping(path = "item", method = RequestMethod.POST)
+	public Item create(@RequestBody Item item, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Item it = itemServ.create(principal.getName(), item);
 
 		if (it != null) {
 			response.setStatus(200);
@@ -57,10 +55,10 @@ public class ItemController {
 		return it;
 	}
 
-	@RequestMapping(path = "user/{uid}/item/{iid}", method = RequestMethod.PATCH)
-	public Item update(@PathVariable int uid, @PathVariable int iid, @RequestBody Item item, HttpServletRequest request,
-			HttpServletResponse response) {
-		Item it = itemServ.update(userServ.show(uid).getEmail(), iid, item);
+	@RequestMapping(path = "item/{iid}", method = RequestMethod.PATCH)
+	public Item update(@PathVariable int iid, @RequestBody Item item, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Item it = itemServ.update(principal.getName(), iid, item);
 
 		if (it != null) {
 			response.setStatus(200);
@@ -72,7 +70,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(path = "item/{iid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int iid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int iid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		itemServ.destroy(iid);
 		response.setStatus(500);
 		try {

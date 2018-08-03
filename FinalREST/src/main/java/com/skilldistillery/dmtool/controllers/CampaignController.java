@@ -1,5 +1,6 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.dmtool.entities.Campaign;
-import com.skilldistillery.dmtool.entities.User;
 import com.skilldistillery.dmtool.services.CampaignService;
-import com.skilldistillery.dmtool.services.UserService;
 
 @RestController
 @RequestMapping(path = "api")
@@ -24,8 +23,7 @@ import com.skilldistillery.dmtool.services.UserService;
 public class CampaignController {
 	@Autowired
 	private CampaignService campServ;
-	@Autowired
-	private UserService userServ;
+
 	
 
 	@RequestMapping(path = "campaign/ping", method = RequestMethod.GET)
@@ -34,9 +32,9 @@ public class CampaignController {
 	}
 
 	// Need to include user id in path to get all notes for a specific campaign
-	@RequestMapping(path = "user/{uid}/campaign/all", method = RequestMethod.GET)
-	public Set<Campaign> index(@PathVariable int uid, HttpServletRequest req, HttpServletResponse res) {
-		return campServ.index(userServ.show(uid).getEmail());
+	@RequestMapping(path = "campaign/all", method = RequestMethod.GET)
+	public Set<Campaign> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		return campServ.index(principal.getName());
 	}
 
 	@RequestMapping(path = "campaign/{cid}")
@@ -44,10 +42,10 @@ public class CampaignController {
 		return campServ.show(cid);
 	}
 
-	@RequestMapping(path = "user/{uid}/campaign", method = RequestMethod.POST)
-	public Campaign create(@RequestBody Campaign campaign, @PathVariable int uid, HttpServletRequest request,
-			HttpServletResponse response) {
-		Campaign camp = campServ.create(userServ.show(uid).getEmail(), campaign);
+	@RequestMapping(path = "campaign", method = RequestMethod.POST)
+	public Campaign create(@RequestBody Campaign campaign, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
+		Campaign camp = campServ.create(principal.getName(), campaign);
 
 		if (camp != null) {
 			response.setStatus(200);
@@ -58,11 +56,11 @@ public class CampaignController {
 		return camp;
 	}
 
-	@RequestMapping(path = "user/{uid}/campaign/{cid}", method = RequestMethod.PATCH)
-	public Campaign update(@PathVariable int uid, @PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(path = "campaign/{cid}", method = RequestMethod.PATCH)
+	public Campaign update(@PathVariable int cid, @RequestBody Campaign campaign, HttpServletRequest request,
+			HttpServletResponse response, Principal principal) {
 		System.out.println(campaign);
-		Campaign camp = campServ.update(userServ.show(uid).getEmail(), cid, campaign);
+		Campaign camp = campServ.update(principal.getName(), cid, campaign);
 
 		if (camp != null) {
 			response.setStatus(200);
@@ -74,7 +72,7 @@ public class CampaignController {
 	}
 
 	@RequestMapping(path = "campaign/{cid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int cid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int cid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		campServ.destroy(cid);
 		response.setStatus(500);
 		try {

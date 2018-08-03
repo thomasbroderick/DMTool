@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.dmtool.entities.Monster;
 import com.skilldistillery.dmtool.entities.Spell;
 import com.skilldistillery.dmtool.repositories.SpellRepository;
 import com.skilldistillery.dmtool.repositories.UserRepository;
@@ -17,8 +18,13 @@ public class SpellServiceImpl implements SpellService {
 	private UserRepository userRepo;
 
 	@Override
-	public Set<Spell> index(String email) {
-		return (Set<Spell>) spellRepo.findByUser_Email(email);
+	public Set<Spell> index(String username) {
+		Set<Spell> results = (Set<Spell>) spellRepo.findByUser_Username(username);
+		
+		if(userRepo.findOneByUsername(username).getId() != 1) {
+			results.addAll(index("admin@admin.com"));
+		}	
+		return results;
 	}
 
 	@Override
@@ -27,15 +33,15 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public Spell create(String email, Spell spell) {
-		spell.setUser(userRepo.findOneByEmail(email));
+	public Spell create(String username, Spell spell) {
+		spell.setUser(userRepo.findOneByUsername(username));
 		return spellRepo.saveAndFlush(spell);
 	}
 
 	@Override
-	public Spell update(String email, int sid, Spell spell) {
+	public Spell update(String username, int sid, Spell spell) {
 		spell.setId(sid);
-		spell.setUser(userRepo.findOneByEmail(email));
+		spell.setUser(userRepo.findOneByUsername(username));
 		return spellRepo.saveAndFlush(spell);
 	}
 

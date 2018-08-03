@@ -4,6 +4,8 @@ import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,10 @@ export class TownService {
   };
 
   index(cid) {
-    console.log(`${this.url} campaign/${cid}/town/all/`);
-    return this.http.get<Town[]>(`${this.url}campaign/${cid}/town/all`).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.get<Town[]>(`${this.url}campaign/${cid}/town/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -27,7 +31,10 @@ export class TownService {
   }
 
   create(cid, town) {
-    return this.http.post<Town>(`${this.url}campaign/${cid}/town`, town).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<Town>(`${this.url}campaign/${cid}/town`, town, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -36,8 +43,10 @@ export class TownService {
   }
 
   update(cid, tid, town) {
-    console.log(`${this.url}campaign/${cid}/town/${tid}`);
-    return this.http.patch<Town>(`${this.url}campaign/${cid}/town/${tid}`, town).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<Town>(`${this.url}campaign/${cid}/town/${tid}`, town, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -46,13 +55,22 @@ export class TownService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}town/${id}`, {}).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}town/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private authService: AuthenticationService, private http: HttpClient) { }
 }
+

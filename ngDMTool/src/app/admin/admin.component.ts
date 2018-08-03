@@ -104,14 +104,14 @@ export class AdminComponent implements OnInit {
   }
   createItem() {
     this.itemService
-      .create(1, this.newItem)
+      .create( this.newItem)
       .subscribe(data => this.items.push(data), err => console.log(err));
 
     this.newUser = new User();
     this.loadUser();
   }
   updateItem() {
-    this.itemService.update(1, this.editItem.id, this.editItem).subscribe(
+    this.itemService.update(this.editItem.id, this.editItem).subscribe(
       data => {
         this.loadItem(),
           (this.selectedItem = this.editItem),
@@ -131,20 +131,20 @@ export class AdminComponent implements OnInit {
   }
   loadItem() {
     this.itemService
-      .index(1)
+      .index()
       .subscribe(data => (this.items = data), err => console.log(err));
   }
 
   createCampaign() {
     this.campaignService
-      .create(2, this.newCampaign)
+      .create(this.newCampaign)
       .subscribe(data => this.campaigns.push(data), err => console.log(err));
 
     this.newUser = new User();
     this.loadUser();
   }
   updateCampaign() {
-    this.campaignService.update(2, this.editCampaign.id, this.editCampaign).subscribe(
+    this.campaignService.update(this.editCampaign.id, this.editCampaign).subscribe(
       data => {
         this.loadCampaign(),
           (this.selectedCampaign = this.editCampaign),
@@ -164,7 +164,7 @@ export class AdminComponent implements OnInit {
   }
   loadCampaign() {
     this.campaignService
-      .index(2)
+      .index()
       .subscribe(data => (this.campaigns = data), err => console.log(err));
   }
 
@@ -244,14 +244,14 @@ export class AdminComponent implements OnInit {
 
   createSpell() {
     this.spellService
-      .create(1, this.newSpell)
+      .create(this.newSpell)
       .subscribe(data => this.spells.push(data), err => console.log(err));
 
     this.newUser = new User();
     this.loadUser();
   }
   updateSpell() {
-    this.spellService.update(1, this.editSpell.id, this.editSpell).subscribe(
+    this.spellService.update(this.editSpell.id, this.editSpell).subscribe(
       data => {
         this.loadSpell(),
           (this.selectedSpell = this.editSpell),
@@ -271,7 +271,7 @@ export class AdminComponent implements OnInit {
   }
   loadSpell() {
     this.spellService
-      .index(1)
+      .index()
       .subscribe(data => (this.spells = data), err => console.log(err));
   }
 

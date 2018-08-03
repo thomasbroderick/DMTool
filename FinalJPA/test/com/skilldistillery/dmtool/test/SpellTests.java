@@ -51,7 +51,7 @@ class SpellTests {
 	
 	@Test
 	void test_spell_mapping_to_user() {
-		assertEquals("standard@standard.com", s.getUser().getEmail());
+		assertEquals("standard@standard.com", s.getUser().getUsername());
 	}
 	
 	

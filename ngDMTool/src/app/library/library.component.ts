@@ -33,14 +33,14 @@ export class LibraryComponent implements OnInit {
   }
   createItem() {
     this.itemService
-      .create(2, this.newItem)
+      .create(this.newItem)
       .subscribe(data => this.items.push(data), err => console.log(err));
 
     this.newUser = new User();
     this.loadUser();
   }
   updateItem() {
-    this.itemService.update(2, this.editItem.id, this.editItem).subscribe(
+    this.itemService.update(this.editItem.id, this.editItem).subscribe(
       data => {
         this.loadItem(),
           (this.selectedItem = this.editItem),
@@ -60,7 +60,7 @@ export class LibraryComponent implements OnInit {
   }
   loadItem() {
     this.itemService
-      .index(1)
+      .index()
       .subscribe(data => (this.items = data), err => console.log(err));
   }
 

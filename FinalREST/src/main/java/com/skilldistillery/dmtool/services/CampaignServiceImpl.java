@@ -17,8 +17,8 @@ public class CampaignServiceImpl implements CampaignService {
 	private CampaignRepository campRepo;
 
 	@Override
-	public Set<Campaign> index(String email) {
-		return (Set<Campaign>) campRepo.findByUser_Email(email);
+	public Set<Campaign> index(String username) {
+		return (Set<Campaign>) campRepo.findByUser_Username(username);
 	}
 
 	@Override
@@ -27,14 +27,14 @@ public class CampaignServiceImpl implements CampaignService {
 	}
 
 	@Override
-	public Campaign create(String email, Campaign campaign) {
-		campaign.setUser(userRepo.findOneByEmail(email));
+	public Campaign create(String username, Campaign campaign) {
+		campaign.setUser(userRepo.findOneByUsername(username));
 		return campRepo.saveAndFlush(campaign);
 	}
 
 	@Override
-	public Campaign update(String email, int cid, Campaign campaign) {
-		campaign.setUser(userRepo.findOneByEmail(email));
+	public Campaign update(String username, int cid, Campaign campaign) {
+		campaign.setUser(userRepo.findOneByUsername(username));
 		campaign.setId(cid);
 		return campRepo.saveAndFlush(campaign);
 	}

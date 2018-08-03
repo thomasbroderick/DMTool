@@ -27,11 +27,14 @@ public class Player {
 	private Integer currentHp;
 	private Integer initiative;
 	private Integer ac;
+	private Integer level;
 	private Integer perception;
 	private Integer investigation;
 	private Integer insight;
 	@Column(name="image_url")
 	private String imageUrl;
+	private String profession;
+	
 	
 	@JsonIgnore
 	@ManyToOne
@@ -151,6 +154,26 @@ public class Player {
 		this.campaign = campaign;
 	}
 
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public List<PlayerNote> getPlayerNotes() {
 		return playerNotes;
 	}
@@ -161,20 +184,22 @@ public class Player {
 
 	@Override
 	public int hashCode() {
-		final Integer prime = 31;
-		Integer result = 1;
-		result = prime * result + ac;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ac == null) ? 0 : ac.hashCode());
 		result = prime * result + ((campaign == null) ? 0 : campaign.hashCode());
-		result = prime * result + ((playerNotes == null) ? 0 : playerNotes.hashCode());
-		result = prime * result + currentHp;
-		result = prime * result + maxHp;
+		result = prime * result + ((currentHp == null) ? 0 : currentHp.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
-		result = prime * result + insight;
-		result = prime * result + initiative;
-		result = prime * result + investigation;
+		result = prime * result + ((initiative == null) ? 0 : initiative.hashCode());
+		result = prime * result + ((insight == null) ? 0 : insight.hashCode());
+		result = prime * result + ((investigation == null) ? 0 : investigation.hashCode());
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
+		result = prime * result + ((maxHp == null) ? 0 : maxHp.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + perception;
+		result = prime * result + ((perception == null) ? 0 : perception.hashCode());
+		result = prime * result + ((playerNotes == null) ? 0 : playerNotes.hashCode());
+		result = prime * result + ((profession == null) ? 0 : profession.hashCode());
 		return result;
 	}
 
@@ -187,21 +212,20 @@ public class Player {
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		if (ac != other.ac)
+		if (ac == null) {
+			if (other.ac != null)
+				return false;
+		} else if (!ac.equals(other.ac))
 			return false;
 		if (campaign == null) {
 			if (other.campaign != null)
 				return false;
 		} else if (!campaign.equals(other.campaign))
 			return false;
-		if (playerNotes == null) {
-			if (other.playerNotes != null)
+		if (currentHp == null) {
+			if (other.currentHp != null)
 				return false;
-		} else if (!playerNotes.equals(other.playerNotes))
-			return false;
-		if (currentHp != other.currentHp)
-			return false;
-		if (maxHp != other.maxHp)
+		} else if (!currentHp.equals(other.currentHp))
 			return false;
 		if (id != other.id)
 			return false;
@@ -210,18 +234,50 @@ public class Player {
 				return false;
 		} else if (!imageUrl.equals(other.imageUrl))
 			return false;
-		if (insight != other.insight)
+		if (initiative == null) {
+			if (other.initiative != null)
+				return false;
+		} else if (!initiative.equals(other.initiative))
 			return false;
-		if (initiative != other.initiative)
+		if (insight == null) {
+			if (other.insight != null)
+				return false;
+		} else if (!insight.equals(other.insight))
 			return false;
-		if (investigation != other.investigation)
+		if (investigation == null) {
+			if (other.investigation != null)
+				return false;
+		} else if (!investigation.equals(other.investigation))
+			return false;
+		if (level == null) {
+			if (other.level != null)
+				return false;
+		} else if (!level.equals(other.level))
+			return false;
+		if (maxHp == null) {
+			if (other.maxHp != null)
+				return false;
+		} else if (!maxHp.equals(other.maxHp))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (perception != other.perception)
+		if (perception == null) {
+			if (other.perception != null)
+				return false;
+		} else if (!perception.equals(other.perception))
+			return false;
+		if (playerNotes == null) {
+			if (other.playerNotes != null)
+				return false;
+		} else if (!playerNotes.equals(other.playerNotes))
+			return false;
+		if (profession == null) {
+			if (other.profession != null)
+				return false;
+		} else if (!profession.equals(other.profession))
 			return false;
 		return true;
 	}
@@ -229,18 +285,20 @@ public class Player {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("player [id=");
+		builder.append("Player [id=");
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
-		builder.append(", hpMax=");
+		builder.append(", maxHp=");
 		builder.append(maxHp);
-		builder.append(", hpCurrent=");
+		builder.append(", currentHp=");
 		builder.append(currentHp);
-		builder.append(", intiative=");
+		builder.append(", initiative=");
 		builder.append(initiative);
 		builder.append(", ac=");
 		builder.append(ac);
+		builder.append(", level=");
+		builder.append(level);
 		builder.append(", perception=");
 		builder.append(perception);
 		builder.append(", investigation=");
@@ -249,11 +307,14 @@ public class Player {
 		builder.append(insight);
 		builder.append(", imageUrl=");
 		builder.append(imageUrl);
+		builder.append(", profession=");
+		builder.append(profession);
 		builder.append(", playerNotes=");
 		builder.append(playerNotes);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 
 	

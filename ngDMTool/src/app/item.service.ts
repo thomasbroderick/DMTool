@@ -4,6 +4,8 @@ import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +18,11 @@ export class ItemService {
     })
   };
 
-  index(uid) {
-    console.log(`${this.url} user/${uid}/item/all`);
-    return this.http.get<Item[]>(`${this.url}user/${uid}/item/all`).pipe(
+  index() {
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.get<Item[]>(`${this.url}item/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -26,8 +30,11 @@ export class ItemService {
     );
   }
 
-  create(uid, item) {
-    return this.http.post<Item>(`${this.url}user/${uid}/item`, item).pipe(
+  create(item) {
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<Item>(`${this.url}item`, item, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -35,9 +42,11 @@ export class ItemService {
     );
   }
 
-  update(uid, iid, item) {
-    console.log(`${this.url}user/${uid}/item/${iid}`);
-    return this.http.patch<Item>(`${this.url}user/${uid}/item/${iid}`, item).pipe(
+  update(iid, item) {
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<Item>(`${this.url}item/${iid}`, item, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -46,13 +55,21 @@ export class ItemService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}item/${id}`, {}).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}item/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private authService: AuthenticationService, private http: HttpClient) { }
 }

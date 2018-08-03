@@ -1,7 +1,7 @@
 package com.skilldistillery.dmtool.controllers;
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,18 +31,18 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "user/all", method = RequestMethod.GET)
-	public List<User> index(HttpServletRequest req, HttpServletResponse res) {
+	public List<User> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		return userServ.index();
 	}
 
 	@RequestMapping(path = "user/{uid}")
-	public User show(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid) {
+	public User show(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, Principal principal) {
 		return userServ.show(uid);
 	}
 
 	@RequestMapping(path = "user", method = RequestMethod.POST)
 	public User create(@RequestBody User user, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		User us = userServ.create(user);
 
 		if (us != null) {
@@ -56,7 +56,7 @@ public class UserController {
 
 	@RequestMapping(path = "user/{uid}", method = RequestMethod.PUT)
 	public User update(@PathVariable int uid, @RequestBody User user, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, Principal principal) {
 		User us = userServ.update(uid, user);
 
 		if (us != null) {
@@ -69,7 +69,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "user/{uid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int uid, HttpServletRequest request, HttpServletResponse response) {
+	public void destroy(@PathVariable int uid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		userServ.destroy(uid);
 		response.setStatus(500);
 		try {

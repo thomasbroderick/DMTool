@@ -27,8 +27,13 @@ public class MonsterServiceImpl implements MonsterService {
 			
 
 	@Override
-	public Set<Monster> index(String email) {
-		return (Set<Monster>) monRepo.findByUser_Email(email);
+	public Set<Monster> index(String username) {
+		Set<Monster> results = (Set<Monster>) monRepo.findByUser_Username(username);
+		
+		if(userRepo.findOneByUsername(username).getId() != 1) {
+			results.addAll(index("admin@admin.com"));
+		}	
+		return results;
 	}
 
 	@Override
@@ -37,14 +42,14 @@ public class MonsterServiceImpl implements MonsterService {
 	}
 
 	@Override
-	public Monster create(String email, Monster monster) {
-		monster.setUser(userRepo.findOneByEmail(email));
+	public Monster create(String username, Monster monster) {
+		monster.setUser(userRepo.findOneByUsername(username));
 		return monRepo.saveAndFlush(monster);
 	}
 
 	@Override
-	public Monster update(String email, int mid, Monster monster) {
-		monster.setUser(userRepo.findOneByEmail(email));
+	public Monster update(String username, int mid, Monster monster) {
+		monster.setUser(userRepo.findOneByUsername(username));
 		monster.setId(mid);
 		return monRepo.saveAndFlush(monster);
 	}

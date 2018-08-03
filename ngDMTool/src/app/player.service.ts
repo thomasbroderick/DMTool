@@ -5,6 +5,8 @@ import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,10 @@ export class PlayerService {
   };
 
   index(cid) {
-    console.log(`${this.url} campaign/${cid}/player/all/`);
-    return this.http.get<Player[]>(`${this.url}campaign/${cid}/player/all`).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.get<Player[]>(`${this.url}campaign/${cid}/player/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -28,7 +32,10 @@ export class PlayerService {
   }
 
   create(cid, player) {
-    return this.http.post<Player>(`${this.url}campaign/${cid}/player`, player).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<Player>(`${this.url}campaign/${cid}/player`, player, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -37,8 +44,10 @@ export class PlayerService {
   }
 
   update(cid, pid, player) {
-    console.log(`${this.url}campaign/${cid}/player/${pid}`);
-    return this.http.patch<Player>(`${this.url}campaign/${cid}/player/${pid}`, player).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<Player>(`${this.url}campaign/${cid}/player/${pid}`, player, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -47,13 +56,21 @@ export class PlayerService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}player/${id}`, {}).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}player/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private authService: AuthenticationService, private http: HttpClient) { }
 }

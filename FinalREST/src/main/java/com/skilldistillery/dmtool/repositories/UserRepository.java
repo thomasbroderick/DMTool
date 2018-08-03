@@ -6,7 +6,7 @@ import com.skilldistillery.dmtool.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
-	public User findOneByEmail(String email);
+	public User findOneByUsername(String username);
 		
 
 }

@@ -6,6 +6,8 @@ import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Router } from '../../node_modules/@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,11 @@ export class SpellService {
     })
   };
 
-  index(uid) {
-    console.log(`${this.url}user/${uid}/spell/all`);
-    return this.http.get<Spell[]>(`${this.url}user/${uid}/spell/all`).pipe(
+  index() {
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.get<Spell[]>(`${this.url}spell/all`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -28,8 +32,11 @@ export class SpellService {
     );
   }
 
-  create(uid, spell) {
-    return this.http.post<Spell>(`${this.url}user/${uid}/spell`, spell).pipe(
+  create(spell) {
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.post<Spell>(`${this.url}spell`, spell, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -37,9 +44,11 @@ export class SpellService {
     );
   }
 
-  update(uid, sid, spell) {
-    console.log(`${this.url}user/${uid}/spell/${sid}`);
-    return this.http.patch<Spell>(`${this.url}user/${uid}/spell/${sid}`, spell).pipe(
+  update(sid, spell) {
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.patch<Spell>(`${this.url}spell/${sid}`, spell, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -48,13 +57,21 @@ export class SpellService {
   }
 
   destroy(id) {
-    return this.http.delete<any>(`${this.url}spell/${id}`, {}).pipe(
+    this.checkLogout();
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    return this.http.delete<any>(`${this.url}spell/${id}`, {headers}).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
       })
     );
   }
+  checkLogout() {
+    if (!this.authService.checkLogin()) {
+      this.router.navigateByUrl('login');
+    }
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private authService: AuthenticationService, private http: HttpClient) { }
 }

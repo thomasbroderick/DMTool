@@ -3,6 +3,7 @@ package com.skilldistillery.dmtool.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String email;
+	@Column(name = "email")
+	private String username;
 	private String password;
 	private boolean enabled;
 	private String role;
@@ -136,12 +138,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
@@ -207,7 +209,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((campaigns == null) ? 0 : campaigns.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
 		result = prime * result + id;
 		result = prime * result + ((items == null) ? 0 : items.hashCode());
@@ -232,10 +234,10 @@ public class User {
 				return false;
 		} else if (!campaigns.equals(other.campaigns))
 			return false;
-		if (email == null) {
-			if (other.email != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!username.equals(other.username))
 			return false;
 		if (enabled != other.enabled)
 			return false;
@@ -274,8 +276,8 @@ public class User {
 		StringBuilder builder = new StringBuilder();
 		builder.append("User [id=");
 		builder.append(id);
-		builder.append(", email=");
-		builder.append(email);
+		builder.append(", username=");
+		builder.append(username);
 		builder.append(", password=");
 		builder.append(password);
 		builder.append(", enabled=");
