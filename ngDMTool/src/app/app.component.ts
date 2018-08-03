@@ -6,6 +6,8 @@ import {
 import * as _ from '../../node_modules/lodash';
 import * as $ from '../../node_modules/jquery';
 import { Gridline } from './models/gridline';
+import { AuthenticationService } from './authentication.service';
+import { Router } from '../../node_modules/@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +18,8 @@ export class AppComponent implements OnInit {
   title = 'app';
   grids = [];
   theme = 'mountain';
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService,
+    private router: Router) {}
   saveGrid() {
     const res = _.map($('.grid-stack .grid-stack-item:visible'), el => {
       el = $(el);
@@ -46,6 +49,19 @@ export class AppComponent implements OnInit {
   }
   tester() {
     console.log(this.grids);
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    if (this.authenticationService.checkLogin()) {
+      this.router.navigateByUrl('');
+    } else {
+      this.router.navigateByUrl('login');
+    }
+  }
+
+  checkLogin() {
+  return this.authenticationService.checkLogin();
   }
 
   ngOnInit() {
