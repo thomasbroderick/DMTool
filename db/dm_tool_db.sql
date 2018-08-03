@@ -313,9 +313,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (1, 'admin@admin.com', 'admin', 'admin', 1);
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (2, 'standard@standard.com', 'standard', 'standard', 1);
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (3, 'disabled@disabled.com', 'disabled', 'standard', 0);
+INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (1, 'admin', '$2a$10$3p/xTjetLCYfgsTkmEOMZeZcJCIlxY4K3iT0qmW/5HndflKQ/GQp2', 'admin', 1);
+INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (2, 'test', '$2a$10$.xqs9mBGlFRp.ozxzmOT3e4d86/4.S6JSpBffO2oQjPZwJ28tevam', 'standard', 1);
 
 COMMIT;
 

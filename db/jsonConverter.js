@@ -3,8 +3,8 @@ var stringify = require('json-stable-stringify');
 
 
 var requiredProperties = [
-"user_id", "name", "description", "range", "components", "material", "ritual", "duration", "concentration", "casting_time", "level", "school", "classes", "higher_lvl"
-"user_id",
+"user_id", "name", "description", "range", "components", "material", "ritual", "duration", "concentration", "casting_time", "level", "school", "classes", "higher_lvl",
+
 "name",
 "size",
 "type",
