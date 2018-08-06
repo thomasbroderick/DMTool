@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EncounterService } from 'src/app/encounter.service';
 
 @Component({
   selector: 'app-encounter',
@@ -7,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EncounterComponent implements OnInit {
 
-  constructor() { }
+  combat = [];
 
   loadCombat() {
-
+    this.combat = this.encounterService.index();
   }
+
+  remove(combatant) {
+    this.encounterService.remove(combatant);
+  }
+
+  constructor(private encounterService: EncounterService) { }
   ngOnInit() {
+    this.loadCombat();
   }
 
 }

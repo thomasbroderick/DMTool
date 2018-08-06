@@ -12,22 +12,17 @@ export class EncounterService {
 
   add(combatant) {
     this.combat.push(combatant);
-    this.refresh();
   }
 
 
   remove(combatant) {
-    this.combat.slice(this.combat.indexOf(combatant));
-    this.refresh();
+    this.combat.splice(this.combat.indexOf(combatant), 1);
   }
 
   index() {
     return this.combat;
   }
 
-  refresh() {
-    this.encounter.loadCombat();
-  }
 
-  constructor(private encounter: EncounterComponent) {}
+  constructor() {}
 }

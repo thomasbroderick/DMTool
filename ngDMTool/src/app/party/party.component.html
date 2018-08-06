@@ -4,170 +4,136 @@
     <ul>
       <p *ngFor='let player of players'>
         <li>{{player.name}}</li>
-        <button (click)="selectedPlayer=player">Details</button>
+        <button (click)="open(content); selectedPlayer = player;">Details</button>
         <button (click)="destroyPlayer(player.id)">Delete</button>
+        <button (click)="addCombatant(player)">Add to Combat</button>
         <li>HP: {{player.currentHp}} / {{player.maxHp}} AC: {{player.ac}}</li>
         <li>Perception: {{player.perception}} Investigation: {{player.investigation}} Insight: {{player.insight}}</li>
       </p>
-      <button class="button" (click)="creating=true">CREATE</button>
+      <button class="button" (click)="open(content); creating=true;">CREATE</button>
     </ul>
   </div>
 
-  <div *ngIf=creating>
-    <input type="text" name="name" placeholder="Name" [(ngModel)]="newPlayer.name" />
-    <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="newPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
-    <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="newPlayer.initiative" />
-    <input type="number" name="ac" placeholder="AC" [(ngModel)]="newPlayer.ac" />
-    <input type="number" name="perception" placeholder="Perception" [(ngModel)]="newPlayer.perception" />
-    <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="newPlayer.investigation" />
-    <input type="number" name="insight" placeholder="insight" [(ngModel)]="newPlayer.insight" />
-    <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="newPlayer.imageUrl" />
-    <button class="button" (click)="createPlayer()">CREATE</button>
-    <button class="button" (click)="creating=false">BACK</button>
+  <ng-template #content let-c="close" let-d="dismiss" size="lg">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Player update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
 
-  </div>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-    </button>
+      <div *ngIf=creating>
+        <input type="text" name="name" placeholder="Name" [(ngModel)]="newPlayer.name" />
+        <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="newPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
+        <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="newPlayer.initiative" />
+        <input type="number" name="ac" placeholder="AC" [(ngModel)]="newPlayer.ac" />
+        <input type="number" name="perception" placeholder="Perception" [(ngModel)]="newPlayer.perception" />
+        <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="newPlayer.investigation" />
+        <input type="number" name="insight" placeholder="insight" [(ngModel)]="newPlayer.insight" />
+        <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="newPlayer.imageUrl" />
+        <button class="button" (click)="createPlayer(); d('Cross click');">CREATE</button>
+        <button class="button" (click)="creating=false; d('Cross click');">BACK</button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
+      </div>
+
+      <div *ngIf='selectedPlayer&&!editPlayer&&!creating' style="margin:auto;width: auto;">
+        <table class="table  table-hover table-bordered table-light">
+          <tr>
+            <td>Name: </td>
+            <td>{{selectedPlayer.name}}</td>
+          </tr>
+          <tr>
+            <td>Max HP: </td>
+            <td>{{selectedPlayer.maxHp}}</td>
+            <td>Current HP: </td>
+            <td>{{selectedPlayer.currentHp}}</td>
+          </tr>
+          <tr>
+            <td>Initiative: </td>
+            <td>{{selectedPlayer.initiative}}</td>
+            <td>Armor Class: </td>
+            <td>{{selectedPlayer.ac}}</td>
+          </tr>
+          <tr>
+            <td>Passive Perception: </td>
+            <td>{{selectedPlayer.perception}}</td>
+            <td>Passive Investigation: </td>
+            <td>{{selectedPlayer.investigation}}</td>
+          </tr>
+          <tr>
+            <td>Passive Insight: </td>
+            <td>{{selectedPlayer.insight}}</td>
+          </tr>
+          <tr>
+              <td>Image URL: </td>
+              <td>{{selectedPlayer.imageUrl}}</td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="setEditPlayer()">Edit</button>
+            </td>
+            <td align=center colspan=2>
+              <button class="button" (click)="selectedPlayer=null; d('Cross click')">Back</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf=editPlayer&&!creating style="margin:auto;width: auto;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>Name: </td>
+            <td><input type="text" name="name" placeholder="Name" [(ngModel)]="editPlayer.name"/></td>
+          </tr>
+          <tr>
+            <td>Max HP: </td>
+            <td><input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.maxHp" /></td>
+            <td>Current HP: </td>
+            <td><input type="number" name="currentHp" placeholder="Current HP" [(ngModel)]="editPlayer.currentHp" />
+            </td>
+          </tr>
+          <tr>
+            <td>Initiative: </td>
+            <td><input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" /></td>
+            <td>Armor Class: </td>
+            <td><input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" /></td>
+          </tr>
+          <tr>
+            <td>Passive Perception: </td>
+            <td><input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" /></td>
+            <td>Passive Investigation: </td>
+            <td><input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" /></td>
+          </tr>
+          <tr>
+            <td>Passive Insight: </td>
+            <td><input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" /></td>
+          </tr>
+          <tr>
+              <td>Image URL: </td>
+              <td><input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" /></td>
+          </tr>
+
+
+
+
+
+          <tr>
+              <td align=center colspan=2>
+                <button class="button" (click)="updatePlayer(); d('Cross click');">Save Changes</button>
+              </td>
+            </tr>
+            <tr>
+              <td align=center colspan=2>
+                <button class="button" (click)="editPlayer=null; d('Cross click');">Cancel Changes</button>
+              </td>
+            </tr>
+          </form>
+        </table>
       </div>
     </div>
-  <div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div *ngIf='selectedPlayer&&!editPlayer' style="margin:auto;width: 50%;
-            border: 3px solid rgb(33, 41, 33);
-            padding: 10px;
-            color: black;">
-            <table class="table  table-hover table-bordered table-light">
-              <tr>
-                <td>Id:</td>
-                <td> {{selectedPlayer.id}}</td>
-                <td>Name: </td>
-                <td>{{selectedPlayer.name}}</td>
-              </tr>
-              <tr>
-                <td>Max HP: </td>
-                <td>{{selectedPlayer.maxHp}}</td>
-                <td>Current HP: </td>
-                <td>{{selectedPlayer.currentHp}}</td>
-              </tr>
-              <tr>
-                <td>Initiative: </td>
-                <td>{{selectedPlayer.initiative}}</td>
-                <td>Armor Class: </td>
-                <td>{{selectedPlayer.ac}}</td>
-              </tr>
-              <tr>
-                <td>Passive Perception: </td>
-                <td>{{selectedPlayer.perception}}</td>
-                <td>Passive Investigation: </td>
-                <td>{{selectedPlayer.investigation}}</td>
-              </tr>
-              <tr>
-                <td>Passive Insight: </td>
-                <td>{{selectedPlayer.insight}}</td>
-                <td>Image URL: </td>
-                <td>{{selectedPlayer.imageUrl}}</td>
-              </tr>
-              <tr>
-              </tr>
-              <tr>
-                <td align=center colspan=2>
-                  <button class="button" (click)="setEditPlayer()">Edit</button>
-                </td>
-                <td align=center colspan=2>
-                  <button class="button" (click)="selectedPlayer=null">Back</button>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div *ngIf=editPlayer style="margin:auto;width: 20%;
-            border: 3px solid rgb(33, 41, 33);
-            padding: 10px;
-            color: black;">
-            <table class="table table-condensed table-hover table-bordered table-light">
-              <form>
-                <tr>
-                  <td>
-                    <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.currentHp" [(ngModel)]="newPlayer.maxHp" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" />
-                  </td>
-                </tr>
-                <tr>
-                  <td align=center colspan=2>
-                    <button class="button" (click)="updatePlayer()">Save Changes</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td align=center colspan=2>
-                    <button class="button" (click)="editPlayer=null">Cancel Changes</button>
-                  </td>
-                </tr>
-              </form>
-            </table>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </ng-template>
+
+
 
 </div>

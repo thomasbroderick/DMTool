@@ -1,3 +1,8 @@
-<p>
-  encounter works!
-</p>
+<div id='encounterMain'>
+  <h1>Encounter</h1>
+  <ul>
+    <li style='color: white' *ngFor='let combatant of combat'> {{combatant.name}}
+      <button (click)='remove(combatant)'>Remove</button>
+    </li>
+  </ul>
+</div>

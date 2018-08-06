@@ -34,13 +34,10 @@ import { EncounterComponent } from './encounter/encounter.component';
     LibraryComponent,
     AuthenticationComponent,
     PartyComponent,
-<<<<<<< HEAD
     ItemComponent,
     MonsterComponent,
-    SpellComponent
-=======
+    SpellComponent,
     EncounterComponent
->>>>>>> bc250d8e6f6a5c93e4e93de4a67e5e7f25680d80
   ],
   imports: [
     NgbModule.forRoot(),

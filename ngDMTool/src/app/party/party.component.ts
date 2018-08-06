@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../models/player';
 import { PlayerService } from '../player.service';
+import { EncounterService } from '../encounter.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-party',
@@ -9,6 +11,7 @@ import { PlayerService } from '../player.service';
 })
 export class PartyComponent implements OnInit {
   players: Player[] = [];
+  closeResult: string;
   newPlayer = new Player();
   editPlayer = null;
   selectedPlayer = null;
@@ -53,7 +56,31 @@ export class PartyComponent implements OnInit {
     );
   }
 
-  constructor(private playerService: PlayerService) {}
+  addCombatant(player: Player) {
+    this.encounterService.add(player);
+  }
+
+
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+  constructor(private playerService: PlayerService, private encounterService: EncounterService,
+     private modalService: NgbModal) {}
 
   ngOnInit() {
     this.loadPlayer();
