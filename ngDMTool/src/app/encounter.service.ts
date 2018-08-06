@@ -12,6 +12,7 @@ export class EncounterService {
 
   add(combatant) {
     this.combat.push(combatant);
+    console.log(combatant);
   }
 
 
@@ -19,6 +20,9 @@ export class EncounterService {
     this.combat.splice(this.combat.indexOf(combatant), 1);
   }
 
+  reset() {
+    this.combat = [];
+  }
   index() {
     return this.combat;
   }

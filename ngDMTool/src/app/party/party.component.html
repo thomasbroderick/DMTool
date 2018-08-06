@@ -3,12 +3,17 @@
     <h1>Party</h1>
     <ul>
       <p *ngFor='let player of players'>
-        <li>{{player.name}}</li>
-        <button (click)="open(content); selectedPlayer = player;">Details</button>
-        <button (click)="destroyPlayer(player.id)">Delete</button>
-        <button (click)="addCombatant(player)">Add to Combat</button>
-        <li>HP: {{player.currentHp}} / {{player.maxHp}} AC: {{player.ac}}</li>
-        <li>Perception: {{player.perception}} Investigation: {{player.investigation}} Insight: {{player.insight}}</li>
+        {{player.name}}
+        <br>
+        <span>
+          <div class="btn-group" role="group" aria-label="Basic example">
+
+            <button class="btn btn-sm" (click)="open(content); selectedPlayer = player;">Details</button>
+            <button class="btn btn-sm" (click)="addCombatant(player)">Add to Combat</button>
+            <button class="btn btn-sm btn-danger" (click)="destroyPlayer(player.id)">Delete</button>
+          </div>
+        </span>
+
       </p>
       <button class="button" (click)="open(content); creating=true;">CREATE</button>
     </ul>
@@ -38,6 +43,7 @@
       </div>
 
       <div *ngIf='selectedPlayer&&!editPlayer&&!creating' style="margin:auto;width: auto;">
+        <img  src={{selectedPlayer.imageUrl}}/>
         <table class="table  table-hover table-bordered table-light">
           <tr>
             <td>Name: </td>
@@ -66,10 +72,6 @@
             <td>{{selectedPlayer.insight}}</td>
           </tr>
           <tr>
-              <td>Image URL: </td>
-              <td>{{selectedPlayer.imageUrl}}</td>
-          </tr>
-          <tr>
             <td align=center colspan=2>
               <button class="button" (click)="setEditPlayer()">Edit</button>
             </td>
@@ -80,45 +82,60 @@
         </table>
       </div>
       <div *ngIf=editPlayer&&!creating style="margin:auto;width: auto;">
-      <table class="table table-condensed table-hover table-bordered table-light">
-        <form>
-          <tr>
-            <td>Name: </td>
-            <td><input type="text" name="name" placeholder="Name" [(ngModel)]="editPlayer.name"/></td>
-          </tr>
-          <tr>
-            <td>Max HP: </td>
-            <td><input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.maxHp" /></td>
-            <td>Current HP: </td>
-            <td><input type="number" name="currentHp" placeholder="Current HP" [(ngModel)]="editPlayer.currentHp" />
-            </td>
-          </tr>
-          <tr>
-            <td>Initiative: </td>
-            <td><input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" /></td>
-            <td>Armor Class: </td>
-            <td><input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" /></td>
-          </tr>
-          <tr>
-            <td>Passive Perception: </td>
-            <td><input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" /></td>
-            <td>Passive Investigation: </td>
-            <td><input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" /></td>
-          </tr>
-          <tr>
-            <td>Passive Insight: </td>
-            <td><input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" /></td>
-          </tr>
-          <tr>
+        <table class="table table-condensed table-hover table-bordered table-light">
+          <form>
+            <tr>
+              <td>Name: </td>
+              <td>
+                <input type="text" name="name" placeholder="Name" [(ngModel)]="editPlayer.name" />
+              </td>
+            </tr>
+            <tr>
+              <td>Max HP: </td>
+              <td>
+                <input type="number" name="maxHp" placeholder="Max HP" [(ngModel)]="editPlayer.maxHp" />
+              </td>
+              <td>Current HP: </td>
+              <td>
+                <input type="number" name="currentHp" placeholder="Current HP" [(ngModel)]="editPlayer.currentHp" />
+              </td>
+            </tr>
+            <tr>
+              <td>Initiative: </td>
+              <td>
+                <input type="number" name="initiative" placeholder="Initiative Bonus" [(ngModel)]="editPlayer.initiative" />
+              </td>
+              <td>Armor Class: </td>
+              <td>
+                <input type="number" name="ac" placeholder="AC" [(ngModel)]="editPlayer.ac" />
+              </td>
+            </tr>
+            <tr>
+              <td>Passive Perception: </td>
+              <td>
+                <input type="number" name="perception" placeholder="Perception" [(ngModel)]="editPlayer.perception" />
+              </td>
+              <td>Passive Investigation: </td>
+              <td>
+                <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="editPlayer.investigation" />
+              </td>
+            </tr>
+            <tr>
+              <td>Passive Insight: </td>
+              <td>
+                <input type="number" name="insight" placeholder="insight" [(ngModel)]="editPlayer.insight" />
+              </td>
               <td>Image URL: </td>
-              <td><input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" /></td>
-          </tr>
+              <td>
+                <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="editPlayer.imageUrl" />
+              </td>
+            </tr>
 
 
 
 
 
-          <tr>
+            <tr>
               <td align=center colspan=2>
                 <button class="button" (click)="updatePlayer(); d('Cross click');">Save Changes</button>
               </td>
