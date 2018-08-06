@@ -51,9 +51,12 @@ public class MonsterServiceImpl implements MonsterService {
 				}
 				for (String spell : spellNames) {
 					mon.addSpell(spellRepo.findByName(spell));
+					
 				}
 			}
 		}
+		Object[] monArr1 = results.toArray();
+		System.out.println(monArr1[186]);
 
 		return results;
 	}
