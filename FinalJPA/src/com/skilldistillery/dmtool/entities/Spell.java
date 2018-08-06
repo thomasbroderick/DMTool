@@ -286,10 +286,6 @@ public class Spell {
 		builder.append(castingTime);
 		builder.append(", lvl=");
 		builder.append(level);
-		builder.append(", school=");
-		builder.append(school);
-		builder.append(", classes=");
-		builder.append(classes);
 		builder.append("]");
 		return builder.toString();
 	}
