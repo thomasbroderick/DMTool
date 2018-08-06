@@ -33,21 +33,22 @@
     <div *ngIf='!selectedItem && itemsVisible' style="margin:auto;width: 60%;
     border: 3px solid rgb(33, 41, 33);
     padding: 10px;">
-      <table class="table table-condensed table-hover table-bordered table-light" *ngIf=!selected>
+      <table class="table table-condensed table-hover table-bordered table-striped" *ngIf=!selected>
         <thead class="thead-dark">
           <tr align=center>
             <th colspan=6>Items</th>
           </tr>
           <tr>
             <th>Name</th>
-            <th>Damage</th>
+            <th>Category</th>
           </tr>
         </thead>
-        <tr *ngFor='let Item of items'>
-          <td (click)="selectedItem=Item">{{Item.name}}</td>
-          <td>{{Item.damage}}</td>
-          <td *ngIf='Item.user.id > 1'>
-            <button (click)="destroyItem(Item.id)">Delete</button>
+        <tr *ngFor='let item of items'>
+          <td (click)="selectedItem=item">{{item.name}}</td>
+          <td>{{item.equipmentCategory}}</td>
+
+          <td>
+            <button (click)="destroyItem(item.id)">Delete</button>
           </td>
         </tr>
       </table>

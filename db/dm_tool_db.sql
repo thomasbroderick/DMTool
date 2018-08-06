@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(100) NOT NULL,
+  `username` VARCHAR(100) NOT NULL,
   `password` MEDIUMTEXT NOT NULL,
   `role` VARCHAR(45) NULL DEFAULT 'standard',
   `enabled` TINYINT(1) NULL DEFAULT '1',
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE UNIQUE INDEX `email_UNIQUE` ON `user` (`email` ASC);
+CREATE UNIQUE INDEX `email_UNIQUE` ON `user` (`username` ASC);
 
 
 -- -----------------------------------------------------
@@ -313,8 +313,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dm_tool_db`;
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (1, 'admin', '$2a$10$3p/xTjetLCYfgsTkmEOMZeZcJCIlxY4K3iT0qmW/5HndflKQ/GQp2', 'admin', 1);
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `enabled`) VALUES (2, 'test', '$2a$10$.xqs9mBGlFRp.ozxzmOT3e4d86/4.S6JSpBffO2oQjPZwJ28tevam', 'standard', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `enabled`) VALUES (1, 'admin', '$2a$10$3p/xTjetLCYfgsTkmEOMZeZcJCIlxY4K3iT0qmW/5HndflKQ/GQp2', 'admin', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `enabled`) VALUES (2, 'test', '$2a$10$.xqs9mBGlFRp.ozxzmOT3e4d86/4.S6JSpBffO2oQjPZwJ28tevam', 'standard', 1);
 
 COMMIT;
 
