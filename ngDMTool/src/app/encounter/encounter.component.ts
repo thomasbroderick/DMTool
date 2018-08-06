@@ -52,7 +52,7 @@ export class EncounterComponent implements OnInit {
   }
 
   reset() {
-    this.combat = [];
+    this.encounterService.reset();
     this.loadCombat();
     this.rolled = null;
   }

@@ -25,7 +25,8 @@ export class Item {
     $weight?: string,
     $properties?: string,
     $description?: string,
-    $imageUrl?: string
+    $imageUrl?: string,
+    $user?: User
   ) {
     this.id = $id;
     this.name = $name;
@@ -38,5 +39,6 @@ export class Item {
     this.properties = $properties;
     this.description = $description;
     this.imageUrl = $imageUrl;
+    this.user = $user;
   }
 }

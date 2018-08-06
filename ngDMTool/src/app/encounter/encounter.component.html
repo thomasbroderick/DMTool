@@ -6,15 +6,16 @@
         <button class='btn btn-danger' (click)='remove(combatant)'>Remove</button>
       </li>
     </ul>
-    <button (click)='roll()'>Roll</button>
+    <button *ngIf='combat.length > 0' (click)='roll()'>Roll</button>
   </div>
   <div *ngIf='rolled!==null'>
     <button class='btn' (click)='next()'>Next</button>
     <button class='btn' (click)='prev()'>Prev</button>
     <button class='btn btn-danger' (click)='remove(combat[rolled])'>Remove</button>
     <button class='btn btn-danger' (click)='reset()'>Reset</button>
+    <button class='btn btn-danger' (click)='rolled=null'>Back</button>
     <br> {{combat[rolled].name}}
-    <img  src={{combat[rolled].imageUrl}}/>
+    <br><img  src={{combat[rolled].imageUrl}}/>
 
 
   </div>

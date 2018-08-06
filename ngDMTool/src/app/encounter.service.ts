@@ -20,6 +20,9 @@ export class EncounterService {
     this.combat.splice(this.combat.indexOf(combatant), 1);
   }
 
+  reset() {
+    this.combat = [];
+  }
   index() {
     return this.combat;
   }
