@@ -37,23 +37,25 @@ public class MonsterServiceImpl implements MonsterService {
 		Pattern pattern = Pattern.compile("(?<=)\\): (.*\\n?)(?=)");
 
 		for (Monster mon : results) {
-			Matcher matcher = pattern.matcher(mon.getSpecialAbilities());
-			ArrayList<String> spellNames = new ArrayList<>();
-			while (matcher.find()) {
+			if (mon.getSpecialAbilities() != null) {
+				Matcher matcher = pattern.matcher(mon.getSpecialAbilities());
+				ArrayList<String> spellNames = new ArrayList<>();
+				while (matcher.find()) {
 
-				String names = matcher.group(1).split("---")[0];
-				String[] arrStr = names.split(", ");
-				for (String str : arrStr) {
-					spellNames.add(str);
+					String names = matcher.group(1).split("---")[0];
+					String[] arrStr = names.split(", ");
+					for (String str : arrStr) {
+						spellNames.add(str);
+					}
+
 				}
-
-			}
-			for(String spell : spellNames) {
-				mon.addSpell(spellRepo.findByName(spell));
+				for (String spell : spellNames) {
+					mon.addSpell(spellRepo.findByName(spell));
+				}
 			}
 		}
 
-		return null;
+		return results;
 	}
 
 	@Override
