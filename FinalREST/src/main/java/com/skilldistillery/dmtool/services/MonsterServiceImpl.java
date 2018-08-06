@@ -45,7 +45,7 @@ public class MonsterServiceImpl implements MonsterService {
 					String names = matcher.group(1).split("---")[0];
 					String[] arrStr = names.split(", ");
 					for (String str : arrStr) {
-						spellNames.add(str);
+						spellNames.add(str.trim());
 					}
 
 				}
