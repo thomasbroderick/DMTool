@@ -3,10 +3,11 @@
     <h1>Party</h1>
     <ul>
       <p *ngFor='let player of players'>
-        <li>{{player.name}}</li>
-        <button (click)="open(content); selectedPlayer = player;">Details</button>
-        <button (click)="destroyPlayer(player.id)">Delete</button>
-        <button (click)="addCombatant(player)">Add to Combat</button>
+        <li>{{player.name}} <button class="btn" (click)="open(content); selectedPlayer = player;">Details</button>
+          <button class="btn" (click)="addCombatant(player)">Add to Combat</button>
+          <button class="btn btn-danger" (click)="destroyPlayer(player.id)">Delete</button>
+          </li>
+
         <li>HP: {{player.currentHp}} / {{player.maxHp}} AC: {{player.ac}}</li>
         <li>Perception: {{player.perception}} Investigation: {{player.investigation}} Insight: {{player.insight}}</li>
       </p>

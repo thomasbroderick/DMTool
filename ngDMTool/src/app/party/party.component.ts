@@ -50,7 +50,6 @@ export class PartyComponent implements OnInit {
     this.playerService.index(1).subscribe(
       data => {
         this.players = data;
-        console.log(this.players[0]);
       },
       err => console.log(err)
     );

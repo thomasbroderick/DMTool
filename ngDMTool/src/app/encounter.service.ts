@@ -12,6 +12,7 @@ export class EncounterService {
 
   add(combatant) {
     this.combat.push(combatant);
+    console.log(combatant);
   }
 
 

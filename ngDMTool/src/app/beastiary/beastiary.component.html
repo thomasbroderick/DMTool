@@ -13,7 +13,7 @@ padding: 10px;">
     <tr *ngFor='let monster of monsters'>
       <td>{{monster.name}}</td>
       <td>
-        <button (click)="selected=monster">Details</button>
+        <button (click)="setSelected(monster)">Details</button>
       </td>
       <td>
         <button (click)="destroyMonster(monster.id)">Delete</button>
@@ -46,6 +46,10 @@ padding: 10px;">
       <td>Name: </td>
       <td>{{selected.name}}</td>
     </tr>
+    <tr>
+      <td>Spells: </td>
+    </tr>
+      <tr *ngFor='let spell of selected.spells'>{{spell.name}}</tr>
     <tr>
     </tr>
     <tr>

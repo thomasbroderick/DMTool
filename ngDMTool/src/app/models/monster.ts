@@ -1,4 +1,5 @@
 import { User } from './user';
+import { Spell } from './spell';
 
 export class Monster {
   id: number;
@@ -33,6 +34,7 @@ export class Monster {
   wisdomSave = 0;
   charismaSave = 0;
   user: User;
+  spells: Spell[];
 
   constructor(
     $id?: number,
@@ -66,7 +68,8 @@ export class Monster {
     $constitutionSave?,
     $wisdomSave?,
     $charismaSave?,
-    $user?: User
+    $user?: User,
+    $spells?: Spell[]
   ) {
     this.id = $id;
     this.name = $name;
@@ -100,5 +103,6 @@ export class Monster {
     this.wisdomSave = $wisdomSave;
     this.charismaSave = $charismaSave;
     this.user = $user;
+    this.spells = $spells;
   }
 }

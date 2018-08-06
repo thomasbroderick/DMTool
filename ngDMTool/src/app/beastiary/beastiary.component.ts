@@ -41,6 +41,11 @@ export class BeastiaryComponent implements OnInit {
       .destroy(id)
       .subscribe(data => this.loadMonster(), err => console.log(err));
   }
+
+  setSelected(monster) {
+    this.selected = monster;
+    console.log(this.selected);
+  }
   loadMonster() {
     this.monsterService
       .index()
