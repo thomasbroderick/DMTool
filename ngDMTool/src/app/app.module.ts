@@ -19,6 +19,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { LibraryComponent } from './library/library.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { PartyComponent } from './party/party.component';
+import { EncounterComponent } from './encounter/encounter.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PartyComponent } from './party/party.component';
     AdminComponent,
     LibraryComponent,
     AuthenticationComponent,
-    PartyComponent
+    PartyComponent,
+    EncounterComponent
   ],
   imports: [
     NgbModule.forRoot(),
