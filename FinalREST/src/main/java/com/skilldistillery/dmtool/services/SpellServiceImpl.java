@@ -40,14 +40,37 @@ public class SpellServiceImpl implements SpellService {
 
 	@Override
 	public Spell update(String username, int sid, Spell spell) {
-		spell.setId(sid);
+		if(spellRepo.findById(sid).get().getUser().getId() == 1) {
+			if(userRepo.findOneByUsername(username).getRole() == "admin") {
+				spell.setUser(userRepo.findOneByUsername("admin"));
+				spell.setId(sid);
+				return spellRepo.saveAndFlush(spell);
+				
+			}
+			else {
+				return create(username, spell);
+			}
+		}
+		
 		spell.setUser(userRepo.findOneByUsername(username));
+		spell.setId(sid);
 		return spellRepo.saveAndFlush(spell);
 	}
 
 	@Override
 	public void destroy(int sid) {
 		spellRepo.deleteById(sid);
+	}
+
+	@Override
+	public boolean checkAbilityToModify(String username, int sid) {
+		if(userRepo.findOneByUsername(username).getRole() == "admin") {
+			return true;
+		}
+		if(userRepo.findOneByUsername(username).getId() == spellRepo.findById(sid).get().getUser().getId()) {
+			return true;
+		}
+		return false;
 	}
 
 }

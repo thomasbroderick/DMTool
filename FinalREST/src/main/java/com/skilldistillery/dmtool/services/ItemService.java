@@ -14,6 +14,8 @@ public interface ItemService {
 	  public Item update(String email, int iid, Item item);
 
 	  public void destroy(int iid);
+	  
+	  public boolean checkAbilityToModify(String username, int iid);
 
 	
 }

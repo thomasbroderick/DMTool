@@ -40,6 +40,18 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public Item update(String username, int iid, Item item) {
+		if(itemRepo.findById(iid).get().getUser().getId() == 1) {
+			if(userRepo.findOneByUsername(username).getRole() == "admin") {
+				item.setUser(userRepo.findOneByUsername("admin"));
+				item.setId(iid);
+				return itemRepo.saveAndFlush(item);
+				
+			}
+			else {
+				return create(username, item);
+			}
+		}
+		
 		item.setUser(userRepo.findOneByUsername(username));
 		item.setId(iid);
 		return itemRepo.saveAndFlush(item);
@@ -48,6 +60,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void destroy(int iid) {
 		itemRepo.deleteById(iid);
+	}
+	@Override
+	public boolean checkAbilityToModify(String username, int mid) {
+		if(userRepo.findOneByUsername(username).getRole() == "admin") {
+			return true;
+		}
+		if(userRepo.findOneByUsername(username).getId() == itemRepo.findById(mid).get().getUser().getId()) {
+			return true;
+		}
+		return false;
 	}
 
 }

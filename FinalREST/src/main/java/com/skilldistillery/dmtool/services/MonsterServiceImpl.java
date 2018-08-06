@@ -50,6 +50,18 @@ public class MonsterServiceImpl implements MonsterService {
 
 	@Override
 	public Monster update(String username, int mid, Monster monster) {
+		if(monRepo.findById(mid).get().getUser().getId() == 1) {
+			if(userRepo.findOneByUsername(username).getRole() == "admin") {
+				monster.setUser(userRepo.findOneByUsername("admin"));
+				monster.setId(mid);
+				return monRepo.saveAndFlush(monster);
+				
+			}
+			else {
+				return create(username, monster);
+			}
+		}
+		
 		monster.setUser(userRepo.findOneByUsername(username));
 		monster.setId(mid);
 		return monRepo.saveAndFlush(monster);
@@ -65,5 +77,15 @@ public class MonsterServiceImpl implements MonsterService {
 		
 		return monster;
 		
+	}
+	@Override
+	public boolean checkAbilityToModify(String username, int mid) {
+		if(userRepo.findOneByUsername(username).getRole() == "admin") {
+			return true;
+		}
+		if(userRepo.findOneByUsername(username).getId() == monRepo.findById(mid).get().getUser().getId()) {
+			return true;
+		}
+		return false;
 	}
 }

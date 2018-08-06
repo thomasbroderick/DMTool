@@ -23,7 +23,6 @@ import com.skilldistillery.dmtool.services.ItemService;
 public class ItemController {
 	@Autowired
 	private ItemService itemServ;
-	
 
 	@RequestMapping(path = "item/ping", method = RequestMethod.GET)
 	public String ping() {
@@ -42,8 +41,8 @@ public class ItemController {
 	}
 
 	@RequestMapping(path = "item", method = RequestMethod.POST)
-	public Item create(@RequestBody Item item, HttpServletRequest request,
-			HttpServletResponse response, Principal principal) {
+	public Item create(@RequestBody Item item, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
 		Item it = itemServ.create(principal.getName(), item);
 
 		if (it != null) {
@@ -70,14 +69,17 @@ public class ItemController {
 	}
 
 	@RequestMapping(path = "item/{iid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int iid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
-		itemServ.destroy(iid);
+	public void destroy(@PathVariable int iid, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
 		response.setStatus(500);
-		try {
-		itemServ.show(iid);
-		}
-		catch(Exception e) {
-			response.setStatus(200);
+		if (itemServ.checkAbilityToModify(principal.getName(), iid)) {
+			itemServ.destroy(iid);
+
+			try {
+				itemServ.show(iid);
+			} catch (Exception e) {
+				response.setStatus(200);
+			}
 		}
 	}
 
