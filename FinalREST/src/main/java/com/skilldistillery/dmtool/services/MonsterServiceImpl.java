@@ -56,7 +56,9 @@ public class MonsterServiceImpl implements MonsterService {
 			}
 		}
 		Object[] monArr1 = results.toArray();
-		System.out.println(monArr1[186]);
+		Monster mon1 = (Monster)(monArr1[186]);
+		System.out.println(mon1.getSpells().toString());
+		
 
 		return results;
 	}
