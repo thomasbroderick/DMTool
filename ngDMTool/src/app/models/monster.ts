@@ -17,7 +17,7 @@ export class Monster {
   specialAbilities: string;
   legendaryActions: string;
   imageUrl: string;
-  hitDice = 0;
+  hitDice: string;
   actions: string;
   stealth: string;
   hitPoints = 0;
