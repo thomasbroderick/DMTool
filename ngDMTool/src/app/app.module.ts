@@ -23,6 +23,7 @@ import { ItemComponent } from './item/item.component';
 import { MonsterComponent } from './monster/monster.component';
 import { SpellComponent } from './spell/spell.component';
 import { EncounterComponent } from './encounter/encounter.component';
+import { PopoverTriggersComponent } from './popover-triggers/popover-triggers.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EncounterComponent } from './encounter/encounter.component';
     ItemComponent,
     MonsterComponent,
     SpellComponent,
-    EncounterComponent
+    EncounterComponent,
+    PopoverTriggersComponent
   ],
   imports: [
     NgbModule.forRoot(),

@@ -26,7 +26,7 @@ public class Spell {
 	private String level;
 	private String school;
 	private String classes;
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

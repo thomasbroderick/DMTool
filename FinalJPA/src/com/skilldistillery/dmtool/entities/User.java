@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
@@ -21,18 +23,18 @@ public class User {
 	private String password;
 	private boolean enabled;
 	private String role;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Spell> spells;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Monster> monsters;
 	
 	//one to one for settings
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Campaign> campaigns;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Item> items;
 	

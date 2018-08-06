@@ -20,7 +20,7 @@ public class Campaign {
 	@Id
 	private int id;
 	private String name;
-	@JsonIgnore
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

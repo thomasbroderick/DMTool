@@ -64,7 +64,7 @@ public class Monster {
 	private Integer wisdomSave;
 	@Column(name="charisma_save")
 	private Integer charismaSave;	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

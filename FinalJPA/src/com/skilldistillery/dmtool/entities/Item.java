@@ -24,7 +24,7 @@ public class Item {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
