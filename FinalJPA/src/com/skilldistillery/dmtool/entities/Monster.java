@@ -1,6 +1,16 @@
 package com.skilldistillery.dmtool.entities;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -58,7 +68,29 @@ public class Monster {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
-
+	@Transient
+	private List <Spell> spells;
+	
+	// add and remove spells
+	
+	public void addSpell(Spell spell) {
+		if(spells == null) spells = new ArrayList<>();
+		
+		if(!spells.contains(spell)) {
+			spells.add(spell);
+				
+			}
+		}
+		
+	public void removeSpell(Spell spell) {
+		if(spells != null) {
+			spells.remove(spell);
+		}
+	}
+	
+	// getters and setters
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -107,29 +139,6 @@ public class Monster {
 		this.alignment = alignment;
 	}
 
-	public String getVulnerabilities() {
-		return damageVulnerabilities;
-	}
-
-	public void setVulnerabilities(String vulnerabilities) {
-		this.damageVulnerabilities = vulnerabilities;
-	}
-
-	public String getResistances() {
-		return damageResistances;
-	}
-
-	public void setResistances(String resistances) {
-		this.damageResistances = resistances;
-	}
-
-	public String getImmunnities() {
-		return damageImmunities;
-	}
-
-	public void setImmunnities(String immunnities) {
-		this.damageImmunities = immunnities;
-	}
 
 	public String getConditionImmunities() {
 		return conditionImmunities;
@@ -141,6 +150,38 @@ public class Monster {
 
 	public String getSenses() {
 		return senses;
+	}
+
+	public String getDamageVulnerabilities() {
+		return damageVulnerabilities;
+	}
+
+	public void setDamageVulnerabilities(String damageVulnerabilities) {
+		this.damageVulnerabilities = damageVulnerabilities;
+	}
+
+	public String getDamageResistances() {
+		return damageResistances;
+	}
+
+	public void setDamageResistances(String damageResistances) {
+		this.damageResistances = damageResistances;
+	}
+
+	public String getDamageImmunities() {
+		return damageImmunities;
+	}
+
+	public void setDamageImmunities(String damageImmunities) {
+		this.damageImmunities = damageImmunities;
+	}
+
+	public List<Spell> getSpells() {
+		return spells;
+	}
+
+	public void setSpells(List<Spell> spells) {
+		this.spells = spells;
 	}
 
 	public void setSenses(String senses) {
@@ -594,6 +635,8 @@ public class Monster {
 		builder.append(wisdomSave);
 		builder.append(", charismaSave=");
 		builder.append(charismaSave);
+		builder.append(", spells=");
+		builder.append(spells);
 		builder.append("]");
 		return builder.toString();
 	}
