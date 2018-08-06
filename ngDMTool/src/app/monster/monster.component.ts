@@ -21,7 +21,7 @@ export class MonsterComponent implements OnInit {
   editMonster = null;
   monstersVisible = true;
   createNew = false;
-  monsterAttributes: string[] = [
+  monsterAttributesString: string[] = [
     'name',
     'size',
     'type',
@@ -40,8 +40,11 @@ export class MonsterComponent implements OnInit {
     'hitDice',
     'actions',
     'stealth',
+    'speed'
+  ];
+
+  monsterAttributesInt = [
     'hitPoints',
-    'speed',
     'strength',
     'dexterity',
     'intelligence',
@@ -59,6 +62,16 @@ export class MonsterComponent implements OnInit {
     private monsterService: MonsterService,
     private userService: UserService
   ) {}
+
+  generateArray(obj) {
+    return Object.keys(obj).map(key => {
+      return { key: key, value: obj[key] };
+    });
+  }
+
+  isObject(obj) {
+    return typeof obj === 'object';
+  }
 
   loadUser() {
     this.userService
