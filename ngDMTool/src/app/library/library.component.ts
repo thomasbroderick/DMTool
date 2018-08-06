@@ -13,60 +13,29 @@ export class LibraryComponent implements OnInit {
   users: User[];
   selectedUser = null;
   newUser = new User();
-  editUser  = null;
-
-  items: Item[];
+  editUser = null;
+  createNew = false;
   itemsVisible = false;
-  selectedItem = null;
-  newItem = new Item();
-  editItem = null;
-  constructor(private itemService: ItemService, private userService: UserService) { }
+  monstersVisible = false;
+  spellsVisible = false;
 
-  loadUser() {
-    this.userService
-      .index()
-      .subscribe(data => (this.users = data), err => console.log(err));
-  }
-
-  showItems() {
+  viewItems() {
     this.itemsVisible = true;
+    this.monstersVisible = false;
+    this.spellsVisible = false;
   }
-  createItem() {
-    this.itemService
-      .create(this.newItem)
-      .subscribe(data => this.items.push(data), err => console.log(err));
-
-    this.newUser = new User();
-    this.loadUser();
+  viewMonsters() {
+    this.itemsVisible = false;
+    this.monstersVisible = true;
+    this.spellsVisible = false;
   }
-  updateItem() {
-    this.itemService.update(this.editItem.id, this.editItem).subscribe(
-      data => {
-        this.loadItem(),
-          (this.selectedItem = this.editItem),
-          (this.editItem = null);
-      },
-      err => console.log(err)
-    );
-  }
-  setEditItem() {
-    this.editItem = Object.assign({}, this.selectedItem);
+  viewSpells() {
+    this.itemsVisible = false;
+    this.monstersVisible = false;
+    this.spellsVisible = true;
   }
 
-  destroyItem(id: number) {
-    this.itemService
-      .destroy(id)
-      .subscribe(data => this.loadItem(), err => console.log(err));
-  }
-  loadItem() {
-    this.itemService
-      .index()
-      .subscribe(data => (this.items = data), err => console.log(err));
-  }
+  constructor(private userService: UserService) {}
 
-  ngOnInit() {
-    this.loadUser();
-    this.loadItem();
-  }
-
+  ngOnInit() {}
 }

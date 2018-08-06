@@ -1,0 +1,144 @@
+<!-- Items display -->
+<div>
+    <div *ngIf='!selectedItem && itemsVisible' style="margin:auto;width: 60%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+      <button class="button" (click)="showCreateDiv()">CREATE NEW ITEM</button>
+      <table class="table table-condensed table-hover table-bordered table-striped" *ngIf=!selected>
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=6>Items</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let item of items'>
+          <td (click)="selectedItem=item">{{item.name}}</td>
+          <td>{{item.equipmentCategory}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf='createNew'>
+      <h2>Create New Item</h2>
+      <form>
+          <input type="text" name="name" placeholder="name" [(ngModel)]="newItem.name" />
+          <input type="text" name="equipmentCategory" placeholder="equipment category" [(ngModel)]="newItem.equipmentCategory" />
+          <input type="text" name="weaponCategory" placeholder="weapon category" [(ngModel)]="newItem.weaponCategory" />
+          <input type="text" name="damage" placeholder="damage" [(ngModel)]="newItem.damage" />
+          <input type="text" name="range" placeholder="range" [(ngModel)]="newItem.range" />
+          <input type="text" name="cost" placeholder="cost" [(ngModel)]="newItem.cost" />
+          <input type="text" name="weight" placeholder="weight" [(ngModel)]="newItem.weight" />
+          <br />
+          <button class="button" (click)="createItem()">CREATE</button>
+        </form>
+      </div>
+
+    <div *ngIf='selectedItem&&!editItem' style="margin:auto;width: 50%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>Item Details</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>name: </td>
+          <td>{{selectedItem.name}}</td>
+        </tr>
+        <tr>
+          <td>equipment category: </td>
+          <td>{{selectedItem.equipmentCategory}}</td>
+        </tr>
+        <tr>
+          <td>weapon category: </td>
+          <td>{{selectedItem.weaponCategory}}</td>
+        </tr>
+        <tr>
+          <td>damage: </td>
+          <td>{{selectedItem.damage}}</td>
+        </tr>
+        <tr>
+          <td>range: </td>
+          <td>{{selectedItem.range}}</td>
+        </tr>
+        <tr>
+          <td>cost: </td>
+          <td>{{selectedItem.cost}}</td>
+        </tr>
+        <tr>
+          <td>weight: </td>
+          <td>{{selectedItem.weight}}</td>
+        </tr>
+
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="setEditItem()">Edit</button>
+            <button class="button" (click)="selectedItem=null">Back</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- Edit Item Div -->
+    <div *ngIf=editItem>
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>name: </td>
+            <td>
+              <input type='text' name="name" [(ngModel)]="editItem.name">
+            </td>
+          </tr>
+          <tr>
+            <td>equipment category: </td>
+            <td>
+              <input type='text' name="equipmentCategory" [(ngModel)]="editItem.equipmentCategory">
+            </td>
+          </tr>
+          <tr>
+            <td>weapon category: </td>
+            <td>
+              <input type='text' name="weapon category" [(ngModel)]="editItem.weaponCategory">
+            </td>
+          </tr>
+          <tr>
+            <td>damage: </td>
+            <td>
+              <input type='text' name="damage" [(ngModel)]="editItem.damage">
+            </td>
+          </tr>
+          <tr>
+            <td>range: </td>
+            <td>
+              <input type='text' name="range" [(ngModel)]="editItem.range">
+            </td>
+          </tr>
+          <tr>
+            <td>cost: </td>
+            <td>
+              <input type='text' name="cost" [(ngModel)]="editItem.cost">
+            </td>
+          </tr>
+          <tr>
+            <td>weight: </td>
+            <td>
+              <input type='text' name="weight" [(ngModel)]="editItem.weight">
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="updateItem()">Save Changes</button>
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="editItem=null">Cancel Changes</button>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+  </div>

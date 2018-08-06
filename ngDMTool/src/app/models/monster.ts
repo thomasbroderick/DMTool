@@ -14,24 +14,24 @@ export class Monster {
   senses: string;
   languages: string;
   specialAbilities: string;
-  actions: string;
   legendaryActions: string;
   imageUrl: string;
-  hitDice: number;
-  actionsstealth: number;
-  hitpoints: number;
+  hitDice = 0;
+  actions: string;
+  stealth: string;
+  hitPoints = 0;
   speed: string;
-  strenth: number;
-  dexterity: number;
-  intelligence: number;
-  wisdom: number;
-  charisma: number;
-  constitution: number;
-  challengeRating: number;
-  dexteritySave: number;
-  constitutionSave: number;
-  wisdomSave: number;
-  charismaSave: number;
+  strength = 0;
+  dexterity = 0;
+  intelligence = 0;
+  wisdom = 0;
+  charisma = 0;
+  constitution = 0;
+  challengeRating = 0;
+  dexteritySave = 0;
+  constitutionSave = 0;
+  wisdomSave = 0;
+  charismaSave = 0;
   user: User;
 
   constructor(
@@ -51,21 +51,21 @@ export class Monster {
     $actions?: string,
     $legendaryActions?: string,
     $imageUrl?: string,
-    $hitDice?: number,
-    $actionsstealth?: number,
-    $hitpoints?: number,
+    $hitDice?,
+    $stealth?,
+    $hitPoints?,
     $speed?: string,
-    $strenth?: number,
-    $dexterity?: number,
-    $intelligence?: number,
-    $wisdom?: number,
-    $charisma?: number,
-    $constitution?: number,
-    $challengeRating?: number,
-    $dexteritySave?: number,
-    $constitutionSave?: number,
-    $wisdomSave?: number,
-    $charismaSave?: number,
+    $strength?,
+    $dexterity?,
+    $intelligence?,
+    $wisdom?,
+    $charisma?,
+    $constitution?,
+    $challengeRating?,
+    $dexteritySave?,
+    $constitutionSave?,
+    $wisdomSave?,
+    $charismaSave?,
     $user?: User
   ) {
     this.id = $id;
@@ -85,10 +85,10 @@ export class Monster {
     this.legendaryActions = $legendaryActions;
     this.imageUrl = $imageUrl;
     this.hitDice = $hitDice;
-    this.actionsstealth = $actionsstealth;
-    this.hitpoints = $hitpoints;
+    this.stealth = $stealth;
+    this.hitPoints = $hitPoints;
     this.speed = $speed;
-    this.strenth = $strenth;
+    this.strength = $strength;
     this.dexterity = $dexterity;
     this.intelligence = $intelligence;
     this.wisdom = $wisdom;

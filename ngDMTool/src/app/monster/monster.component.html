@@ -1,0 +1,81 @@
+<!-- Monsters display -->
+<div>
+    <div *ngIf='!selectedMonster && monstersVisible' style="margin:auto;width: 60%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+      <button class="button" (click)="showCreateDiv()">CREATE NEW MONSTER</button>
+      <table class="table table-condensed table-hover table-bordered table-striped" *ngIf=!selected>
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=6>Monsters</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let monster of monsters'>
+          <td (click)="selectedMonster=monster">{{monster.name}}</td>
+          <td>{{monster.type}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf='createNew'>
+      <h2>Create New Monster</h2>
+      <form #createMonsterForm="ngForm">
+
+          <input *ngFor='let attribute of monsterAttributes' type="text" name={{attribute}} placeholder={{attribute}} ngModel />
+
+          <br />
+          <button class="button" (click)="createMonster(createMonsterForm)">CREATE</button>
+        </form>
+      </div>
+
+    <div *ngIf='selectedMonster&&!editMonster' style="margin:auto;width: 50%;
+      border: 3px solid rgb(33, 41, 33);
+      padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>Monster Details</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>name: </td>
+          <td>{{selectedMonster.name}}</td>
+        </tr>
+
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="setEditMonster()">Edit</button>
+            <button class="button" (click)="selectedMonster=null">Back</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- Edit Monster Div -->
+    <div *ngIf=editMonster>
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>name: </td>
+            <td>
+              <input type='text' name="name" [(ngModel)]="editMonster.name">
+            </td>
+
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="updateMonster()">Save Changes</button>
+            </td>
+          </tr>
+          <tr>
+            <td align=center colspan=2>
+              <button class="button" (click)="editMonster=null">Cancel Changes</button>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+  </div>
+
