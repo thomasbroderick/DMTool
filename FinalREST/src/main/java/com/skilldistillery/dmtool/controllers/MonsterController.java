@@ -23,9 +23,6 @@ import com.skilldistillery.dmtool.services.MonsterService;
 public class MonsterController {
 	@Autowired
 	private MonsterService monServ;
-	
-
-	
 
 	@RequestMapping(path = "monster/ping", method = RequestMethod.GET)
 	public String ping() {
@@ -44,8 +41,8 @@ public class MonsterController {
 	}
 
 	@RequestMapping(path = "monster", method = RequestMethod.POST)
-	public Monster create(@RequestBody Monster monster, HttpServletRequest request,
-			HttpServletResponse response, Principal principal) {
+	public Monster create(@RequestBody Monster monster, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
 		Monster mon = monServ.create(principal.getName(), monster);
 
 		if (mon != null) {
@@ -72,14 +69,17 @@ public class MonsterController {
 	}
 
 	@RequestMapping(path = "monster/{mid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int mid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
-		monServ.destroy(mid);
+	public void destroy(@PathVariable int mid, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
 		response.setStatus(500);
-		try {
-		monServ.show(mid);
-		}
-		catch(Exception e) {
-			response.setStatus(200);
+		if (monServ.checkAbilityToModify(principal.getName(), mid)) {
+			monServ.destroy(mid);
+
+			try {
+				monServ.show(mid);
+			} catch (Exception e) {
+				response.setStatus(200);
+			}
 		}
 	}
 

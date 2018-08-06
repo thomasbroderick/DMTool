@@ -22,6 +22,7 @@ import { PartyComponent } from './party/party.component';
 import { ItemComponent } from './item/item.component';
 import { MonsterComponent } from './monster/monster.component';
 import { SpellComponent } from './spell/spell.component';
+import { EncounterComponent } from './encounter/encounter.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,13 @@ import { SpellComponent } from './spell/spell.component';
     LibraryComponent,
     AuthenticationComponent,
     PartyComponent,
+<<<<<<< HEAD
     ItemComponent,
     MonsterComponent,
     SpellComponent
+=======
+    EncounterComponent
+>>>>>>> bc250d8e6f6a5c93e4e93de4a67e5e7f25680d80
   ],
   imports: [
     NgbModule.forRoot(),

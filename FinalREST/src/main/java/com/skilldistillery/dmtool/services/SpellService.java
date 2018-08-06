@@ -14,4 +14,6 @@ public interface SpellService {
 	  public Spell update(String email,int sid, Spell spell);
 
 	  public void destroy(int sid);
+
+	public boolean checkAbilityToModify(String name, int sid);
 }

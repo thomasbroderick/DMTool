@@ -23,7 +23,6 @@ import com.skilldistillery.dmtool.services.SpellService;
 public class SpellController {
 	@Autowired
 	private SpellService spellServ;
-	
 
 	@RequestMapping(path = "spell/ping", method = RequestMethod.GET)
 	public String ping() {
@@ -42,8 +41,8 @@ public class SpellController {
 	}
 
 	@RequestMapping(path = "spell", method = RequestMethod.POST)
-	public Spell create(@RequestBody Spell spell, HttpServletRequest request,
-			HttpServletResponse response, Principal principal) {
+	public Spell create(@RequestBody Spell spell, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
 		Spell sp = spellServ.create(principal.getName(), spell);
 
 		if (sp != null) {
@@ -70,15 +69,18 @@ public class SpellController {
 	}
 
 	@RequestMapping(path = "spell/{sid}", method = RequestMethod.DELETE)
-	public void destroy(@PathVariable int sid, HttpServletRequest request, HttpServletResponse response, Principal principal) {
-		spellServ.destroy(sid);
+	public void destroy(@PathVariable int sid, HttpServletRequest request, HttpServletResponse response,
+			Principal principal) {
 		response.setStatus(500);
-		try {
-		spellServ.show(sid);
+		if (spellServ.checkAbilityToModify(principal.getName(), sid)) {
+			spellServ.destroy(sid);
+			try {
+				spellServ.show(sid);
+			} catch (Exception e) {
+				response.setStatus(200);
+			}
 		}
-		catch(Exception e) {
-			response.setStatus(200);
-		}
+
 	}
 
 }
