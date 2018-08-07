@@ -12,11 +12,14 @@
           <tr>
             <th>Name</th>
             <th>Category</th>
+            <th></th>
+
           </tr>
         </thead>
         <tr *ngFor='let item of items'>
           <td (click)="selectedItem=item">{{item.name}}</td>
           <td>{{item.equipmentCategory}}</td>
+          <button class="btn btn-danger" *ngIf='item.user.id > 1' (click)='destroyItem(item.id)'>X</button>
         </tr>
       </table>
     </div>

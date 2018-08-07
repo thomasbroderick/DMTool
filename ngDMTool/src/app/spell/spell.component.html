@@ -1,3 +1,87 @@
-<p>
-  SPELLS
-</p>
+<!-- Spells display -->
+<div>
+    <div *ngIf='!selectedSpell && spellsVisible' style="margin:auto;width: 60%;
+        border: 3px solid rgb(33, 41, 33);
+        padding: 10px;">
+      <button class="button" (click)="showCreateDiv()">CREATE NEW SPELL</button>
+      <table class="table table-condensed table-hover table-bordered table-striped" *ngIf=!selected>
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=6>Spells</th>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <th>School</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr *ngFor='let spell of spells'>
+          <td (click)="selectedSpell=spell">{{spell.name}}</td>
+          <td>{{spell.school}}</td>
+          <button class="btn btn-danger" *ngIf='spell.user.id > 1' (click)='destroySpell(spell.id)'>X</button>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf='createNew'>
+      <h2>Create New Spell</h2>
+      <form #createSpellForm="ngForm">
+
+        <input *ngFor='let attribute of spellAttributes' type="text" name={{attribute}} placeholder={{attribute}} ngModel
+        />
+        <br />
+        <button class="button" (click)="createSpell(createSpellForm)">CREATE</button>
+      </form>
+    </div>
+
+    <div *ngIf='selectedSpell&&!editSpell' style="margin:auto;width: 50%;
+        border: 3px solid rgb(33, 41, 33);
+        padding: 10px;">
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>Spell Details</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let property of generateArray(selectedSpell)'>
+          <td>{{property.key}}: </td>
+          <td *ngIf="isObject(property.value)">
+            <p *ngFor='let prop of generateArray(property.value)'>{{prop.value.name}}</p> **Here's where we left off**
+          </td>
+          <td *ngIf="!isObject(property.value)">{{property.value}}
+          </td>
+        </tr>
+
+        <tr>
+          <td align=center colspan=2>
+            <button class="button" (click)="setEditSpell()">Edit</button>
+            <button class="button" (click)="selectedSpell=null">Back</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- Edit Spell Div -->
+    <div *ngIf=editSpell>
+      <table class="table table-condensed table-hover table-bordered table-light">
+        <form>
+          <tr>
+            <td>name: </td>
+            <td>
+              <input type='text' name="name" [(ngModel)]="editSpell.name">
+            </td>
+
+            <tr>
+              <td align=center colspan=2>
+                <button class="button" (click)="updateSpell()">Save Changes</button>
+              </td>
+            </tr>
+            <tr>
+              <td align=center colspan=2>
+                <button class="button" (click)="editSpell=null">Cancel Changes</button>
+              </td>
+            </tr>
+        </form>
+      </table>
+    </div>
+  </div>
+
