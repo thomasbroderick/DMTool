@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@libria/gridstack": "https://github.com/pfms84/lb-gridstack/raw/develop/tarball/libria-gridstack-0.0.1.tgz",
-    "@ng-bootstrap/ng-bootstrap": "^2.2.1",
+    "@ng-bootstrap/ng-bootstrap": "^2.2.2",
     "@types/lodash": "^4.14.115",
     "bootstrap": "^4.1.3",
     "core-js": "^2.5.4",

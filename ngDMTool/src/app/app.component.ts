@@ -8,6 +8,7 @@ import * as $ from '../../node_modules/jquery';
 import { Gridline } from './models/gridline';
 import { AuthenticationService } from './authentication.service';
 import { Router } from '../../node_modules/@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

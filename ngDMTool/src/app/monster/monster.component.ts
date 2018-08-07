@@ -1,9 +1,13 @@
+import { PartyComponent } from './../party/party.component';
+import { PopoverTriggersComponent } from './../popover-triggers/popover-triggers.component';
 import { NgForm } from '@angular/forms';
 import { MonsterService } from './../monster.service';
 import { Component, OnInit } from '@angular/core';
 import { Monster } from '../models/monster';
+import { Spell } from '../models/spell';
 import { User } from '../models/user';
 import { UserService } from '../user.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-monster',
@@ -60,13 +64,27 @@ export class MonsterComponent implements OnInit {
 
   constructor(
     private monsterService: MonsterService,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: NgbModal
   ) {}
+
+  closeResult: string;
+  selectedSpell = null;
 
   generateArray(obj) {
     return Object.keys(obj).map(key => {
       return { key: key, value: obj[key] };
     });
+  }
+
+  checkLvl(int) {
+    const spellArr = [];
+    for (let i = 0; i < this.selectedMonster.spells.length; i++) {
+      if (this.selectedMonster.spells[i] !== null && this.selectedMonster.spells[i].level === int) {
+        spellArr.push(this.selectedMonster.spells[i]);
+      }
+    }
+    return spellArr;
   }
 
   isObject(obj) {
@@ -118,6 +136,29 @@ export class MonsterComponent implements OnInit {
     this.monsterService
       .index()
       .subscribe(data => (this.monsters = data), err => console.log(err));
+  }
+
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
   ngOnInit() {
     this.loadUser();
