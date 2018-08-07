@@ -1,6 +1,7 @@
 package com.skilldistillery.dmtool.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +24,8 @@ public class MonsterServiceImpl implements MonsterService {
 	private UserRepository userRepo;
 	@Autowired
 	private SpellRepository spellRepo;
+	
+	private boolean needsFix = true;
 
 	// Find all by default Id then add in user created spells?
 	// private List<Spell> spells = spellRepo.findAll();
@@ -55,13 +58,44 @@ public class MonsterServiceImpl implements MonsterService {
 				}
 			}
 		}
-		//print out lich spells for test
-		Object[] monArr1 = results.toArray();
-		Monster mon1 = (Monster)(monArr1[186]);
-		System.out.println(mon1.getSpells().toString());
-		
+		if(needsFix) {
+			fix(results);
+		}
 
 		return results;
+	}
+	
+	public void fix(Set<Monster> results) {
+		List<Monster> fixMe = new ArrayList<>(results);
+
+		for (int i = 0; i < fixMe.size(); i++) {
+			
+			Monster monster = fixMe.get(i);
+			String str = monster.getSpecialAbilities();
+
+			str = str.replace("================================", "\n");
+			str = str.replaceAll("(---attack_bonus : \\d*---)(damage_dice : \\d*d\\d*(---damage_bonus : \\d---)*)*", "");
+			str = str.replace("•", "\n•");
+			str = str.replace("---", " - ");
+			
+			monster.setSpecialAbilities(str);
+
+			String str2 = monster.getActions();
+			str2 = str2.replaceAll("(---attack_bonus : \\d*---)(damage_dice : \\d*d\\d*(---damage_bonus : \\d---)*)*", "");
+			str2 = str2.replace("================================", "\n");
+			str2 = str2.replace("---", " - ");
+			monster.setActions(str2);
+
+			String str3 = monster.getLegendaryActions();
+			str3 = str3.replace("================================", "\n");
+			str3 = str3.replaceAll("(---attack_bonus : \\d*---)(damage_dice : \\d*d\\d*(---damage_bonus : \\d---)*)*", "");
+			str3 = str3.replace("---", " - ");
+			monster.setLegendaryActions(str3);
+			update("admin", monster.getId(), monster);
+			needsFix = false;
+
+		}
+
 	}
 
 	@Override

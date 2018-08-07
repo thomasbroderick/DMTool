@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from '../models/player';
 import { PlayerService } from '../player.service';
 import { EncounterService } from '../encounter.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-party',
@@ -59,18 +59,22 @@ export class PartyComponent implements OnInit {
     this.encounterService.add(player);
   }
   addAll() {
-    for(let i = 0; i < this.players.length; i++) {
+    for (let i = 0; i < this.players.length; i++) {
       this.encounterService.add(this.players[i]);
     }
   }
 
-
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -79,11 +83,14 @@ export class PartyComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
-  constructor(private playerService: PlayerService, private encounterService: EncounterService,
-     private modalService: NgbModal) {}
+  constructor(
+    private playerService: PlayerService,
+    private encounterService: EncounterService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.loadPlayer();
