@@ -19,6 +19,7 @@ public class SpellServiceImpl implements SpellService {
 	@Autowired
 	private UserRepository userRepo;
 
+	private boolean needsFix = true;
 	@Override
 	public Set<Spell> index(String username) {
 		Set<Spell> results = (Set<Spell>) spellRepo.findByUser_Username(username);
@@ -27,7 +28,9 @@ public class SpellServiceImpl implements SpellService {
 			results.addAll(index("admin"));
 		}
 
+		if(needsFix) {
 		fix(results);
+		}
 		return results;
 	}
 
@@ -60,6 +63,7 @@ public class SpellServiceImpl implements SpellService {
 			spell.setHigherLevel(str3);
 			
 			update("admin", spell.getId(), spell);
+			needsFix = false;
 
 		}
 
