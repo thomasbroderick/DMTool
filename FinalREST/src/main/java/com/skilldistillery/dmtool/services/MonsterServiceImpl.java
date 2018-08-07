@@ -55,6 +55,10 @@ public class MonsterServiceImpl implements MonsterService {
 				}
 			}
 		}
+		//print out lich spells for test
+		Object[] monArr1 = results.toArray();
+		Monster mon1 = (Monster)(monArr1[186]);
+		System.out.println(mon1.getSpells().toString());
 		
 
 		return results;

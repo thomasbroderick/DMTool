@@ -27,6 +27,7 @@ import { PopoverTriggersComponent } from './popover-triggers/popover-triggers.co
 import { NameFilterPipe } from './name-filter.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
+import { GeneralComponent } from './general/general.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatInputModule} from '@angular/material';
     SpellComponent,
     EncounterComponent,
     PopoverTriggersComponent,
-    NameFilterPipe
+    NameFilterPipe,
+    GeneralComponent
   ],
   imports: [
     NgbModule.forRoot(),

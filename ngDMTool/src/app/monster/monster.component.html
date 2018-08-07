@@ -45,9 +45,114 @@
         </tr>
       </thead>
       <tr *ngFor='let property of generateArray(selectedMonster)'>
-        <td>{{property.key}}: </td>
-        <td *ngIf="isObject(property.value)">
-          <p *ngFor='let prop of generateArray(property.value)'>{{prop.value.name}}</p> **Here's where we left off**
+        <td *ngIf="property.key !== 'user'">{{property.key}}: </td>
+        <td *ngIf="isObject(property.value) && property.key != 'user'">
+
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">{{selectedSpell.name}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <b>
+                      <i>Level:</i>
+                    </b>
+                    {{selectedSpell.level}} - <b><i>Casting Time: </i></b>{{selectedSpell.castingTime}} - <b><i>Range: </i></b>{{selectedSpell.range}} - <b><i>Duration: </i></b>{{selectedSpell.duration}} - <b><i>Ritual: </i></b>{{selectedSpell.ritual}}<br>
+                    <b><i>Concentration: </i></b>{{selectedSpell.concentration}} - <b><i>Components: </i></b>{{selectedSpell.components}} - <b><i>Materials: </i></b>{{selectedSpell.material}}</p>
+                  <hr>
+              <p>
+                <b>
+                  <i>Description:</i>
+                </b>
+                {{selectedSpell.description}}</p>
+              <hr>
+              <p>
+                <b>
+                  <i>Higher Level:</i>
+                </b>
+                {{selectedSpell.higherLevel}}</p>
+              <hr>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+
+          <p *ngIf="checkLvl('0').length !== 0">
+            Cantrips:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('0')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('1').length !== 0">
+            Level 1:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('1')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+
+          </p>
+          <p *ngIf="checkLvl('2').length !== 0">
+
+            Level 2:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('2')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('3').length !== 0">
+
+            Level 3:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('3')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('4').length !== 0">
+
+            Level 4:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('4')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('5').length !== 0">
+
+            Level 5:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('5')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('6').length !== 0">
+
+            Level 6:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('6')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('7').length !== 0">
+
+            Level 7:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('7')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('8').length !== 0">
+
+            Level 8:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('8')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+          <p *ngIf="checkLvl('9').length !== 0">
+
+            Level 9:
+
+            <button class="btn btn-lg btn-outline-primary" *ngFor="let spell of checkLvl('9')" (click)="open(content); selectedSpell = spell;">{{spell.name}}</button>
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <hr>
         </td>
         <td *ngIf="!isObject(property.value)">{{property.value}}
         </td>
