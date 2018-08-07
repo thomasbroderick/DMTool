@@ -31,13 +31,32 @@
   <mat-form-field>
     <input type="text" placeholder="Search" aria-label="Search" matInput [formControl]="searchText" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option (click)='selectedOption = setOption(option)' *ngFor="let option of filteredOptions | async" [value]="option">
+      <mat-option (click)='open(content); selectedOption = setOption(option)' *ngFor="let option of filteredOptions | async" [value]="option">
         {{option}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
   <button (click)='showSelectedOption()'>Selected Option?</button>
 </form>
+<ng-template #content let-c="close" let-d="dismiss">
+<div class="modal-body">
+    <table class="table table-condensed table-hover table-bordered table-light">
+        <thead class="thead-dark">
+          <tr align=center>
+            <th colspan=2>Details</th>
+          </tr>
+        </thead>
+        <tr *ngFor='let property of generateArray(selectedOption)'>
+          <td>{{property.key}}: </td>
+          <td *ngIf="isObject(property.value)">
+            <p *ngFor='let prop of generateArray(property.value)'>{{prop.value.name}}</p>
+          </td>
+          <td *ngIf="!isObject(property.value)">{{property.value}}
+          </td>
+        </tr>
+      </table>
+</div>
+</ng-template>
 <!-- </div> -->
 <!-- </nav> -->
 <!-- Overview content div -->
