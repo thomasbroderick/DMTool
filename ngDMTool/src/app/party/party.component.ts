@@ -58,7 +58,11 @@ export class PartyComponent implements OnInit {
   addCombatant(player: Player) {
     this.encounterService.add(player);
   }
-
+  addAll() {
+    for(let i = 0; i < this.players.length; i++) {
+      this.encounterService.add(this.players[i]);
+    }
+  }
 
 
   open(content) {
