@@ -47,8 +47,7 @@ public class SpellServiceImpl implements SpellService {
 			str = str.replace("\", \"", " ");
 			str = str.replace("\\u00e2\\u20ac\\u2122", "'");
 			str = str.replace("\\u00e2\\u20ac\\ufffd", "'");
-			str = str.replace("\\u00e2\\u20ac\\u0153", "'");
-			
+			str = str.replace("\\u00e2\\u20ac\\u0153", "'");	
 			spell.setDescription(str);
 
 			String str2 = spell.getComponents();
@@ -60,8 +59,16 @@ public class SpellServiceImpl implements SpellService {
 			String str3 = spell.getHigherLevel();
 			str3 = str3.replace("[\"", "");
 			str3 = str3.replace("\"]", "");
+			str3 = str3.replace("\\u00e2\\u20ac\\u2122", "'");
+			str3 = str3.replace("\\u00e2\\u20ac\\ufffd", "'");
+			str3 = str3.replace("\\u00e2\\u20ac\\u0153", "'");
 			spell.setHigherLevel(str3);
 			
+			String str4 = spell.getClasses();
+			str4 = str4.replace("url : null---name : ", " ");
+			str4 = str4.replace("---================================", " ");
+			str4 = str4.replace("---", " ");
+			spell.setClasses(str4);
 			update("admin", spell.getId(), spell);
 			needsFix = false;
 
