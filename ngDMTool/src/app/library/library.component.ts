@@ -27,7 +27,7 @@ export class LibraryComponent implements OnInit {
   monstersVisible = false;
   spellsVisible = false;
   searchText = new FormControl('');
-  options: string[] = [];
+  options = [];
   items: Item[];
   monsters: Monster[];
   spells: Spell[];
@@ -37,28 +37,60 @@ export class LibraryComponent implements OnInit {
     this.itemService.index().subscribe(
       data => {
         this.items = data;
+        this.options.push(this.nameFilter.transform(this.items));
       },
       err => console.log(err)
     );
-    this.options.push(this.nameFilter.transform(this.items));
   }
   loadMonster() {
     this.monsterService.index().subscribe(
       data => {
         this.monsters = data;
+        this.options.push(this.nameFilter.transform(this.monsters));
       },
       err => console.log(err)
     );
-    this.options.push(this.nameFilter.transform(this.monsters));
   }
   loadSpell() {
     this.spellService.index().subscribe(
       data => {
         this.spells = data;
+        this.options.push(this.nameFilter.transform(data));
       },
       err => console.log(err)
     );
-    this.options.push(this.nameFilter.transform(this.spells));
+  }
+
+  loadAll() {
+    this.itemService.index().subscribe(
+      items => {
+        this.items = items;
+        this.options.push(this.nameFilter.transform(this.items));
+        this.monsterService.index().subscribe(
+          monsters => {
+            this.monsters = monsters;
+            this.options.push(this.nameFilter.transform(this.monsters));
+            this.spellService.index().subscribe(
+              spells => {
+                this.spells = spells;
+                this.options.push(this.nameFilter.transform(this.spells));
+                this.populateSearch();
+              },
+              err => console.log(err)
+            );
+          },
+          err => console.log(err)
+        );
+      },
+      err => console.log(err)
+    );
+  }
+
+  populateSearch() {
+    this.filteredOptions = this.searchText.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
   viewItems() {
@@ -86,20 +118,19 @@ export class LibraryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadItem();
-    this.loadMonster();
-    this.loadSpell();
-    this.filteredOptions = this.searchText.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-
-    console.log(this.options);
+    // this.loadItem();
+    // this.loadMonster();
+    // this.loadSpell();
+    this.loadAll();
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
+    const newOptions = this.options[0]
+      .concat(this.options[1])
+      .concat(this.options[2]);
+    console.log(newOptions);
 
-    return this.options.filter(option =>
+    return newOptions.filter(option =>
       option.toLowerCase().includes(filterValue)
     );
   }
