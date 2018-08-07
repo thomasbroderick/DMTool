@@ -17,6 +17,7 @@
       <tr *ngFor='let monster of monsters'>
         <td (click)="selectedMonster=monster">{{monster.name}}</td>
         <td>{{monster.type}}</td>
+        <td><button class='btn btn' (click)='addCombatant(monster)'>Add to Combat</button></td>
       </tr>
     </table>
   </div>

@@ -8,6 +8,7 @@ import { Spell } from '../models/spell';
 import { User } from '../models/user';
 import { UserService } from '../user.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EncounterService } from '../encounter.service';
 
 @Component({
   selector: 'app-monster',
@@ -65,7 +66,8 @@ export class MonsterComponent implements OnInit {
   constructor(
     private monsterService: MonsterService,
     private userService: UserService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private encounterService: EncounterService
   ) {}
 
   closeResult: string;
@@ -89,6 +91,10 @@ export class MonsterComponent implements OnInit {
 
   isObject(obj) {
     return typeof obj === 'object';
+  }
+
+  addCombatant(monster: Monster) {
+    this.encounterService.add(monster);
   }
 
   loadUser() {
