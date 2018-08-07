@@ -1,8 +1,16 @@
+import { MonsterService } from './../monster.service';
+import { NameFilterPipe } from './../name-filter.pipe';
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../item.service';
 import { Item } from '../models/item';
 import { User } from '../models/user';
 import { UserService } from '../user.service';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { SpellService } from '../spell.service';
+import { Monster } from '../models/monster';
+import { Spell } from '../models/spell';
 
 @Component({
   selector: 'app-library',
@@ -18,6 +26,72 @@ export class LibraryComponent implements OnInit {
   itemsVisible = false;
   monstersVisible = false;
   spellsVisible = false;
+  searchText = new FormControl('');
+  options = [];
+  items: Item[];
+  monsters: Monster[];
+  spells: Spell[];
+  filteredOptions: Observable<string[]>;
+
+  loadItem() {
+    this.itemService.index().subscribe(
+      data => {
+        this.items = data;
+        this.options.push(this.nameFilter.transform(this.items));
+      },
+      err => console.log(err)
+    );
+  }
+  loadMonster() {
+    this.monsterService.index().subscribe(
+      data => {
+        this.monsters = data;
+        this.options.push(this.nameFilter.transform(this.monsters));
+      },
+      err => console.log(err)
+    );
+  }
+  loadSpell() {
+    this.spellService.index().subscribe(
+      data => {
+        this.spells = data;
+        this.options.push(this.nameFilter.transform(data));
+      },
+      err => console.log(err)
+    );
+  }
+
+  loadAll() {
+    this.itemService.index().subscribe(
+      items => {
+        this.items = items;
+        this.options.push(this.nameFilter.transform(this.items));
+        this.monsterService.index().subscribe(
+          monsters => {
+            this.monsters = monsters;
+            this.options.push(this.nameFilter.transform(this.monsters));
+            this.spellService.index().subscribe(
+              spells => {
+                this.spells = spells;
+                this.options.push(this.nameFilter.transform(this.spells));
+                this.populateSearch();
+              },
+              err => console.log(err)
+            );
+          },
+          err => console.log(err)
+        );
+      },
+      err => console.log(err)
+    );
+  }
+
+  populateSearch() {
+    this.filteredOptions = this.searchText.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
 
   viewItems() {
     this.itemsVisible = true;
@@ -35,7 +109,29 @@ export class LibraryComponent implements OnInit {
     this.spellsVisible = true;
   }
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private nameFilter: NameFilterPipe,
+    private monsterService: MonsterService,
+    private itemService: ItemService,
+    private spellService: SpellService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.loadItem();
+    // this.loadMonster();
+    // this.loadSpell();
+    this.loadAll();
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    const newOptions = this.options[0]
+      .concat(this.options[1])
+      .concat(this.options[2]);
+    console.log(newOptions);
+
+    return newOptions.filter(option =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
 }
