@@ -46,7 +46,7 @@
         <tr *ngFor='let property of generateArray(selectedSpell)'>
           <td>{{property.key}}: </td>
           <td *ngIf="isObject(property.value)">
-            <p *ngFor='let prop of generateArray(property.value)'>{{prop.value.name}}</p> **Here's where we left off**
+            <p *ngFor='let prop of generateArray(property.value)'>{{prop.value.name}}</p>
           </td>
           <td *ngIf="!isObject(property.value)">{{property.value}}
           </td>
