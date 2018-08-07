@@ -12,6 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 import { SpellService } from '../spell.service';
 import { Monster } from '../models/monster';
 import { Spell } from '../models/spell';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-library',
@@ -27,6 +28,7 @@ export class LibraryComponent implements OnInit {
   itemsVisible = false;
   monstersVisible = false;
   spellsVisible = false;
+  closeResult: string;
   searchText = new FormControl('');
   options = [];
   items: Item[];
@@ -34,6 +36,39 @@ export class LibraryComponent implements OnInit {
   spells: Spell[];
   filteredOptions: Observable<string[]>;
   selectedOption = null;
+
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  isObject(obj) {
+    return typeof obj === 'object';
+  }
+  generateArray(obj) {
+    Object.keys(obj).forEach((key) => (obj[key] == null) && delete obj[key]);
+    return Object.keys(obj).map(key => {
+      if (key) {
+      return { key: key, value: obj[key] }; }
+    });
+  }
 
   setOption(option) {
     const foundItem = this.items.find(function(e) {
@@ -112,7 +147,8 @@ export class LibraryComponent implements OnInit {
     private nameFilter: NameFilterPipe,
     private monsterService: MonsterService,
     private itemService: ItemService,
-    private spellService: SpellService
+    private spellService: SpellService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
