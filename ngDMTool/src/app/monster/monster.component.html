@@ -49,13 +49,13 @@
         <td *ngIf="isObject(property.value) && property.key != 'user'">
 
           <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">{{selectedSpell.name}}</h4>
+            <div class="modal-header" style="background: #f9f7f4;">
+              <h4 class="modal-title" style="background: #f9f7f4;">{{selectedSpell.name}}</h4>
               <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background: #f9f7f4;">
                 <p>
                     <b>
                       <i>Level:</i>
@@ -78,7 +78,7 @@
 
 
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="background: #f9f7f4;">
               <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
             </div>
           </ng-template>
