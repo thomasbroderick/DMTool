@@ -9,6 +9,7 @@ export class NameFilterPipe implements PipeTransform {
 
     elements.forEach(function(elem) {
       results.push(elem.name);
+      // results.push(elem);
     });
 
     return results;

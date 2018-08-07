@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ItemService } from '../item.service';
 import { Item } from '../models/item';
 import { User } from '../models/user';
@@ -21,6 +21,7 @@ export class ItemComponent implements OnInit {
   selectedItem = null;
   newItem = new Item();
   editItem = null;
+
   constructor(private itemService: ItemService, private userService: UserService) { }
 
   loadUser() {

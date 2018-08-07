@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { MonsterService } from './../monster.service';
 import { NameFilterPipe } from './../name-filter.pipe';
 import { Component, OnInit } from '@angular/core';
@@ -34,32 +35,28 @@ export class LibraryComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   selectedOption = null;
 
-  loadItem() {
-    this.itemService.index().subscribe(
-      data => {
-        this.items = data;
-        this.options.push(this.nameFilter.transform(this.items));
-      },
-      err => console.log(err)
-    );
+  setOption(option) {
+    const foundItem = this.items.find(function(e) {
+      return e.name === option;
+    });
+    if (foundItem) {
+      return foundItem;
+    }
+    const foundMonster = this.monsters.find(function(elem) {
+      return elem.name === option;
+    });
+    if (foundMonster) {
+      return foundMonster;
+    }
+
+    const foundSpell = this.spells.find(function(el) {
+      return el.name === option;
+    });
+    return foundSpell;
   }
-  loadMonster() {
-    this.monsterService.index().subscribe(
-      data => {
-        this.monsters = data;
-        this.options.push(this.nameFilter.transform(this.monsters));
-      },
-      err => console.log(err)
-    );
-  }
-  loadSpell() {
-    this.spellService.index().subscribe(
-      data => {
-        this.spells = data;
-        this.options.push(this.nameFilter.transform(data));
-      },
-      err => console.log(err)
-    );
+
+  showSelectedOption() {
+    console.log(this.selectedOption);
   }
 
   loadAll() {
