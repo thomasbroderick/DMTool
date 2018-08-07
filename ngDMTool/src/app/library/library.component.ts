@@ -32,6 +32,7 @@ export class LibraryComponent implements OnInit {
   monsters: Monster[];
   spells: Spell[];
   filteredOptions: Observable<string[]>;
+  selectedOption = null;
 
   loadItem() {
     this.itemService.index().subscribe(
@@ -128,7 +129,6 @@ export class LibraryComponent implements OnInit {
     const newOptions = this.options[0]
       .concat(this.options[1])
       .concat(this.options[2]);
-    console.log(newOptions);
 
     return newOptions.filter(option =>
       option.toLowerCase().includes(filterValue)
