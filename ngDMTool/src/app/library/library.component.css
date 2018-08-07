@@ -6,3 +6,15 @@ md-input-container label {
 md-input-container.md-input-focused label {
   color: black;
 }
+#libMain {
+  background-color: rgba(0, 161, 13, 0.788);
+  height: auto;
+  width: auto;
+  border: black 5px solid;
+  padding: 5px;
+  color: black;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
