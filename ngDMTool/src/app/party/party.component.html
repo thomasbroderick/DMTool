@@ -1,5 +1,5 @@
 <div id='partyMain'>
-  <div>
+    <div class="container" height=40px>
     <h1>Party</h1>
     <ul>
       <p *ngFor='let player of players'>
@@ -15,7 +15,8 @@
         </span>
 
       </p>
-      <button class="button" (click)="open(content); creating=true;">CREATE</button>
+      <button class="btn btn" (click)="open(content); creating=true;">CREATE</button>
+      <button class="btn btn" (click)="addAll()">Add All To Combat</button>
     </ul>
   </div>
 
@@ -37,8 +38,8 @@
         <input type="number" name="investigation" placeholder="Investigation" [(ngModel)]="newPlayer.investigation" />
         <input type="number" name="insight" placeholder="insight" [(ngModel)]="newPlayer.insight" />
         <input type="text" name="imageUrl" placeholder="Image URL" [(ngModel)]="newPlayer.imageUrl" />
-        <button class="button" (click)="createPlayer(); d('Cross click');">CREATE</button>
-        <button class="button" (click)="creating=false; d('Cross click');">BACK</button>
+        <button class="btn btn" (click)="createPlayer(); d('Cross click');">CREATE</button>
+        <button class="btn btn" (click)="creating=false; d('Cross click');">BACK</button>
 
       </div>
 

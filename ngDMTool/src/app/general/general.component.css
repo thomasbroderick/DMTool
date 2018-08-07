@@ -1,0 +1,12 @@
+#generalMain {
+  background-color: rgba(0, 0, 0, 0.788);
+  height: auto;
+  width: auto;
+  border: black 5px solid;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

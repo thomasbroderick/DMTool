@@ -24,6 +24,10 @@ import { MonsterComponent } from './monster/monster.component';
 import { SpellComponent } from './spell/spell.component';
 import { EncounterComponent } from './encounter/encounter.component';
 import { PopoverTriggersComponent } from './popover-triggers/popover-triggers.component';
+import { NameFilterPipe } from './name-filter.pipe';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material';
+import { GeneralComponent } from './general/general.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,9 @@ import { PopoverTriggersComponent } from './popover-triggers/popover-triggers.co
     MonsterComponent,
     SpellComponent,
     EncounterComponent,
-    PopoverTriggersComponent
+    PopoverTriggersComponent,
+    NameFilterPipe,
+    GeneralComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -52,9 +58,11 @@ import { PopoverTriggersComponent } from './popover-triggers/popover-triggers.co
     FormsModule,
     ReactiveFormsModule,
     MatSliderModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [NameFilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
