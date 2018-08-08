@@ -8,15 +8,17 @@
         <span>
           <div class="btn-group" role="group" aria-label="Basic example">
 
-            <button class="btn btn-sm" (click)="open(content); selectedPlayer = player;">Details</button>
-            <button class="btn btn-sm" (click)="addCombatant(player)">Add to Combat</button>
+            <button class="btn btn-sm btn-secondary" (click)="open(content); selectedPlayer = player;">Details</button>
+            <button class="btn btn-sm btn-secondary" (click)="addCombatant(player)">Add to Combat</button>
             <button class="btn btn-sm btn-danger" (click)="destroyPlayer(player.id)">Delete</button>
           </div>
         </span>
 
       </p>
-      <button class="btn btn" (click)="open(content); creating=true;">CREATE</button>
-      <button class="btn btn" (click)="addAll()">Add All To Combat</button>
+      <div class="btn-group" role="group" aria-label="example">
+      <button class="btn btn-sm btn-secondary" (click)="open(content); creating=true;">Create Player</button>
+      <button class="btn btn-sm btn-success" (click)="addAll()">Add All To Combat</button>
+    </div>
     </ul>
   </div>
 
