@@ -1,8 +1,6 @@
 <router-outlet></router-outlet>
 
 <body id='{{theme}}'>
-  <button id='lock' *ngIf='locked' class='btn btn' (click)=lock()>Unlock Grid</button>
-  <button id='lock' *ngIf='!locked' class='btn btn' (click)=lock()>Lock Grid</button>
   <input id='logout' class='btn btn' *ngIf=checkLogin() type="submit" value="Logout" (click)=logout()>
   <select class="form-control col-sm-1" id="sel1" [(ngModel)]=theme>
     <option value='snow'>Snow</option>
