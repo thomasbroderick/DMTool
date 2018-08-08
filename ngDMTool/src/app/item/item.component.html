@@ -39,10 +39,10 @@
         </form>
       </div>
 
-    <div *ngIf='selectedItem&&!editItem' style="margin:auto;width: 50%;
+    <div *ngIf='selectedItem&&!editItem' style="margin:auto;width: 60%;
       border: 3px solid rgb(33, 41, 33);
       padding: 10px;">
-      <table class="table table-condensed table-hover table-bordered table-light">
+      <table class="table table-condensed table-hover table-bordered table-striped">
         <thead class="thead-dark">
           <tr align=center>
             <th colspan=2>Item Details</th>
@@ -87,7 +87,7 @@
     </div>
     <!-- Edit Item Div -->
     <div *ngIf=editItem>
-      <table class="table table-condensed table-hover table-bordered table-light">
+      <table class="table table-condensed table-hover table-bordered table-striped">
         <form>
           <tr>
             <td>name: </td>

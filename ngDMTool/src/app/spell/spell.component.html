@@ -37,7 +37,7 @@
     <div *ngIf='selectedSpell&&!editSpell' style="margin:auto;width: 50%;
         border: 3px solid rgb(33, 41, 33);
         padding: 10px;">
-      <table class="table table-condensed table-hover table-bordered table-light">
+      <table class="table table-condensed table-hover table-bordered table-striped">
         <thead class="thead-dark">
           <tr align=center>
             <th colspan=2>Spell Details</th>
@@ -62,7 +62,7 @@
     </div>
     <!-- Edit Spell Div -->
     <div *ngIf=editSpell>
-      <table class="table table-condensed table-hover table-bordered table-light">
+      <table class="table table-condensed table-hover table-bordered table-striped">
         <form>
           <tr>
             <td>name: </td>

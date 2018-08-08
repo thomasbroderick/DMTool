@@ -22,6 +22,7 @@ export class PartyComponent implements OnInit {
       data => {
         this.players.push(data);
         this.creating = false;
+        this.newPlayer = new Player();
       },
       err => console.log(err)
     );

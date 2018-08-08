@@ -9,6 +9,7 @@ import { Gridline } from './models/gridline';
 import { AuthenticationService } from './authentication.service';
 import { Router } from '../../node_modules/@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { GridstackService } from '../../node_modules/@libria/gridstack/services/gridstack.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   grids = [];
   theme = 'mountain';
+  locked = false;
   constructor(private authenticationService: AuthenticationService,
     private router: Router) {}
   saveGrid() {
@@ -34,7 +36,23 @@ export class AppComponent implements OnInit {
       this.grids[index] = gridline;
     });
   }
-
+  lock() {
+    if (this.locked) {
+      const res = _.map($('.grid-stack'), el => {
+        el = $(el);
+        el.attr('movable', true);
+        this.grid.movable(el, true);
+      });
+      this.locked = false;
+    } else {
+      const res = _.map($('.grid-stack'), el => {
+        el = $(el);
+        el.attr('movable', false);
+        this.grid.movable(el, false);
+      });
+      this.locked = true;
+    }
+  }
   loadGrid() {
     const res = _.map($('.grid-stack .grid-stack-item:visible'), el => {
       el = $(el);

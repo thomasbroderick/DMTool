@@ -77,7 +77,12 @@
   position: absolute;
   right: 100px;
 }
+#lock {
+  position: absolute;
+  right: 250px;
+}
 #main {
   position: relative;
   top: 50px;
 }
+
