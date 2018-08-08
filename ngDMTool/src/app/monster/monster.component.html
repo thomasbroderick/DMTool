@@ -1,6 +1,6 @@
 <!-- Monsters display -->
 <div>
-  <div *ngIf='!selectedMonster && monstersVisible' style="margin:auto;width: 60%;
+  <div *ngIf='!selectedMonster && monstersVisible' style="margin:auto;width: 90%;
       border: 3px solid rgb(33, 41, 33);
       padding: 10px;">
     <button class="button" (click)="showCreateDiv()">CREATE NEW MONSTER</button>
@@ -11,12 +11,15 @@
         </tr>
         <tr>
           <th>Name</th>
+          <th>CR</th>
           <th>Type</th>
+          <th>Add/Remove</th>
         </tr>
       </thead>
       <tr *ngFor='let monster of monsters'>
         <td (click)="selectedMonster=monster">{{monster.name}}</td>
-        <td>{{monster.type}}</td>
+        <td>{{monster.challengeRating | fractionizer}}</td>
+        <td>{{monster.type | capitalize}}</td>
         <td><button class='btn btn' (click)='addCombatant(monster)'>Add to Combat</button></td>
       </tr>
     </table>
@@ -36,7 +39,7 @@
     </form>
   </div>
 
-  <div *ngIf='selectedMonster&&!editMonster' style="margin:auto;width: 50%;
+  <div *ngIf='selectedMonster&&!editMonster' style="margin:auto;width: 70%;
       border: 3px solid rgb(33, 41, 33);
       padding: 10px;">
     <table class="table table-condensed table-hover table-bordered table-striped">
