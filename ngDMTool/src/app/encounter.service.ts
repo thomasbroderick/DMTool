@@ -11,8 +11,19 @@ export class EncounterService {
   combat = [];
 
   add(combatant) {
-    this.combat.push(combatant);
-    console.log(combatant);
+    let count = 0;
+    for (let i = 0; i < this.combat.length; i++) {
+      if (this.combat[i].name.startsWith(combatant.name)) {
+        count++;
+      }
+    }
+    if (count > 0) {
+      const combatant2 = Object.assign({}, combatant);
+      combatant2.name = combatant2.name + ' ' + count;
+      this.combat.push(combatant2);
+    } else {
+      this.combat.push(combatant);
+    }
   }
 
 

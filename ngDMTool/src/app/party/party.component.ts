@@ -78,6 +78,9 @@ export class PartyComponent implements OnInit {
   }
 
   private getDismissReason(reason: any): string {
+    this.editPlayer = null;
+    this.newPlayer = null;
+    this.selectedPlayer = null;
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
