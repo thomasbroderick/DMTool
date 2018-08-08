@@ -28,6 +28,8 @@ import { NameFilterPipe } from './name-filter.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
 import { GeneralComponent } from './general/general.component';
+import { CapitalizePipe } from './capitalize.pipe';
+import { FractionizerPipe } from './fractionizer.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { GeneralComponent } from './general/general.component';
     EncounterComponent,
     PopoverTriggersComponent,
     NameFilterPipe,
-    GeneralComponent
+    GeneralComponent,
+    CapitalizePipe,
+    FractionizerPipe
   ],
   imports: [
     NgbModule.forRoot(),
