@@ -9,3 +9,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+img.resize {
+  width: 300px; /* you can use % */
+  height: 300px;
+}

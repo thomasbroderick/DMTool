@@ -36,7 +36,7 @@ public class AuthController {
 	}
 
 	@RequestMapping(path = "authenticate", method = RequestMethod.GET)
-	public Principal authenticate(Principal principal) {
+	public Principal authenticate(Principal principal, HttpServletResponse res) {
 	  return principal;
 	}
 

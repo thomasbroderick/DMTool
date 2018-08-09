@@ -40,7 +40,7 @@ register(form: NgForm) {
       data => {
         console.log('working');
         this.authenticationService
-          .login(form.value.email, form.value.password)
+          .login(form.value.username, form.value.password)
           .subscribe(
             data => {
               this.router.navigateByUrl('');

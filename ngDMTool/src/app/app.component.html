@@ -1,6 +1,6 @@
+<body id='{{theme}}'>
 <router-outlet></router-outlet>
 
-<body id='{{theme}}'>
   <input id='logout' class='btn btn' *ngIf=checkLogin() type="submit" value="Logout" (click)=logout()>
   <select class="form-control col-sm-1" id="sel1" [(ngModel)]=theme>
     <option value='snow'>Snow</option>
