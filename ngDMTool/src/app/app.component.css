@@ -100,3 +100,6 @@
   top: 50px;
 }
 
+body, html {
+  overflow: hidden;
+}

@@ -22,8 +22,7 @@ export class UserService {
   };
 
   index() {
-    if (this.checkLogin()) {
-      this.checkLogout();
+
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
       return this.http.get<User[]>(`${this.url}user/all`, { headers }).pipe(
@@ -32,7 +31,7 @@ export class UserService {
           return throwError('KABOOM');
         })
       );
-    }
+
   }
 
   create(user) {

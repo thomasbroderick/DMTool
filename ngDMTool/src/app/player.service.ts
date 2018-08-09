@@ -23,8 +23,6 @@ export class PlayerService {
   };
 
   index(cid) {
-    if (this.checkLogin()) {
-      this.checkLogout();
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
       return this.http
@@ -35,7 +33,6 @@ export class PlayerService {
             return throwError('KABOOM');
           })
         );
-    }
   }
 
   create(cid, player) {

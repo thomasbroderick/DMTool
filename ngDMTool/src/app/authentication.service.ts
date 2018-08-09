@@ -17,6 +17,7 @@ export class AuthenticationService {
     const token = this.generateBasicAuthToken(username, password);
 
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+    headers.set('X-Requested-With', 'XMLHttpRequest');
 
     return this.http
     .get(`${this.url}authenticate`, {headers})
