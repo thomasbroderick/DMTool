@@ -2,7 +2,6 @@ package com.skilldistillery.dmtool.entities;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Spell {
