@@ -1,6 +1,6 @@
 #dieMain {
-  background-color: rgb(235, 13, 13);
-  background-color: rgba(252, 8, 8, 0.5);
+  color: #e6e6e8;
+  background-color: #06000a;
   height: auto;
   width: auto;
   border: black 5px solid;
@@ -12,14 +12,14 @@
 }
 
 .btn-primary{
-  background-color: darkmagenta;
-  color: rgb(211, 197, 5);
+  background-color: #300032;
+  color: #e6e6e8;
   border: black solid;
 }
 
 #dropdown {
-  background-color: darkmagenta;
-  color: rgb(211, 197, 5);
+  background-color: #300032;
+  color: #e6e6e8;
   border: black solid;
 }
 
@@ -33,8 +33,8 @@
 }
 
 #result {
-  background-color: darkmagenta;
-  color: rgb(211, 197, 5);
+  background-color: #300032;
+  color: #e6e6e8;
   border: black solid;
   text-align: center;
 }

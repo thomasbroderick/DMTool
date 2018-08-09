@@ -7,12 +7,12 @@
         <li style='color: white' *ngFor='let combatant of combat'> {{combatant.name}}
         </li>
       </ul>
-      <button class='btn btn-lg btn-success' *ngIf='combat.length > 0' (click)='roll()'>Roll</button>
+      <button class='btn btn-lg btn-light' *ngIf='combat.length > 0' (click)='roll()'>Initiative</button>
     </div>
     <div *ngIf='rolled!==null'>
       <div class='btn-group'>
-      <button class='btn btn-secondary' (click)='next()'>Next</button>
-      <button class='btn btn-secondary' (click)='prev()'>Prev</button>
+      <button class='btn btn-light' (click)='next()'>Next</button>
+      <button class='btn btn-light' (click)='prev()'>Prev</button>
       <button class='btn btn-danger' (click)='remove(combat[rolled])'>Remove</button>
       <button class='btn btn-danger' (click)='reset()'>Reset</button>
       <button class='btn btn-danger' (click)='rolled=null'>Back</button>
