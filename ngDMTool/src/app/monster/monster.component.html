@@ -3,9 +3,9 @@
   <div *ngIf='!selectedMonster && monstersVisible' style="margin:auto;width: 90%;
       border: 3px solid rgb(33, 41, 33);
       padding: 10px;">
-    <button class="button" (click)="showCreateDiv()">CREATE NEW MONSTER</button>
+    <button class="btn btn-light" (click)="showCreateDiv()">Create New Monster</button>
     <table class="table table-condensed table-hover table-bordered table-striped" *ngIf=!selected>
-      <thead class="thead-dark">
+      <thead>
         <tr align=center>
           <th colspan=6>Monsters</th>
         </tr>
@@ -20,7 +20,7 @@
         <td (click)="selectedMonster=monster">{{monster.name}}</td>
         <td>{{monster.challengeRating | fractionizer}}</td>
         <td>{{monster.type | capitalize}}</td>
-        <td><button class='btn btn' (click)='addCombatant(monster)'>Add to Combat</button></td>
+        <td><button class='btn btn-secondary' (click)='addCombatant(monster)'>Add to Combat</button></td>
       </tr>
     </table>
   </div>
@@ -35,7 +35,7 @@
       />
 
       <br />
-      <button class="button" (click)="createMonster(createMonsterForm)">CREATE</button>
+      <button class="btn btn-light" (click)="createMonster(createMonsterForm)">CREATE</button>
     </form>
   </div>
 
@@ -43,7 +43,7 @@
       border: 3px solid rgb(33, 41, 33);
       padding: 10px;">
     <table class="table table-condensed table-hover table-bordered table-striped">
-      <thead class="thead-dark">
+      <thead>
         <tr align=center>
           <th colspan=2>Monster Details</th>
         </tr>
