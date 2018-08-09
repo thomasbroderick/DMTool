@@ -26,7 +26,7 @@ public class CampaignController {
 
 	
 
-	@RequestMapping(path = "campaign/ping", method = RequestMethod.GET)
+	@RequestMapping(path = "ping", method = RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
