@@ -9,6 +9,7 @@ import { User } from '../models/user';
 import { UserService } from '../user.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EncounterService } from '../encounter.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-monster',
