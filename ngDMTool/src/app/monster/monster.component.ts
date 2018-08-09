@@ -68,7 +68,8 @@ export class MonsterComponent implements OnInit {
     private monsterService: MonsterService,
     private userService: UserService,
     private modalService: NgbModal,
-    private encounterService: EncounterService
+    private encounterService: EncounterService,
+    private authService: AuthenticationService
   ) {}
 
   closeResult: string;
@@ -99,10 +100,12 @@ export class MonsterComponent implements OnInit {
   }
 
   loadUser() {
+    if (this.authService.checkLogin()) {
     this.userService
       .index()
       .subscribe(data => (this.users = data), err => console.log(err));
   }
+}
   showCreateDiv() {
     this.createNew = true;
     this.monstersVisible = false;

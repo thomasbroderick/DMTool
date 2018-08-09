@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ItemService } from '../item.service';
 import { Item } from '../models/item';
@@ -22,13 +23,15 @@ export class ItemComponent implements OnInit {
   newItem = new Item();
   editItem = null;
 
-  constructor(private itemService: ItemService, private userService: UserService) { }
+  constructor(private itemService: ItemService, private userService: UserService, private authService: AuthenticationService) { }
 
   loadUser() {
+    if (this.authService.checkLogin()) {
     this.userService
       .index()
       .subscribe(data => (this.users = data), err => console.log(err));
   }
+}
 
   showCreateDiv() {
     this.createNew = true;
