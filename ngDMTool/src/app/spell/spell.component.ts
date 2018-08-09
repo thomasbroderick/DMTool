@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../authentication.service';
+import { AuthenticationComponent } from './../authentication/authentication.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { Spell } from '../models/spell';
@@ -46,7 +48,8 @@ export class SpellComponent implements OnInit {
 
   constructor(
     private spellService: SpellService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthenticationService
   ) {}
 
   isObject(obj) {
@@ -54,9 +57,11 @@ export class SpellComponent implements OnInit {
   }
 
   loadUser() {
-    this.userService
-      .index()
-      .subscribe(data => (this.users = data), err => console.log(err));
+    if (this.authService.checkLogin()) {
+      this.userService
+        .index()
+        .subscribe(data => (this.users = data), err => console.log(err));
+    }
   }
   showCreateDiv() {
     this.createNew = true;

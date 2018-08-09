@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../authentication.service';
 import { element } from 'protractor';
 import { MonsterService } from './../monster.service';
 import { NameFilterPipe } from './../name-filter.pipe';
@@ -98,6 +99,7 @@ export class LibraryComponent implements OnInit {
   }
 
   loadAll() {
+    if (this.authService.checkLogin()) {
     this.itemService.index().subscribe(
       items => {
         this.items = items;
@@ -121,6 +123,7 @@ export class LibraryComponent implements OnInit {
       err => console.log(err)
     );
   }
+}
 
   populateSearch() {
     this.filteredOptions = this.searchText.valueChanges.pipe(
@@ -151,7 +154,8 @@ export class LibraryComponent implements OnInit {
     private monsterService: MonsterService,
     private itemService: ItemService,
     private spellService: SpellService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit() {

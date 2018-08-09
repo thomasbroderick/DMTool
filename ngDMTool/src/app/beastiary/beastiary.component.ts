@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Monster } from '../models/monster';
 import { MonsterService } from '../monster.service';
@@ -47,11 +48,13 @@ export class BeastiaryComponent implements OnInit {
     console.log(this.selected);
   }
   loadMonster() {
+    if (this.authService.checkLogin()) {
     this.monsterService
       .index()
       .subscribe(data => (this.monsters = data), err => console.log(err));
   }
-  constructor(private monsterService: MonsterService) {}
+}
+  constructor(private authService: AuthenticationService, private monsterService: MonsterService) {}
 
   ngOnInit() {
     this.loadMonster();

@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../models/user';
@@ -28,7 +29,7 @@ export class AdminComponent implements OnInit {
   users: User[] = [];
   selectedUser = null;
   newUser = new User();
-  editUser  = null;
+  editUser = null;
 
   items: Item[] = [];
   selectedItem = null;
@@ -98,13 +99,15 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadUser(), err => console.log(err));
   }
   loadUser() {
+    if (this.authService.checkLogin()) {
     this.userService
       .index()
       .subscribe(data => (this.users = data), err => console.log(err));
   }
+}
   createItem() {
     this.itemService
-      .create( this.newItem)
+      .create(this.newItem)
       .subscribe(data => this.items.push(data), err => console.log(err));
 
     this.newUser = new User();
@@ -130,10 +133,12 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadItem(), err => console.log(err));
   }
   loadItem() {
+    if (this.authService.checkLogin()) {
     this.itemService
       .index()
       .subscribe(data => (this.items = data), err => console.log(err));
   }
+}
 
   createCampaign() {
     this.campaignService
@@ -144,14 +149,16 @@ export class AdminComponent implements OnInit {
     this.loadUser();
   }
   updateCampaign() {
-    this.campaignService.update(this.editCampaign.id, this.editCampaign).subscribe(
-      data => {
-        this.loadCampaign(),
-          (this.selectedCampaign = this.editCampaign),
-          (this.editCampaign = null);
-      },
-      err => console.log(err)
-    );
+    this.campaignService
+      .update(this.editCampaign.id, this.editCampaign)
+      .subscribe(
+        data => {
+          this.loadCampaign(),
+            (this.selectedCampaign = this.editCampaign),
+            (this.editCampaign = null);
+        },
+        err => console.log(err)
+      );
   }
   setEditCampaign() {
     this.editCampaign = Object.assign({}, this.selectedCampaign);
@@ -163,10 +170,12 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadCampaign(), err => console.log(err));
   }
   loadCampaign() {
+    if (this.authService.checkLogin()) {
     this.campaignService
       .index()
       .subscribe(data => (this.campaigns = data), err => console.log(err));
   }
+}
 
   createNpc() {
     this.npcService
@@ -196,18 +205,17 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadNpc(), err => console.log(err));
   }
   loadNpc() {
-    console.log('sldfjdslkjf');
-    this.npcService
-      .index(1)
-      .subscribe(data => {
+    if (this.authService.checkLogin()) {
+    this.npcService.index(1).subscribe(
+      data => {
+        console.log(data);
 
-          console.log(data);
-
-          this.npcs = data;
-        },
-        err => console.log(err)
-      );
+        this.npcs = data;
+      },
+      err => console.log(err)
+    );
   }
+}
 
   createPlayer() {
     this.playerService
@@ -237,10 +245,12 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadPlayer(), err => console.log(err));
   }
   loadPlayer() {
+    if (this.authService.checkLogin()) {
     this.playerService
       .index(1)
       .subscribe(data => (this.players = data), err => console.log(err));
   }
+}
 
   createSpell() {
     this.spellService
@@ -270,10 +280,12 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadSpell(), err => console.log(err));
   }
   loadSpell() {
+    if (this.authService.checkLogin()) {
     this.spellService
       .index()
       .subscribe(data => (this.spells = data), err => console.log(err));
   }
+}
 
   createTown() {
     this.townService
@@ -303,28 +315,35 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadTown(), err => console.log(err));
   }
   loadTown() {
+    if (this.authService.checkLogin()) {
     this.townService
       .index(1)
       .subscribe(data => (this.towns = data), err => console.log(err));
   }
+}
 
   createCampaignNote() {
     this.campaignNoteService
       .create(1, this.newCampaignNote)
-      .subscribe(data => this.campaignNotes.push(data), err => console.log(err));
+      .subscribe(
+        data => this.campaignNotes.push(data),
+        err => console.log(err)
+      );
 
     this.newUser = new User();
     this.loadUser();
   }
   updateCampaignNote() {
-    this.campaignNoteService.update(1, this.editCampaignNote.id, this.editCampaignNote).subscribe(
-      data => {
-        this.loadCampaignNote(),
-          (this.selectedCampaignNote = this.editCampaignNote),
-          (this.editCampaignNote = null);
-      },
-      err => console.log(err)
-    );
+    this.campaignNoteService
+      .update(1, this.editCampaignNote.id, this.editCampaignNote)
+      .subscribe(
+        data => {
+          this.loadCampaignNote(),
+            (this.selectedCampaignNote = this.editCampaignNote),
+            (this.editCampaignNote = null);
+        },
+        err => console.log(err)
+      );
   }
   setEditCampaignNote() {
     this.editCampaignNote = Object.assign({}, this.selectedCampaignNote);
@@ -336,9 +355,14 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadCampaignNote(), err => console.log(err));
   }
   loadCampaignNote() {
-    this.campaignNoteService
-      .index(1)
-      .subscribe(data => (this.campaignNotes = data), err => console.log(err));
+    if (this.authService.checkLogin()) {
+      this.campaignNoteService
+        .index(1)
+        .subscribe(
+          data => (this.campaignNotes = data),
+          err => console.log(err)
+        );
+    }
   }
 
   createPlayerNote() {
@@ -350,14 +374,16 @@ export class AdminComponent implements OnInit {
     this.loadUser();
   }
   updatePlayerNote() {
-    this.playerNoteService.update(1, this.editPlayerNote.id, this.editPlayerNote).subscribe(
-      data => {
-        this.loadPlayerNote(),
-          (this.selectedPlayerNote = this.editPlayerNote),
-          (this.editPlayerNote = null);
-      },
-      err => console.log(err)
-    );
+    this.playerNoteService
+      .update(1, this.editPlayerNote.id, this.editPlayerNote)
+      .subscribe(
+        data => {
+          this.loadPlayerNote(),
+            (this.selectedPlayerNote = this.editPlayerNote),
+            (this.editPlayerNote = null);
+        },
+        err => console.log(err)
+      );
   }
   setEditPlayerNote() {
     this.editPlayerNote = Object.assign({}, this.selectedPlayerNote);
@@ -369,15 +395,24 @@ export class AdminComponent implements OnInit {
       .subscribe(data => this.loadPlayerNote(), err => console.log(err));
   }
   loadPlayerNote() {
-    this.playerNoteService
-      .index(1)
-      .subscribe(data => (this.playerNotes = data), err => console.log(err));
+    if (this.authService.checkLogin()) {
+      this.playerNoteService
+        .index(1)
+        .subscribe(data => (this.playerNotes = data), err => console.log(err));
+    }
   }
-  constructor(private playerNoteService: PlayerNoteService,
-    private campaignNoteService: CampaignNoteService, private townService: TownService,
-    private spellService: SpellService, private playerService: PlayerService,
-    private npcService: NpcService, private campaignService: CampaignService,
-    private userService: UserService, private itemService: ItemService) {}
+  constructor(
+    private playerNoteService: PlayerNoteService,
+    private campaignNoteService: CampaignNoteService,
+    private townService: TownService,
+    private spellService: SpellService,
+    private playerService: PlayerService,
+    private npcService: NpcService,
+    private campaignService: CampaignService,
+    private userService: UserService,
+    private itemService: ItemService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.loadUser();
@@ -390,5 +425,4 @@ export class AdminComponent implements OnInit {
     this.loadCampaignNote();
     this.loadPlayerNote();
   }
-
 }
