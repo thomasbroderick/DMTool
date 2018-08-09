@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.dmtool.entities.Monster;
-import com.skilldistillery.dmtool.entities.Spell;
 import com.skilldistillery.dmtool.repositories.MonsterRepository;
 import com.skilldistillery.dmtool.repositories.SpellRepository;
 import com.skilldistillery.dmtool.repositories.UserRepository;

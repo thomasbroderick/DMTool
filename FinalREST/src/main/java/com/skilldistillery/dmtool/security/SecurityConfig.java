@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        .antMatchers(HttpMethod.GET, "/api/ping").permitAll()
 	        .antMatchers(HttpMethod.GET, "/").permitAll()
 	        .antMatchers("/api/register").permitAll()
+	        .antMatchers("/api/login").permitAll()
 	        .anyRequest().authenticated()
 	        .and()
 	        .httpBasic();

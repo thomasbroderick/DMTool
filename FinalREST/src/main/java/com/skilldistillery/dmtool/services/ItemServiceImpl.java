@@ -28,7 +28,9 @@ public class ItemServiceImpl implements ItemService {
 		if (userRepo.findOneByUsername(username).getId() != 1) {
 			results.addAll(index("admin"));
 		}
+		if(needsFix) {
 		fix(results);
+		}
 		return results;
 	}
 
