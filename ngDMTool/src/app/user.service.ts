@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '../../node_modules/@angular/common/http';
+import {
+  HttpHeaders,
+  HttpClient
+} from '../../node_modules/@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
@@ -19,22 +22,24 @@ export class UserService {
   };
 
   index() {
-    this.checkLogout();
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
-    return this.http.get<User[]>(`${this.url}user/all`, {headers}).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('KABOOM');
-      })
-    );
+    if (this.checkLogin) {
+      this.checkLogout();
+      const token = this.authService.getToken();
+      const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
+      return this.http.get<User[]>(`${this.url}user/all`, { headers }).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
+    }
   }
 
   create(user) {
     this.checkLogout();
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
-    return this.http.post<User>(`${this.url}user`, user, {headers}).pipe(
+    return this.http.post<User>(`${this.url}user`, user, { headers }).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -46,19 +51,21 @@ export class UserService {
     this.checkLogout();
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
-    return this.http.put<User>(`${this.url}user/${uid}`, user, {headers}).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('KABOOM');
-      })
-    );
+    return this.http
+      .put<User>(`${this.url}user/${uid}`, user, { headers })
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+      );
   }
 
   destroy(id) {
     this.checkLogout();
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
-    return this.http.delete<any>(`${this.url}user/${id}`, {headers}).pipe(
+    return this.http.delete<any>(`${this.url}user/${id}`, { headers }).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');
@@ -70,6 +77,16 @@ export class UserService {
       this.router.navigateByUrl('login');
     }
   }
+  checkLogin() {
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+    return false;
+  }
 
-  constructor(private router: Router, private authService: AuthenticationService, private http: HttpClient) { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    private http: HttpClient
+  ) {}
 }
