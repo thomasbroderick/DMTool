@@ -143,10 +143,12 @@ export class MonsterComponent implements OnInit {
       .subscribe(data => this.loadMonster(), err => console.log(err));
   }
   loadMonster() {
+    if (this.authService.checkLogin()) {
     this.monsterService
       .index()
       .subscribe(data => (this.monsters = data), err => console.log(err));
   }
+}
 
   open(content) {
     this.modalService

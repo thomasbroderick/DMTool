@@ -68,10 +68,12 @@ export class ItemComponent implements OnInit {
       .subscribe(data => this.loadItem(), err => console.log(err));
   }
   loadItem() {
+    if (this.authService.checkLogin()) {
     this.itemService
       .index()
       .subscribe(data => (this.items = data), err => console.log(err));
   }
+}
   ngOnInit() {
     this.loadUser();
     this.loadItem();

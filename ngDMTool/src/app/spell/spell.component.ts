@@ -100,10 +100,12 @@ export class SpellComponent implements OnInit {
       .subscribe(data => this.loadSpell(), err => console.log(err));
   }
   loadSpell() {
+    if (this.authService.checkLogin()) {
     this.spellService
       .index()
       .subscribe(data => (this.spells = data), err => console.log(err));
   }
+}
   ngOnInit() {
     this.loadUser();
     this.loadSpell();

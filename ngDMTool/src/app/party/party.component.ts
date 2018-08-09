@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../models/player';
 import { PlayerService } from '../player.service';
@@ -48,6 +49,7 @@ export class PartyComponent implements OnInit {
       .subscribe(data => this.loadPlayer(), err => console.log(err));
   }
   loadPlayer() {
+    if (this.authService.checkLogin()) {
     this.playerService.index(1).subscribe(
       data => {
         this.players = data;
@@ -55,6 +57,7 @@ export class PartyComponent implements OnInit {
       err => console.log(err)
     );
   }
+}
 
   addCombatant(player: Player) {
     this.encounterService.add(player);
@@ -94,7 +97,8 @@ export class PartyComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private encounterService: EncounterService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit() {
