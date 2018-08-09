@@ -5,17 +5,18 @@
     <div *ngIf='rolled===null'>
       <ul>
         <li style='color: white' *ngFor='let combatant of combat'> {{combatant.name}}
-          <button class='btn btn-danger' (click)='remove(combatant)'>Remove</button>
         </li>
       </ul>
-      <button *ngIf='combat.length > 0' (click)='roll()'>Roll</button>
+      <button class='btn btn-lg btn-success' *ngIf='combat.length > 0' (click)='roll()'>Roll</button>
     </div>
     <div *ngIf='rolled!==null'>
-      <button class='btn' (click)='next()'>Next</button>
-      <button class='btn' (click)='prev()'>Prev</button>
+      <div class='btn-group'>
+      <button class='btn btn-secondary' (click)='next()'>Next</button>
+      <button class='btn btn-secondary' (click)='prev()'>Prev</button>
       <button class='btn btn-danger' (click)='remove(combat[rolled])'>Remove</button>
       <button class='btn btn-danger' (click)='reset()'>Reset</button>
       <button class='btn btn-danger' (click)='rolled=null'>Back</button>
+    </div>
       <br> {{combat[rolled].name}}
       <br>
       <img src={{combat[rolled].imageUrl}}/>

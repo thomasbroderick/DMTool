@@ -47,11 +47,14 @@
           </tr>
         </thead>
         <tr *ngFor='let property of generateArray(selectedOption)'>
-          <td>{{property.key}}: </td>
-          <td *ngIf="isObject(property.value)">
+          <td *ngIf="property.key !== 'user' && property.key !== 'range' && property.key !== 'imageUrl' && property.key !== 'description'
+          && property.key !== 'id'">{{property.key}}: </td>
+          <td *ngIf="isObject(property.value) && property.key !== 'user' && property.key !== 'range' && property.key !== 'imageUrl' && property.key !== 'description'
+          && property.key !== 'id'">
             <p *ngFor='let prop of generateArray(property.value)'>{{prop.value.name}}</p>
           </td>
-          <td *ngIf="!isObject(property.value)">{{property.value}}
+          <td *ngIf="!isObject(property.value) && property.key !== 'user' && property.key !== 'range' && property.key !== 'imageUrl' && property.key !== 'description'
+          && property.key !== 'id'">{{property.value}}
           </td>
         </tr>
       </table>
