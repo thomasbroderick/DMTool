@@ -24,7 +24,7 @@ export class SpellService {
   };
 
   index() {
-    if (this.checkLogin) {
+    if (this.checkLogin()) {
       this.checkLogout();
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
