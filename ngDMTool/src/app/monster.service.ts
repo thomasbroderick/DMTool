@@ -22,8 +22,7 @@ export class MonsterService {
   };
 
   index() {
-    if (this.checkLogin()) {
-      this.checkLogout();
+
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
       return this.http
@@ -34,7 +33,7 @@ export class MonsterService {
             return throwError('KABOOM');
           })
         );
-    }
+
   }
 
   create(monster) {

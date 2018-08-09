@@ -22,8 +22,7 @@ export class ItemService {
   };
 
   index() {
-    if (this.checkLogin()) {
-      this.checkLogout();
+
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
       return this.http.get<Item[]>(`${this.url}item/all`, { headers }).pipe(
@@ -32,7 +31,7 @@ export class ItemService {
           return throwError('KABOOM');
         })
       );
-    }
+
   }
 
   create(item) {

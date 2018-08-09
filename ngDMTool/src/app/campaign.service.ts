@@ -22,8 +22,6 @@ export class CampaignService {
   };
 
   index() {
-    if (this.checkLogin()) {
-      this.checkLogout();
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
       return this.http
@@ -34,7 +32,7 @@ export class CampaignService {
             return throwError('KABOOM');
           })
         );
-    }
+
   }
 
   create(campaign) {

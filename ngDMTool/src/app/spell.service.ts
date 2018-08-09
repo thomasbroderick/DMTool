@@ -24,8 +24,6 @@ export class SpellService {
   };
 
   index() {
-    if (this.checkLogin()) {
-      this.checkLogout();
       const token = this.authService.getToken();
       const headers = new HttpHeaders().set('Authorization', `Basic ${token}`);
       return this.http.get<Spell[]>(`${this.url}spell/all`, { headers }).pipe(
@@ -34,7 +32,7 @@ export class SpellService {
           return throwError('KABOOM');
         })
       );
-    }
+
   }
 
   create(spell) {
