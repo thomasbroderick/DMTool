@@ -170,4 +170,5 @@ export class MonsterComponent implements OnInit {
     this.loadUser();
     this.loadMonster();
   }
+
 }

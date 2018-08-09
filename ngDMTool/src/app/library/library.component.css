@@ -7,12 +7,12 @@ md-input-container.md-input-focused label {
   color: black;
 }
 #libMain {
-  background-color: rgba(73, 73, 73, 0.788);
+  background-color: #06000a;
   height: auto;
   width: auto;
   border: black 5px solid;
   padding: 5px;
-  color: rgb(255, 255, 255);
+  color: #e6e6e8;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;

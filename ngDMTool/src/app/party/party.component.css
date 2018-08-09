@@ -1,11 +1,15 @@
 #partyMain {
-  background-color: rgba(8, 32, 252, 0.658);
+  background-color: #06000a;
   height: auto;
   width: auto;
   border: black 5px solid;
-  color: white;
+  color: #e6e6e8;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.btn-secondary {
+  background-color: #300032;
 }

@@ -3,22 +3,22 @@
     <h1>Die Roller</h1>
     <form [formGroup]="radioGroupForm">
       <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="model" [(ngModel)]="dieType">
-        <label ngbButtonLabel class="btn-primary">
+        <label ngbButtonLabel class="btn-primary btn-sm">
           <input ngbButton type="radio" [value]="4"> d4
         </label>
-        <label ngbButtonLabel class="btn-primary">
+        <label ngbButtonLabel class="btn-primary btn-sm">
           <input ngbButton type="radio" [value]="6"> d6
         </label>
-        <label ngbButtonLabel class="btn-primary">
+        <label ngbButtonLabel class="btn-primary btn-sm">
           <input ngbButton type="radio" [value]="8"> d8
         </label>
-        <label ngbButtonLabel class="btn-primary">
+        <label ngbButtonLabel class="btn-primary btn-sm">
           <input ngbButton type="radio" [value]="10"> d10
         </label>
-        <label ngbButtonLabel class="btn-primary">
+        <label ngbButtonLabel class="btn-primary btn-sm">
           <input ngbButton type="radio" [value]="12"> d12
         </label>
-        <label ngbButtonLabel class="btn-primary">
+        <label ngbButtonLabel class="btn-primary btn-sm">
           <input ngbButton type="radio" [value]="20"> d20
         </label>
       </div>
@@ -32,7 +32,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button id="rollSubmit" class="btn btn-primary btn-lg" (click)="roll()">Roll!</button>
+    <button id="rollSubmit" class="btn btn-primary btn-sm" (click)="roll()">Roll!</button>
     <br>
     <br>
     <br *ngIf=!dieResult>
