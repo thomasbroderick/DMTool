@@ -51,6 +51,7 @@ export class LibraryComponent implements OnInit {
   }
 
   private getDismissReason(reason: any): string {
+    this.selectedOption = null;
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -63,10 +64,12 @@ export class LibraryComponent implements OnInit {
     return typeof obj === 'object';
   }
   generateArray(obj) {
-    Object.keys(obj).forEach((key) => (obj[key] == null) && delete obj[key]);
+    Object.keys(obj).forEach(key => obj[key] == null && delete obj[key]);
     return Object.keys(obj).map(key => {
       if (key) {
-      return { key: key, value: obj[key] }; }
+        console.log(key);
+        return { key: key, value: obj[key] };
+      }
     });
   }
 

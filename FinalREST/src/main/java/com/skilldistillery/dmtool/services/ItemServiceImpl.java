@@ -41,28 +41,31 @@ public class ItemServiceImpl implements ItemService {
 			String str = item.getProperties();
 
 			if (str.contains("Ammunition"))
-				strb.append("Ammunition ");
+				strb.append("Ammunition, ");
 			if (str.contains("Finesse"))
-				strb.append("Finesse ");
+				strb.append("Finesse, ");
 			if (str.contains("Heavy"))
-				strb.append("Heavy ");
+				strb.append("Heavy, ");
 			if (str.contains("Light"))
-				strb.append("Light ");
+				strb.append("Light, ");
 			if (str.contains("Loading"))
-				strb.append("Loading ");
+				strb.append("Loading, ");
 			if (str.contains("Reach"))
-				strb.append("Reach ");
+				strb.append("Reach, ");
 			if (str.contains("Special"))
-				strb.append("Special ");
+				strb.append("Special, ");
 			if (str.contains("Thrown"))
-				strb.append("Thrown ");
+				strb.append("Thrown, ");
 			if (str.contains("Two-Handed"))
-				strb.append("Two-Handed ");
+				strb.append("Two-Handed, ");
 			if (str.contains("Versatile"))
-				strb.append("Versatile ");
+				strb.append("Versatile, ");
 			if (str.contains("Monk"))
-				strb.append("Monk ");
+				strb.append("Monk, ");
 
+			if (strb.length() > 0) {
+				strb.deleteCharAt(strb.length() - 2);
+			}
 			item.setProperties(strb.toString());
 
 			update("admin", item.getId(), item);
