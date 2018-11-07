@@ -1,12 +1,12 @@
-**DM Tool - Final Project for Skill Distillery
+##DM Tool - Final Project for Skill Distillery
 
-*Group Members
+###Group Members
 Tom Broderick, Jared Groves, Jeremy Botta
 
 Hosted on AWS at http://18.217.143.254:8080/FinalREST/
 Login with Username "Test" and Password "Test"
 
-*Overview
+###Overview
 
 We started this problem aiming to solve a problem familiar to those who run tabletop games everywhere: There's no singular all-in-one tool to assist you in sifting through the massive amount of information and applying it to your specific situation.
 
@@ -14,15 +14,15 @@ This is where our app comes into play: when you log in, our database stocked ful
 
 This isn't only aimed at Dungeons and Dragons though, this was an exercise to be able to aggregate large amounts of information and display them in a meaningful and easy to navigate way.  Users can move the various grid elements around the screen, add their own characters, search the Tome of Arcane Knowledge, and access various rules for 5E play.  
 
-*Agile
+###Agile
 
 Greatly helping our group dynamic was our implementation of a more agile work environment. The more workplace-oriented practice of having two week sprints was untenable for a week-long project, so we modified these practices to have both morning and afternoon stand-up meetings in place of a traditional sprint. This allowed us to keep close tabs on where the project stood, where any issues were cropping up, and whether or not we needed to sit down for some pair programming to figure out an intractable problem. Using these practices, we were able to not only avoid code conflicts but the conflicts that arise when communication has broken down and team members find themselves at loggerheads.
 
-*Pair Programming
+###Pair Programming
 
 Working in pairs solidifies techniques and information that may have been glossed over previously. As a group, we found that talking out problems with each other provided a solution much more quickly than hacking it out solo, and most importantly, all contributors were able to walk away with a more thorough understanding of the solved problem.
 
-*Technologies
+###Technologies
 
 JPA
 The Java Persistence API allowed us to maintain information from one session to the next with Java in the middle. This made our back-end database much more useful, as we would otherwise have had to hard-code any needed long-lasting information with no ability to modify it throughout.
